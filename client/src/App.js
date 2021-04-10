@@ -2,7 +2,7 @@ import React, { useState, Component } from 'react';
 import logo from './orca-logo.png';
 import './App.css';
 import Osc1 from './components/Osc1';
-import Customers from './components/creators';
+import Creators from './components/creators';
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -24,15 +24,32 @@ function App() {
   }
     return (
       <div className="App">
+
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">w e l c o m e  t o  o r c a</h1>
-          <button onClick={() => osc1.start()}>on</button>
-          <button onClick={() => osc1.stop()}>off</button>
-          <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
+          <h1 className="App-title">ORCA</h1>
+
+          <h1 className="App-title">killer music app</h1>
+
+          <div className="circle">
+            <span></span>
+            <img src={logo} className="App-logo" alt="logo" />
+            <span> </span>
+
+
+
+
+            <span></span>
+            <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
+            <button onClick={() => osc1.start()}>Toaster ON</button>
+
+            <span></span>
+            <button onClick={() => osc1.stop()}>Toaster OFF</button>
+          </div>
         </header>
-        <Customers />
+        <Creators />
       </div>
+
+
     );
 }
 

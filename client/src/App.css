@@ -1,3 +1,13 @@
+body {
+
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
 .App {
   text-align: center;
 }
@@ -8,7 +18,7 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: black;
   height: 150px;
   padding: 20px;
   color: white;
@@ -25,4 +35,58 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.circle {
+    position: center;
+    width: 50vh;
+    height: 50vh;
+    background: linear-gradient(#4c4545, #ff0066);
+    border-radius: 500px;
+    animation: animate 10s normal infinite;
+}
+
+@keyframes animate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.circle:after {
+    content: '';
+    position: absolute;
+    top: 170px;
+    right: 170px;
+    bottom: 170px;
+    right: 170px;
+    border-radius: 500px;
+    background-color: black;
+}
+
+.circle span {
+    osition: absolute;
+    width: 20%;
+    height: 20%;
+    background: linear-gradient(#738188, #0800ff);
+    border-radius: 500%;
+}
+
+.circle span:nth-child(1) {
+    filter: blur(5px);
+}
+
+.circle span:nth-child(2) {
+    filter: blur(10px);
+}
+
+.circle span:nth-child(3) {
+    filter: blur(20px);
+}
+
+.circle span:nth-child(4) {
+    filter: blur(55px);
 }
