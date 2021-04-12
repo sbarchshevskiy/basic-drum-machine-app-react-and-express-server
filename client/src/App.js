@@ -4,6 +4,8 @@ import Styling from './components/Styling'
 import './App.css';
 import Osc1 from './components/Osc1';
 import Creators from './components/creators';
+import ReactRecorder from './components/ReactRecorder';
+
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -26,7 +28,9 @@ function App() {
   return (
 
   <div className="App">
-      <header className="App-header">
+    < ReactRecorder />
+
+    <header className="App-header">
         <h1 className="App-title">killer music app</h1>
         <div className="circle">
           <button onClick={() => osc1.start()}>Toaster ON</button>
@@ -37,7 +41,9 @@ function App() {
           <span></span>
         </div>
       </header>
-      <body >
+
+
+    <body >
       <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
       <Styling />
       <Creators />

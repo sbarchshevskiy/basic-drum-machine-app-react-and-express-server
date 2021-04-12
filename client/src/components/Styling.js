@@ -7,7 +7,6 @@ export default function Styling() {
 
     <div>
       <h1 className="primary">ORCA</h1>
-      <h3 className="primary">Killer Music App</h3>
 
       <div className="motionblur">
         <span className="one"></span>
