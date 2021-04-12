@@ -5,7 +5,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: FF0066;
 }
 
 .App {
@@ -18,7 +18,7 @@ body {
 }
 
 .App-header {
-  background-color: black;
+  background-color: FF0066;
   height: 150px;
   padding: 20px;
   color: white;
@@ -64,7 +64,7 @@ body {
     bottom: 170px;
     right: 170px;
     border-radius: 500px;
-    background-color: black;
+    background-color: orange;
 }
 
 .circle span {
@@ -90,3 +90,6 @@ body {
 .circle span:nth-child(4) {
     filter: blur(55px);
 }
+
+
+

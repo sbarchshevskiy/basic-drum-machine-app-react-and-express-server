@@ -1,5 +1,6 @@
-import React, { useState, Component } from 'react';
+import React, {useState, Component} from 'react';
 import logo from './orca-logo.png';
+import Styling from './components/Styling'
 import './App.css';
 import Osc1 from './components/Osc1';
 import Creators from './components/creators';
@@ -22,35 +23,28 @@ function App() {
     setOsc1Freq(value);
     osc1.frequency.value = value;
   }
-    return (
-      <div className="App">
+  return (
 
-        <header className="App-header">
-          <h1 className="App-title">ORCA</h1>
-
-          <h1 className="App-title">killer music app</h1>
-
-          <div className="circle">
-            <span></span>
-            <img src={logo} className="App-logo" alt="logo" />
-            <span> </span>
-
-
-
-
-            <span></span>
-            <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
-            <button onClick={() => osc1.start()}>Toaster ON</button>
-
-            <span></span>
-            <button onClick={() => osc1.stop()}>Toaster OFF</button>
-          </div>
-        </header>
-        <Creators />
-      </div>
-
-
-    );
+  <div className="App">
+      <header className="App-header">
+        <h1 className="App-title">killer music app</h1>
+        <div className="circle">
+          <button onClick={() => osc1.start()}>Toaster ON</button>
+          <img src={logo} className="App-logo" alt="logo" />
+          <button onClick={() => osc1.stop()}>Toaster OFF</button>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </header>
+      <body >
+      <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
+      <Styling />
+      <Creators />
+      </body>
+    </div>
+  );
 }
 
 export default App;
+
