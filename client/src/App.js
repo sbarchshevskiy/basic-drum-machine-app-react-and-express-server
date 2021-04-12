@@ -42,7 +42,6 @@ function App() {
         </div>
       </header>
 
-
     <body >
       <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
       <Styling />
