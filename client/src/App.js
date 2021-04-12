@@ -99,7 +99,7 @@ function App() {
           <Steps count={totalSteps} />
           <div className="app_content">
             <PlayHead {...playHeadProps} />
-            {/* <TrackList {...trackListProps} /> */}
+            <TrackList {...trackListProps} />
           </div>
         </main>
       </Provider>

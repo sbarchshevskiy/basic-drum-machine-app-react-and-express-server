@@ -10,6 +10,12 @@ html {
 
 .App {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: var(--app-max-width);
+  visibility: var(--app-visibility);
+  background-color: var(--color-bg);
+  padding: 20px;
 }
 
 .App-logo {
@@ -22,10 +28,25 @@ html {
   height: 150px;
   padding: 20px;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  margin-bottom: calc(var(--spacer) * 1);
+  margin-left: var(--spacer);
+  margin-right: var(--spacer);
 }
 
 .App-title {
   font-size: 1.5em;
+}
+
+.app_content {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+  position: relative;
+  transform: translateZ(0);
 }
 
 .App-intro {
