@@ -1,34 +1,34 @@
-import React, { Component } from 'react';
-import './creators.css';
-
-
-
+import React, { Component } from "react";
+import "./creators.css";
 
 class Creators extends Component {
-
   constructor() {
     super();
     this.state = {
-      creators: []
+      creators: [],
     };
   }
 
   componentDidMount() {
-    fetch('/api/creators')
-      .then(res => res.json())
-      .then(creators => this.setState({creators}, () => console.log('Customers fetched...', creators)));
+    fetch("http://localhost:5000/api/creators")
+      .then((res) => res.json())
+      .then((creators) =>
+        this.setState({ creators }, () =>
+          console.log("Customers fetched...", creators)
+        )
+      );
   }
-
-
 
   render() {
     return (
       <div>
         <h2>Creators</h2>
         <ul>
-        {this.state.creators.map(creator =>
-          <li key={creator.id}>{creator.firstName} {creator.lastName}</li>
-        )}
+          {this.state.creators.map((creator) => (
+            <li key={creator.id}>
+              {creator.firstName} {creator.lastName}
+            </li>
+          ))}
         </ul>
       </div>
     );
