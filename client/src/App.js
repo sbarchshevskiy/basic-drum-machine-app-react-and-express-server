@@ -1,11 +1,12 @@
 import React, { useState, useEffect, Component } from "react";
-import Instruments from "./components/Instruments";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+
+import Session from "./components/Session";
 
 import logo from "./orca-logo.png";
-import "./App.css";
 import Osc1 from "./components/Osc1";
 import Customers from "./components/creators";
-import Session from "./components/Session";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -34,7 +35,14 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Customers />
-      <Session />
+      <Router>
+        <div>
+          <Route path="/session" component={Session} />
+          <Route path="/users" />
+          <Route path="/tracks" />
+          <Route exact path="/" />
+        </div>
+      </Router>
     </div>
   );
 }
