@@ -5,6 +5,7 @@ import logo from "./orca-logo.png";
 import "./App.css";
 import Osc1 from "./components/Osc1";
 import Customers from "./components/creators";
+import Session from "./components/Session";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -33,7 +34,7 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Customers />
-      <Instruments />
+      <Session />
     </div>
   );
 }
