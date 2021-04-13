@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Instruments from "./components/Instruments";
 
 import logo from "./orca-logo.png";
@@ -33,7 +35,11 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Customers />
-      <Instruments />
+      <Router>
+        <div>
+          <Route path="/session" component={Instruments} />
+        </div>
+      </Router>
     </div>
   );
 }
