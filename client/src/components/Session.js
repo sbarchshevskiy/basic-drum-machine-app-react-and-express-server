@@ -3,7 +3,7 @@ import Instruments from "./Instruments";
 
 const Session = () => {
   return (
-    <div className="bass">
+    <div>
       <Instruments />
     </div>
   );
