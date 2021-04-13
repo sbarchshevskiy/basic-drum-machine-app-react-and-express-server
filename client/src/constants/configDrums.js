@@ -1,54 +1,42 @@
-const sequenceList = [
+// Drum sounds
+
+const soundLibrary = {
+  hiHat: "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatOpen.mp3",
+  snare: "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/snare.mp3",
+  hatClosed: "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatClosed.mp3",
+};
+
+const drumSequenceList = [
   {
     id: 0,
     title: "Pulse",
     noteCount: 16,
     trackList: [
       {
-        title: "C2",
+        title: "Kick",
         soundFile: "bass_C2",
         onNotes: [0, 4, 8, 12],
       },
       {
-        title: "B1",
+        title: "Snare",
         soundFile: "bass_B1",
         onNotes: [],
       },
       {
-        title: "A1",
+        title: "HiHat Open",
         soundFile: "bass_A1",
         onNotes: [],
       },
       {
-        title: "G1",
+        title: "HiHat Closed",
         soundFile: "bass_G1",
-        onNotes: [],
-      },
-      {
-        title: "F1",
-        soundFile: "bass_F1",
-        onNotes: [],
-      },
-      {
-        title: "E1",
-        soundFile: "bass_E1",
-        onNotes: [],
-      },
-      {
-        title: "D1",
-        soundFile: "bass_D1",
-        onNotes: [],
-      },
-      {
-        title: "C1",
-        soundFile: "bass_C1",
         onNotes: [],
       },
     ],
   },
 ];
 
-const soundFiles = {
+const drumSoundFiles = {
   bass_C2: "/sounds/bass/bass_C2.wav",
   bass_B1: "/sounds/bass/bass_B1.wav",
   bass_A1: "/sounds/bass/bass_A1.wav",
@@ -59,4 +47,4 @@ const soundFiles = {
   bass_C1: "/sounds/bass/bass_C1.wav",
 };
 
-export { sequenceList, soundFiles };
+export { drumSequenceList, drumSoundFiles };

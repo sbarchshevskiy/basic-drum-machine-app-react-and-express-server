@@ -1,6 +1,6 @@
 import React, { useContext, memo } from "react";
-import { Context } from "../../hooks/useStore";
-import "./Toolbar.css";
+import { Context } from "../../hooks/useDrumStore";
+import "./DrumToolbar.css";
 
 const ToolBar = ({
   setStartTime,

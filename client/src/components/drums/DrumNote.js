@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, memo } from "react";
 import classNames from "classnames";
-import { Context } from "../../hooks/useStore";
-import "./Note.css";
+import { Context } from "../../hooks/useDrumStore";
+import "./DrumNote.css";
 
 const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
   const { toggleNote } = useContext(Context);

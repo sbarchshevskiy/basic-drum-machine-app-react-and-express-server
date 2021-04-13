@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "./Toolbar";
-import Steps from "./Steps";
-import TrackList from "./TrackList";
+import ToolBar from "./DrumToolbar";
+import Steps from "./DrumSteps";
+import TrackList from "./DrumTrackList";
 
-import PlayHead from "./PlayHead";
-import { Provider } from "../../hooks/useStore";
+import PlayHead from "./DrumPlayHead";
+import { Provider } from "../../hooks/useDrumStore";
 import useTimer from "../../hooks/useTimer";
 import useStyles from "../../hooks/useStyles";
 

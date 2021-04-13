@@ -1,8 +1,8 @@
 import React, { useContext, memo } from "react";
 
-import { Context } from "../../hooks/useStore";
-import { soundFiles } from "../../constants/config";
-import Track from "./Track";
+import { Context } from "../../hooks/useDrumStore";
+import { drumSoundFiles } from "../../constants/configDrums";
+import Track from "./DrumTrack";
 
 const TrackList = ({ currentStepID }) => {
   const {
@@ -10,7 +10,7 @@ const TrackList = ({ currentStepID }) => {
   } = useContext(Context);
   const content = trackList.map((track, trackID) => {
     const { title, onNotes, soundFile } = track;
-    const soundFilePath = soundFiles[soundFile];
+    const soundFilePath = drumSoundFiles[soundFile];
 
     return (
       <Track

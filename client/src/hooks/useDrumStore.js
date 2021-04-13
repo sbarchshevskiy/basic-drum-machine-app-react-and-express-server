@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from "react";
-import { bassSequenceList } from "../constants/configBass";
+import { drumSequenceList } from "../constants/configDrums";
 
 const Context = createContext({
   sequence: {},
@@ -11,7 +11,7 @@ const appReducer = (state, action) => {
   switch (action.type) {
     case "SET_SEQUENCE":
       return {
-        ...bassSequenceList.find((seq) => seq.id === action.value),
+        ...drumSequenceList.find((seq) => seq.id === action.value),
       };
     case "SET_ON_NOTES":
       let newTrackList = state.trackList.map((track, trackID) => {
@@ -35,7 +35,7 @@ const appReducer = (state, action) => {
 
 const Provider = ({ children }) => {
   const [sequence, dispatch] = useReducer(appReducer, {
-    ...bassSequenceList[0],
+    ...drumSequenceList[0],
   });
 
   const toggleNote = ({ trackID, stepID }) => {
