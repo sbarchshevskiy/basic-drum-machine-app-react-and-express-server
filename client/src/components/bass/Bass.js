@@ -59,21 +59,19 @@ const Bass = () => {
     currentStepID,
   };
   return (
-    <div className="bass">
-      <Provider>
-        <main className="app">
-          <header className="app_header">
-            <h1 className="app_title">B-B-BASS</h1>
-            <ToolBar {...toolBarProps} />
-          </header>
-          <Steps count={totalSteps} />
-          <div className="app_content">
-            <PlayHead {...playHeadProps} />
-            <TrackList {...trackListProps} />
-          </div>
-        </main>
-      </Provider>
-    </div>
+    <Provider>
+      <main className="app">
+        <header className="app_header">
+          <h1 className="app_title">B-B-BASS</h1>
+          <ToolBar {...toolBarProps} />
+        </header>
+        <Steps count={totalSteps} />
+        <div className="app_content">
+          <PlayHead {...playHeadProps} />
+          <TrackList {...trackListProps} />
+        </div>
+      </main>
+    </Provider>
   );
 };
 

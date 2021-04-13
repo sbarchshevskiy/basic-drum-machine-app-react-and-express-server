@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from "react";
-import Bass from "./components/bass/Bass";
+import Instruments from "./components/Instruments";
 
 import logo from "./orca-logo.png";
 import "./App.css";
@@ -33,7 +33,7 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Customers />
-      <Bass />
+      <Instruments />
     </div>
   );
 }
