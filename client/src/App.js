@@ -5,6 +5,8 @@ import './App.css';
 import Osc1 from './components/Osc1';
 import Creators from './components/creators';
 import ReactRecorder from './components/ReactRecorder';
+import DrumModule from './components/DrumModule';
+
 
 
 const actx = new AudioContext();
@@ -32,6 +34,9 @@ function App() {
 
     <header className="App-header">
         <h1 className="App-title">killer music app</h1>
+      <div>
+        <DrumModule />
+      </div>
         <div className="circle">
           <button onClick={() => osc1.start()}>Toaster ON</button>
           <img src={logo} className="App-logo" alt="logo" />
@@ -39,11 +44,15 @@ function App() {
           <span></span>
           <span></span>
           <span></span>
+
         </div>
       </header>
 
     <body >
-      <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
+
+
+
+    <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value}/>
       <Styling />
       <Creators />
       </body>
