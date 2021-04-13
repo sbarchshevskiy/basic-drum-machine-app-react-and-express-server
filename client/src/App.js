@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
 
-import Instruments from "./components/Instruments";
+import Session from "./components/Session";
 
 import logo from "./orca-logo.png";
-import "./App.css";
 import Osc1 from "./components/Osc1";
 import Customers from "./components/creators";
 
@@ -37,7 +37,7 @@ function App() {
       <Customers />
       <Router>
         <div>
-          <Route path="/session" component={Instruments} />
+          <Route path="/session" component={Session} />
         </div>
       </Router>
     </div>
