@@ -4,6 +4,7 @@ import Instruments from "./Instruments";
 const Session = () => {
   return (
     <div>
+      <button>Save</button>
       <Instruments />
     </div>
   );
