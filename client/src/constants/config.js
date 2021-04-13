@@ -5,162 +5,58 @@ const sequenceList = [
     noteCount: 16,
     trackList: [
       {
-        title: "Kick",
-        soundFile: "kick",
+        title: "C2",
+        soundFile: "bass_C2",
         onNotes: [0, 4, 8, 12],
       },
       {
-        title: "Snare",
-        soundFile: "snare",
+        title: "B1",
+        soundFile: "bass_B1",
         onNotes: [],
       },
       {
-        title: "Open Hat",
-        soundFile: "hh_open",
+        title: "A1",
+        soundFile: "bass_A1",
         onNotes: [],
       },
       {
-        title: "Closed Hat",
-        soundFile: "hh_closed",
+        title: "G1",
+        soundFile: "bass_G1",
         onNotes: [],
       },
       {
-        title: "F3",
-        soundFile: "hh_closed",
+        title: "F1",
+        soundFile: "bass_F1",
         onNotes: [],
       },
       {
-        title: "E3",
-        soundFile: "hh_closed",
+        title: "E1",
+        soundFile: "bass_E1",
         onNotes: [],
       },
       {
-        title: "D3",
-        soundFile: "hh_closed",
+        title: "D1",
+        soundFile: "bass_D1",
         onNotes: [],
       },
       {
-        title: "C3",
-        soundFile: "hh_closed",
+        title: "C1",
+        soundFile: "bass_C1",
         onNotes: [],
-      },
-    ],
-  },
-  {
-    id: 1,
-    title: "Driving thump",
-    noteCount: 16,
-    trackList: [
-      {
-        title: "Kick",
-        soundFile: "kick",
-        onNotes: [0, 2, 4, 6, 8, 10, 12, 14],
-      },
-      {
-        title: "Snare",
-        soundFile: "snare",
-        onNotes: [],
-      },
-      {
-        title: "Open Hat",
-        soundFile: "hh_open",
-        onNotes: [],
-      },
-      {
-        title: "Closed Hat",
-        soundFile: "hh_closed",
-        onNotes: [],
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Smooth Backbeat",
-    noteCount: 16,
-    trackList: [
-      {
-        title: "Kick",
-        soundFile: "kick",
-        onNotes: [0, 2, 8, 10, 14],
-      },
-      {
-        title: "Snare",
-        soundFile: "snare",
-        onNotes: [4, 12],
-      },
-      {
-        title: "Open Hat",
-        soundFile: "hh_open",
-        onNotes: [],
-      },
-      {
-        title: "Closed Hat",
-        soundFile: "hh_closed",
-        onNotes: [],
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Boom Chuck",
-    noteCount: 16,
-    trackList: [
-      {
-        title: "Kick",
-        soundFile: "kick",
-        onNotes: [0, 4, 8, 12],
-      },
-      {
-        title: "Snare",
-        soundFile: "snare",
-        onNotes: [2, 6, 10, 14],
-      },
-      {
-        title: "Open Hat",
-        soundFile: "hh_open",
-        onNotes: [],
-      },
-      {
-        title: "Closed Hat",
-        soundFile: "hh_closed",
-        onNotes: [],
-      },
-    ],
-  },
-  {
-    id: 4,
-    title: "Transporter",
-    noteCount: 16,
-    trackList: [
-      {
-        title: "Kick",
-        soundFile: "kick",
-        onNotes: [0, 1, 2, 3, 6, 8, 10, 13, 14, 15],
-      },
-      {
-        title: "Snare",
-        soundFile: "snare",
-        onNotes: [4, 12],
-      },
-      {
-        title: "Open Hat",
-        soundFile: "hh_open",
-        onNotes: [],
-      },
-      {
-        title: "Closed Hat",
-        soundFile: "hh_closed",
-        onNotes: [0, 4, 8, 12],
       },
     ],
   },
 ];
 
 const soundFiles = {
-  kick: "/sounds/kick.wav",
-  snare: "/sounds/snare.wav",
-  hh_open: "/sounds/hh_open.wav",
-  hh_closed: "/sounds/hh_closed.wav",
+  bass_C2: "/sounds/bass/bass_C2.wav",
+  bass_B1: "/sounds/bass/bass_B1.wav",
+  bass_A1: "/sounds/bass/bass_A1.wav",
+  bass_G1: "/sounds/bass/bass_G1.wav",
+  bass_F1: "/sounds/bass/bass_F1.wav",
+  bass_E1: "/sounds/bass/bass_E1.wav",
+  bass_D1: "/sounds/bass/bass_D1.wav",
+  bass_C1: "/sounds/bass/bass_C1.wav",
 };
 
 export { sequenceList, soundFiles };
