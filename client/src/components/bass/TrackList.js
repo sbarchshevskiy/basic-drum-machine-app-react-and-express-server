@@ -1,7 +1,7 @@
 import React, { useContext, memo } from "react";
 
-import { Context } from "../hooks/useStore";
-import { soundFiles } from "../constants/config";
+import { Context } from "../../hooks/useStore";
+import { soundFiles } from "../../constants/config";
 import Track from "./Track";
 
 const TrackList = ({ currentStepID }) => {

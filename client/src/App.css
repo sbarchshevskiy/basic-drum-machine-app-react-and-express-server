@@ -10,6 +10,9 @@ html {
 
 .App {
   text-align: center;
+}
+
+.bass {
   margin-left: auto;
   margin-right: auto;
   width: var(--app-max-width);

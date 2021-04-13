@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "./components/Toolbar";
-import Steps from "./components/Steps";
-import TrackList from "./components/TrackList";
+import ToolBar from "./components/bass/Toolbar";
+import Steps from "./components/bass/Steps";
+import TrackList from "./components/bass/TrackList";
 
-import PlayHead from "./components/PlayHead";
+import PlayHead from "./components/bass/PlayHead";
 import { Provider } from "./hooks/useStore";
 import useTimer from "./hooks/useTimer";
 import useStyles from "./hooks/useStyles";
@@ -90,19 +90,21 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Customers />
-      <Provider>
-        <main className="app">
-          <header className="app_header">
-            <h1 className="app_title">REACT-808</h1>
-            <ToolBar {...toolBarProps} />
-          </header>
-          <Steps count={totalSteps} />
-          <div className="app_content">
-            <PlayHead {...playHeadProps} />
-            <TrackList {...trackListProps} />
-          </div>
-        </main>
-      </Provider>
+      <div className="bass">
+        <Provider>
+          <main className="app">
+            <header className="app_header">
+              <h1 className="app_title">B-B-BASS</h1>
+              <ToolBar {...toolBarProps} />
+            </header>
+            <Steps count={totalSteps} />
+            <div className="app_content">
+              <PlayHead {...playHeadProps} />
+              <TrackList {...trackListProps} />
+            </div>
+          </main>
+        </Provider>
+      </div>
     </div>
   );
 }
