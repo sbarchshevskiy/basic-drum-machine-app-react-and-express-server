@@ -38,6 +38,9 @@ function App() {
       <Router>
         <div>
           <Route path="/session" component={Session} />
+          <Route path="/users" />
+          <Route path="/tracks" />
+          <Route exact path="/" />
         </div>
       </Router>
     </div>
