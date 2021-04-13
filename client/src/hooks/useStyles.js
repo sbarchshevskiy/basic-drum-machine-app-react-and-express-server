@@ -2,12 +2,12 @@ import { useEffect } from "react";
 
 const defaults = {
   __app_visibility: "visible",
-  __color_bg: "#505050",
-  __color_fg: "#f5f5f5",
+  __color_bg: "#b6d8e1",
+  __color_fg: "#2e2929",
   __color_black: "#000",
   __color_dark_grey: "#2e2e2e",
   __color_light_grey: "#5d5d5d",
-  __color_highlight: "#37e147",
+  __color_highlight: "#db482e",
   __base_font_size: 12,
   __number_of_steps: 16,
   __number_of_tracks: 8,
