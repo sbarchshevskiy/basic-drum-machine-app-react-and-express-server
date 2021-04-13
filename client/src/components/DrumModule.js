@@ -2,17 +2,20 @@ import React, {useState} from 'react';
 const actx = new AudioContext();
 const out = actx.destination
 
+
 const mainGainNode = actx.createGain();
 mainGainNode.gain.setValueAtTime(1, 0);
 mainGainNode.connect(out);
 
+const soundLibrary = {
+  hiHat: "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatOpen.mp3",
+  snare: "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/snare.mp3",
+  hatClosed:"https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatClosed.mp3"
+}
 
-const soundLibrary =
-  "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatOpen.mp3";
 
 // other effects from the API
-// "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatClosed.mp3";
-// "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/crash.mp3";
+// https://unpkg.com/@teropa/drumkit@1.1.0/dist/drumkit.js
 
 
 const notes = [
@@ -62,7 +65,7 @@ export default function DrumModule(){
 
   // HiHat, has a bit a of a lag when starting for first time
   const hiHatEvent = (async() => {
-    const fetchSound = await fetch(soundLibrary);
+    const fetchSound = await fetch(soundLibrary.hiHat);
     const buffered = await fetchSound.arrayBuffer();
     const hiHat = await actx.decodeAudioData(buffered);
 
@@ -73,11 +76,44 @@ export default function DrumModule(){
     hiHatOut.start();
   })
 
+  // Snare, has a bit a of a lag when starting for first time
+  const snareEvent = (async() => {
+    const fetchSound = await fetch(soundLibrary.snare);
+    const buffered = await fetchSound.arrayBuffer();
+    const snare = await actx.decodeAudioData(buffered);
+
+    const snareOut = actx.createBufferSource();
+    snareOut.buffer = snare;
+    snareOut.playbackRate.setValueAtTime(2, 0);
+    snareOut.connect(mainGainNode);
+    snareOut.start();
+  })
+
+  // HatClosed, has a bit a of a lag when starting for first time
+  const hatClosedEvent = (async() => {
+    const fetchSound = await fetch(soundLibrary.hatClosed);
+    const buffered = await fetchSound.arrayBuffer();
+    const hatClosed = await actx.decodeAudioData(buffered);
+
+    const hatClosedOut = actx.createBufferSource();
+    hatClosedOut.buffer = hatClosed;
+    hatClosedOut.playbackRate.setValueAtTime(2, 0);
+    hatClosedOut.connect(mainGainNode);
+    hatClosedOut.start();
+  })
+
+
+
+
+
 
   return(
     <div>
       <button onClick={() => hiHatEvent()}>hiHat</button>
       <button onClick={() => kickEvent()}>kick</button>
+      <button onClick={() => snareEvent()}>snare</button>
+      <button onClick={() => hatClosedEvent()}>hatClosed</button>
+
     </div>
   )
 }
