@@ -7,9 +7,27 @@ body {
     align-items: center;
     background-color: FF0066;
 }
+:root {
+  --app-max-width: 0;
+  --app-visibility: hidden;
+}
+
+html {
+  font-size: var(--base-font-size);
+  color: var(--color-fg);
+}
 
 .App {
   text-align: center;
+}
+
+.bass {
+  margin-left: auto;
+  margin-right: auto;
+  width: var(--app-max-width);
+  visibility: var(--app-visibility);
+  background-color: var(--color-bg);
+  padding: 20px;
 }
 
 .App-logo {
@@ -22,10 +40,25 @@ body {
   height: 150px;
   padding: 20px;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  margin-bottom: calc(var(--spacer) * 1);
+  margin-left: var(--spacer);
+  margin-right: var(--spacer);
 }
 
 .App-title {
   font-size: 1.5em;
+}
+
+.app_content {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+  position: relative;
+  transform: translateZ(0);
 }
 
 .App-intro {
@@ -33,8 +66,12 @@ body {
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .circle {
