@@ -6,6 +6,15 @@ const mainGainNode = actx.createGain();
 mainGainNode.gain.setValueAtTime(1, 0);
 mainGainNode.connect(out);
 
+
+const soundLibrary =
+  "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatOpen.mp3";
+
+// other effects from the API
+// "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/hatClosed.mp3";
+// "https://unpkg.com/@teropa/drumkit@1.1.0/src/assets/crash.mp3";
+
+
 const notes = [
   { name: "C", frequency: 49 },
   { name: "C#", frequency: 52 },
@@ -25,9 +34,10 @@ const notes = [
   { name: "G", frequency: 107 }
 ];
 
-export default function DrumModule(){
-  // const [oscKick, setOscKick] = useState(osc1.frequency.value)
 
+export default function DrumModule(){
+
+  // Kick sound
   const kickEvent = () => {
       const kick = actx.createOscillator();
     //hz value
@@ -36,7 +46,6 @@ export default function DrumModule(){
       0.001,
       actx.currentTime + 0.5
     );
-
     const kickGain = actx.createGain();
     kickGain.gain.setValueAtTime(1, 0);
     // will end the beat fraction of a second earlier to avoid loud speaker pop
@@ -44,7 +53,6 @@ export default function DrumModule(){
       0.001,
       actx.currentTime + 0.5
     );
-
     kick.connect(kickGain);
     kickGain.connect(mainGainNode);
     kick.start();
@@ -52,8 +60,23 @@ export default function DrumModule(){
     kick.stop(actx.currentTime + 0.5);
   };
 
+  // HiHat, has a bit a of a lag when starting for first time
+  const hiHatEvent = (async() => {
+    const fetchSound = await fetch(soundLibrary);
+    const buffered = await fetchSound.arrayBuffer();
+    const hiHat = await actx.decodeAudioData(buffered);
+
+    const hiHatOut = actx.createBufferSource();
+    hiHatOut.buffer = hiHat;
+    hiHatOut.playbackRate.setValueAtTime(2, 0);
+    hiHatOut.connect(mainGainNode);
+    hiHatOut.start();
+  })
+
+
   return(
     <div>
+      <button onClick={() => hiHatEvent()}>hiHat</button>
       <button onClick={() => kickEvent()}>kick</button>
     </div>
   )
