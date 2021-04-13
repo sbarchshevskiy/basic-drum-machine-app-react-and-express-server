@@ -103,10 +103,6 @@ export default function DrumModule(){
   })
 
 
-
-
-
-
   return(
     <div>
       <button onClick={() => hiHatEvent()}>hiHat</button>
