@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from "react";
-import Bass from "./components/Bass";
+import Bass from "./components/bass/Bass";
 
 import logo from "./orca-logo.png";
 import "./App.css";

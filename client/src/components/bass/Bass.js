@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "../components/bass/Toolbar";
-import Steps from "../components/bass/Steps";
-import TrackList from "../components/bass/TrackList";
+import ToolBar from "./Toolbar";
+import Steps from "./Steps";
+import TrackList from "./TrackList";
 
-import PlayHead from "../components/bass/PlayHead";
-import { Provider } from "../hooks/useStore";
-import useTimer from "../hooks/useTimer";
-import useStyles from "../hooks/useStyles";
+import PlayHead from "./PlayHead";
+import { Provider } from "../../hooks/useStore";
+import useTimer from "../../hooks/useTimer";
+import useStyles from "../../hooks/useStyles";
 
 const Bass = () => {
   const baseBPMPerOneSecond = 60;
