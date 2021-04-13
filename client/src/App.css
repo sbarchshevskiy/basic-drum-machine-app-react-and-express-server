@@ -26,7 +26,7 @@ html {
   margin-right: auto;
   width: var(--app-max-width);
   visibility: var(--app-visibility);
-  background-color: var(--color-bg);
+  background-color: var(--color-orange);
   padding: 20px;
 }
 

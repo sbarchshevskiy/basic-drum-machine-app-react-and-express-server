@@ -8,6 +8,7 @@ const defaults = {
   __color_dark_grey: "#2e2e2e",
   __color_light_grey: "#5d5d5d",
   __color_highlight: "#db482e",
+  __color_orange: "#eda42d",
   __base_font_size: 12,
   __number_of_steps: 16,
   __number_of_tracks: 8,
@@ -42,6 +43,7 @@ const setStyles = (totalSteps) => {
   setProperty("--color-dark-grey", defaults.__color_dark_grey);
   setProperty("--color-light-grey", defaults.__color_light_grey);
   setProperty("--color-highlight", defaults.__color_highlight);
+  setProperty("--color-orange", defaults.__color_orange);
   setProperty("--base-font-size", defaults.__base_font_size + "px");
   setProperty("--number-of-steps", defaults.__number_of_steps);
   setProperty("--play-head-width", defaults.__play_head_width + "px");
