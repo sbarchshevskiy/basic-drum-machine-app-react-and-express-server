@@ -19,6 +19,7 @@ const Instruments = ({
   pastSynthLapsedTime,
   setSynthPastLapse,
   isSynthSequencePlaying,
+  saveTrackList,
 }) => {
   return (
     <div>
@@ -38,6 +39,7 @@ const Instruments = ({
           pastBassLapsedTime={pastBassLapsedTime}
           setBassPastLapse={setBassPastLapse}
           isBassSequencePlaying={isBassSequencePlaying}
+          saveTrackList={saveTrackList}
         />
       </div>
       <div className="synth">

@@ -15,6 +15,9 @@ const Session = () => {
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
 
+  const saveSession = (event) => {
+    event.preventDefault();
+  };
   function drumsPlayback() {
     togglePlayback(
       isDrumSequencePlaying,
@@ -69,9 +72,12 @@ const Session = () => {
     stopSynthPlayback();
   }
 
+  const getTacksFromTrackList = (value, ID) => {
+    console.log(value, ID);
+  };
   return (
     <div>
-      <button>Save</button>
+      <button onClick={getTacksFromTrackList}>Save</button>
       <button onClick={globalStopPlayback}>Stop!</button>
       <button onClick={globalPlayback}>Play!</button>
       <Instruments
@@ -90,6 +96,7 @@ const Session = () => {
         pastSynthLapsedTime={pastSynthLapsedTime}
         setSynthPastLapse={setSynthPastLapse}
         isSynthSequencePlaying={isSynthSequencePlaying}
+        saveTrackList={getTacksFromTrackList}
       />
     </div>
   );

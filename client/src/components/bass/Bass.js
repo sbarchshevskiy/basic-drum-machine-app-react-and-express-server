@@ -14,6 +14,7 @@ const Bass = ({
   pastBassLapsedTime,
   setBassPastLapse,
   isBassSequencePlaying,
+  saveTrackList,
 }) => {
   const baseBPMPerOneSecond = 60;
   const stepsPerBar = 16;
@@ -63,6 +64,7 @@ const Bass = ({
 
   const trackListProps = {
     currentStepID,
+    saveTrackList,
   };
   return (
     <Provider>
