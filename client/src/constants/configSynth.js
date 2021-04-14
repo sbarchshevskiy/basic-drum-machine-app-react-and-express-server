@@ -6,43 +6,43 @@ const synthSequenceList = [
     noteCount: 16,
     trackList: [
       {
-        title: "C2",
-        soundFile: "synth_C2",
+        title: "C4",
+        soundFile: "synth_C4",
         onNotes: [0, 4, 8, 12],
       },
       {
-        title: "B1",
-        soundFile: "synth_B1",
+        title: "B3",
+        soundFile: "synth_B3",
         onNotes: [],
       },
       {
-        title: "A1",
-        soundFile: "synth_A1",
+        title: "A3",
+        soundFile: "synth_A3",
         onNotes: [],
       },
       {
-        title: "G1",
-        soundFile: "synth_G1",
+        title: "G3",
+        soundFile: "synth_G3",
         onNotes: [],
       },
       {
-        title: "F1",
-        soundFile: "synth_F1",
+        title: "F3",
+        soundFile: "synth_F3",
         onNotes: [],
       },
       {
-        title: "E1",
-        soundFile: "synth_E1",
+        title: "E3",
+        soundFile: "synth_E3",
         onNotes: [],
       },
       {
-        title: "D1",
-        soundFile: "synth_D1",
+        title: "D3",
+        soundFile: "synth_D3",
         onNotes: [],
       },
       {
-        title: "C1",
-        soundFile: "synth_C1",
+        title: "C3",
+        soundFile: "synth_C3",
         onNotes: [],
       },
     ],
@@ -50,14 +50,14 @@ const synthSequenceList = [
 ];
 
 const synthSoundFiles = {
-  synth_C2: "/sounds/synth/synth_C2.wav",
-  synth_B1: "/sounds/synth/synth_B1.wav",
-  synth_A1: "/sounds/synth/synth_A1.wav",
-  synth_G1: "/sounds/synth/synth_G1.wav",
-  synth_F1: "/sounds/synth/synth_F1.wav",
-  synth_E1: "/sounds/synth/synth_E1.wav",
-  synth_D1: "/sounds/synth/synth_D1.wav",
-  synth_C1: "/sounds/synth/synth_C1.wav",
+  synth_C4: "/sounds/synth/synth_C4.wav",
+  synth_B3: "/sounds/synth/synth_B3.wav",
+  synth_A3: "/sounds/synth/synth_A3.wav",
+  synth_G3: "/sounds/synth/synth_G3.wav",
+  synth_F3: "/sounds/synth/synth_F3.wav",
+  synth_E3: "/sounds/synth/synth_E3.wav",
+  synth_D3: "/sounds/synth/synth_D3.wav",
+  synth_C3: "/sounds/synth/synth_C3.wav",
 };
 
 export { synthSequenceList, synthSoundFiles };
