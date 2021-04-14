@@ -16,12 +16,14 @@ const ToolBar = ({
     selectSequence,
   } = useContext(Context);
 
-  togglePlayback(
-    isBassSequencePlaying,
-    setBassPastLapse,
-    startBassTime,
-    setStartBassTime
-  );
+  function togglePlayback() {
+    if (isBassSequencePlaying) {
+      setBassPastLapse((l) => l + performance.now() - startBassTime);
+      setStartBassTime(null);
+    } else {
+      setStartBassTime(performance.now());
+    }
+  }
 
   function stopPlayback() {
     setBassPastLapse(0);
@@ -51,12 +53,7 @@ const ToolBar = ({
       </button>
       <button
         className="form_element button_play_pause"
-        onClick={togglePlayback(
-          isBassSequencePlaying,
-          setBassPastLapse,
-          startBassTime,
-          setStartBassTime
-        )}
+        onClick={togglePlayback}
         aria-label="Play / Pause"
       >
         <svg width="14" height="14" viewBox="8 8 20 20">
