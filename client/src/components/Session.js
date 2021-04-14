@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
+import axios from "axios";
+
 import Instruments from "./Instruments";
 import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
@@ -45,13 +47,12 @@ const Session = () => {
       synth_d3: getSynth().trackList["6"].onNotes,
       synth_c3: getSynth().trackList["7"].onNotes,
     };
+
+    axios.post("http://localhost:3001/session", trackValues);
     console.log(trackValues);
     //1. Map trackID to a db line
     //2. Create an object with proper values
     //3. Create an axios requests
-    console.log(getBass().trackList["7"].onNotes);
-    console.log(getDrums().trackList["0"].onNotes);
-    console.log(getSynth().trackList["1"].onNotes);
   };
 
   function drumsPlayback() {
