@@ -48,11 +48,11 @@ const Session = () => {
       synth_c3: getSynth().trackList["7"].onNotes,
     };
 
-    axios.post("http://localhost:3001/session", trackValues);
+    axios
+      .post("http://localhost:5000/session", trackValues)
+      .then((res) => console.log("SAVED!", res))
+      .catch((err) => console.log("ERROR!", err));
     console.log(trackValues);
-    //1. Map trackID to a db line
-    //2. Create an object with proper values
-    //3. Create an axios requests
   };
 
   function drumsPlayback() {
