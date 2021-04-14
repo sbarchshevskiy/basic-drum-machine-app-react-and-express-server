@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import Instruments from "./Instruments";
 import { togglePlayback } from "../helpers";
+import { getSequence as getBass } from "../hooks/useBassStore";
 
 const Session = () => {
   const [startBassTime, setStartBassTime] = useState(null);
@@ -17,6 +18,7 @@ const Session = () => {
 
   const saveSession = (event) => {
     event.preventDefault();
+    console.log(getBass());
   };
   function drumsPlayback() {
     togglePlayback(
@@ -72,12 +74,9 @@ const Session = () => {
     stopSynthPlayback();
   }
 
-  const getTacksFromTrackList = (value, ID) => {
-    console.log(value, ID);
-  };
   return (
     <div>
-      <button onClick={() => getTacksFromTrackList()}>Save</button>
+      <button onClick={saveSession}>Save</button>
       <button onClick={globalStopPlayback}>Stop!</button>
       <button onClick={globalPlayback}>Play!</button>
       <Instruments
@@ -96,7 +95,6 @@ const Session = () => {
         pastSynthLapsedTime={pastSynthLapsedTime}
         setSynthPastLapse={setSynthPastLapse}
         isSynthSequencePlaying={isSynthSequencePlaying}
-        saveTrackList={getTacksFromTrackList}
       />
     </div>
   );

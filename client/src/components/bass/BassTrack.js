@@ -10,7 +10,6 @@ const Track = ({
   noteCount,
   onNotes,
   soundFilePath,
-  saveTrackList,
 }) => {
   const [play] = useSound(soundFilePath);
 
@@ -32,12 +31,6 @@ const Track = ({
 
   return (
     <div className="track">
-      <button
-        className="bassSaveTrackList"
-        onClick={() => saveTrackList(onNotes, trackID)}
-      >
-        Save Tracks
-      </button>
       <header className="track_title">{title}</header>
       <main className="track_notes">{notes}</main>
     </div>

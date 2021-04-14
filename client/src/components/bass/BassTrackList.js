@@ -4,13 +4,13 @@ import { Context } from "../../hooks/useBassStore";
 import { bassSoundFiles } from "../../constants/configBass";
 import Track from "./BassTrack";
 
-const TrackList = ({ currentStepID, saveTrackList }) => {
+const TrackList = ({ currentStepID }) => {
   const {
     sequence: { trackList, noteCount },
   } = useContext(Context);
   const content = trackList.map((track, trackID) => {
     const { title, onNotes, soundFile } = track;
-    // props.onSave
+
     const soundFilePath = bassSoundFiles[soundFile];
     return (
       <Track
@@ -21,7 +21,6 @@ const TrackList = ({ currentStepID, saveTrackList }) => {
         noteCount={noteCount}
         onNotes={onNotes}
         soundFilePath={soundFilePath}
-        saveTrackList={saveTrackList}
       />
     );
   });
