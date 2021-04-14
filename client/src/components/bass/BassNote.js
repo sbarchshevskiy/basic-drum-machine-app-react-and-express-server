@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, memo } from "react";
 import classNames from "classnames";
 import { Context } from "../../hooks/useBassStore";
-import "./Note.css";
+import "./BassNote.css";
 
 const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
   const { toggleNote } = useContext(Context);

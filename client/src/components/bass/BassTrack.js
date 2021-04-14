@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import useSound from "../../hooks/useSound";
-import Note from "./Note";
-import "./Track.css";
+import Note from "./BassNote";
+import "./BassTrack.css";
 
 const Track = ({
   trackID,
@@ -17,7 +17,7 @@ const Track = ({
     const isNoteOn = onNotes.indexOf(i) !== -1;
     const isNoteOnCurrentStep = currentStepID === i;
     const stepID = i;
-
+    console.log("ON NOTE: ", stepID);
     return (
       <Note
         key={i}

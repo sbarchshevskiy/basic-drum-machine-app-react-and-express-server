@@ -2,7 +2,7 @@ import React, { useContext, memo } from "react";
 
 import { Context } from "../../hooks/useBassStore";
 import { bassSoundFiles } from "../../constants/configBass";
-import Track from "./Track";
+import Track from "./BassTrack";
 
 const TrackList = ({ currentStepID }) => {
   const {

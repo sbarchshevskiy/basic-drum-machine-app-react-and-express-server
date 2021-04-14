@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "./Toolbar";
-import Steps from "./Steps";
-import TrackList from "./TrackList";
+import ToolBar from "./BassToolbar";
+import Steps from "./BassSteps";
+import TrackList from "./BassTrackList";
 
-import PlayHead from "./PlayHead";
+import PlayHead from "./BassPlayHead";
 import { Provider } from "../../hooks/useBassStore";
 import useTimer from "../../hooks/useTimer";
 import useStyles from "../../hooks/useBassStyles";

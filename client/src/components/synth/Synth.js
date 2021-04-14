@@ -64,6 +64,7 @@ const Synth = ({
   const trackListProps = {
     currentStepID,
   };
+
   return (
     <Provider>
       <main className="app">

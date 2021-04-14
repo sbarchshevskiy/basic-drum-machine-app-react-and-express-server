@@ -1,7 +1,7 @@
 import React, { useContext, memo } from "react";
 import { Context } from "../../hooks/useBassStore";
 import { togglePlayback } from "../../helpers";
-import "./Toolbar.css";
+import "./BassToolbar.css";
 
 const ToolBar = ({
   setStartBassTime,
