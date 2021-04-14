@@ -17,6 +17,7 @@ const Session = () => {
 
   return (
     <div>
+      <button>Save</button>
       <button>Play!</button>
       <Instruments
         startBassTime={startBassTime}
