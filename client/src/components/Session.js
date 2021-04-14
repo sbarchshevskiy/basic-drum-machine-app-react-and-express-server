@@ -18,8 +18,9 @@ const Session = () => {
 
   const saveSession = (event) => {
     event.preventDefault();
-    console.log(getBass());
+    console.log(getBass().trackList["7"].onNotes);
   };
+
   function drumsPlayback() {
     togglePlayback(
       isDrumSequencePlaying,
