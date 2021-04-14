@@ -1,19 +1,19 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "./BassToolbar";
-import Steps from "./BassSteps";
-import TrackList from "./BassTrackList";
+import ToolBar from "./DrumToolbar";
+import Steps from "./DrumSteps";
+import TrackList from "./DrumTrackList";
 
-import PlayHead from "./BassPlayHead";
-import { Provider } from "../../hooks/useBassStore";
+import PlayHead from "./DrumPlayHead";
+import { Provider } from "../../hooks/useDrumStore";
 import useTimer from "../../hooks/useTimer";
-import useStyles from "../../hooks/useBassStyles";
+import useStyles from "../../hooks/useDrumStyles";
 
-const Bass = ({
-  startBassTime,
-  setStartBassTime,
-  pastBassLapsedTime,
-  setBassPastLapse,
-  isBassSequencePlaying,
+const Drums = ({
+  startDrumTime,
+  setStartDrumTime,
+  pastDrumLapsedTime,
+  setDrumPastLapse,
+  isDrumSequencePlaying,
 }) => {
   const baseBPMPerOneSecond = 60;
   const stepsPerBar = 16;
@@ -23,35 +23,35 @@ const Bass = ({
   const totalBeats = beatsPerBar * barsPerSequence;
 
   const [BPM, setBPM] = useState(128);
-  // const [startBassTime, setStartBassTime] = useState(null);
-  // const [pastBassLapsedTime, setBassPastLapse] = useState(0);
+  // const [startDrumTime, setStartDrumTime] = useState(null);
+  // const [pastDrumLapsedTime, setDrumPastLapse] = useState(0);
   const [currentStepID, setCurrentStep] = useState(null);
   const [getNotesAreaWidthInPixels] = useStyles(totalSteps);
 
   const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps);
   const timePerSequence = (baseBPMPerOneSecond / BPM) * 1000 * totalBeats;
   const timePerStep = timePerSequence / totalSteps;
-  // const isBassSequencePlaying = startBassTime !== null;
-  const playerTime = useTimer(isBassSequencePlaying);
-  const lapsedTime = isBassSequencePlaying
-    ? Math.max(0, playerTime - startBassTime)
+  // const isDrumSequencePlaying = startDrumTime !== null;
+  const playerTime = useTimer(isDrumSequencePlaying);
+  const lapsedTime = isDrumSequencePlaying
+    ? Math.max(0, playerTime - startDrumTime)
     : 0;
-  const totalLapsedTime = pastBassLapsedTime + lapsedTime;
+  const totalLapsedTime = pastDrumLapsedTime + lapsedTime;
 
   useEffect(() => {
-    if (isBassSequencePlaying) {
+    if (isDrumSequencePlaying) {
       setCurrentStep(Math.floor(totalLapsedTime / timePerStep) % totalSteps);
     } else {
       setCurrentStep(null);
     }
-  }, [isBassSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
+  }, [isDrumSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
 
   const toolBarProps = {
-    setStartBassTime,
-    setBassPastLapse,
+    setStartDrumTime,
+    setDrumPastLapse,
     setBPM,
-    isBassSequencePlaying,
-    startBassTime,
+    isDrumSequencePlaying,
+    startDrumTime,
     BPM,
   };
 
@@ -68,7 +68,7 @@ const Bass = ({
     <Provider>
       <main className="app">
         <header className="app_header">
-          <h1 className="app_title">B-B-BASS</h1>
+          <h1 className="app_title">DRRRRUM</h1>
           <ToolBar {...toolBarProps} />
         </header>
         <Steps count={totalSteps} />
@@ -81,4 +81,4 @@ const Bass = ({
   );
 };
 
-export default Bass;
+export default Drums;

@@ -1,19 +1,19 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "./BassToolbar";
-import Steps from "./BassSteps";
-import TrackList from "./BassTrackList";
+import ToolBar from "./SynthToolbar";
+import Steps from "./SynthSteps";
+import TrackList from "./SynthTrackList";
 
-import PlayHead from "./BassPlayHead";
-import { Provider } from "../../hooks/useBassStore";
+import PlayHead from "./SynthPlayHead";
+import { Provider } from "../../hooks/useSynthStore";
 import useTimer from "../../hooks/useTimer";
-import useStyles from "../../hooks/useBassStyles";
+import useStyles from "../../hooks/useSynthStyles";
 
-const Bass = ({
-  startBassTime,
-  setStartBassTime,
-  pastBassLapsedTime,
-  setBassPastLapse,
-  isBassSequencePlaying,
+const Synth = ({
+  startSynthTime,
+  setStartSynthTime,
+  pastSynthLapsedTime,
+  setSynthPastLapse,
+  isSynthSequencePlaying,
 }) => {
   const baseBPMPerOneSecond = 60;
   const stepsPerBar = 16;
@@ -23,35 +23,35 @@ const Bass = ({
   const totalBeats = beatsPerBar * barsPerSequence;
 
   const [BPM, setBPM] = useState(128);
-  // const [startBassTime, setStartBassTime] = useState(null);
-  // const [pastBassLapsedTime, setBassPastLapse] = useState(0);
+  // const [startSynthTime, setStartSynthTime] = useState(null);
+  // const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const [currentStepID, setCurrentStep] = useState(null);
   const [getNotesAreaWidthInPixels] = useStyles(totalSteps);
 
   const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps);
   const timePerSequence = (baseBPMPerOneSecond / BPM) * 1000 * totalBeats;
   const timePerStep = timePerSequence / totalSteps;
-  // const isBassSequencePlaying = startBassTime !== null;
-  const playerTime = useTimer(isBassSequencePlaying);
-  const lapsedTime = isBassSequencePlaying
-    ? Math.max(0, playerTime - startBassTime)
+  // const isSynthSequencePlaying = startSynthTime !== null;
+  const playerTime = useTimer(isSynthSequencePlaying);
+  const lapsedTime = isSynthSequencePlaying
+    ? Math.max(0, playerTime - startSynthTime)
     : 0;
-  const totalLapsedTime = pastBassLapsedTime + lapsedTime;
+  const totalLapsedTime = pastSynthLapsedTime + lapsedTime;
 
   useEffect(() => {
-    if (isBassSequencePlaying) {
+    if (isSynthSequencePlaying) {
       setCurrentStep(Math.floor(totalLapsedTime / timePerStep) % totalSteps);
     } else {
       setCurrentStep(null);
     }
-  }, [isBassSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
+  }, [isSynthSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
 
   const toolBarProps = {
-    setStartBassTime,
-    setBassPastLapse,
+    setStartSynthTime,
+    setSynthPastLapse,
     setBPM,
-    isBassSequencePlaying,
-    startBassTime,
+    isSynthSequencePlaying,
+    startSynthTime,
     BPM,
   };
 
@@ -64,11 +64,12 @@ const Bass = ({
   const trackListProps = {
     currentStepID,
   };
+
   return (
     <Provider>
       <main className="app">
         <header className="app_header">
-          <h1 className="app_title">B-B-BASS</h1>
+          <h1 className="app_title">MEEEELOOODEEEE</h1>
           <ToolBar {...toolBarProps} />
         </header>
         <Steps count={totalSteps} />
@@ -81,4 +82,4 @@ const Bass = ({
   );
 };
 
-export default Bass;
+export default Synth;
