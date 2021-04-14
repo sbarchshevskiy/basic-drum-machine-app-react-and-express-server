@@ -8,7 +8,13 @@ import { Provider } from "../../hooks/useSynthStore";
 import useTimer from "../../hooks/useTimer";
 import useStyles from "../../hooks/useSynthStyles";
 
-const Synth = () => {
+const Synth = ({
+  startSynthTime,
+  setSynthstartSynthTime,
+  pastSynthLapsedTime,
+  setSynthPastLapse,
+  isSynthSequencePlaying,
+}) => {
   const baseBPMPerOneSecond = 60;
   const stepsPerBar = 16;
   const beatsPerBar = 4;
@@ -17,20 +23,20 @@ const Synth = () => {
   const totalBeats = beatsPerBar * barsPerSequence;
 
   const [BPM, setBPM] = useState(128);
-  const [startSynthTime, setSynthstartSynthTime] = useState(null);
-  const [pastLapsedTime, setSynthPastLapse] = useState(0);
+  // const [startSynthTime, setSynthstartSynthTime] = useState(null);
+  // const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const [currentStepID, setCurrentStep] = useState(null);
   const [getNotesAreaWidthInPixels] = useStyles(totalSteps);
 
   const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps);
   const timePerSequence = (baseBPMPerOneSecond / BPM) * 1000 * totalBeats;
   const timePerStep = timePerSequence / totalSteps;
-  const isSynthSequencePlaying = startSynthTime !== null;
+  // const isSynthSequencePlaying = startSynthTime !== null;
   const playerTime = useTimer(isSynthSequencePlaying);
   const lapsedTime = isSynthSequencePlaying
     ? Math.max(0, playerTime - startSynthTime)
     : 0;
-  const totalLapsedTime = pastLapsedTime + lapsedTime;
+  const totalLapsedTime = pastSynthLapsedTime + lapsedTime;
 
   useEffect(() => {
     if (isSynthSequencePlaying) {
