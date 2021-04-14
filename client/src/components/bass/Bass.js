@@ -6,7 +6,7 @@ import TrackList from "./TrackList";
 import PlayHead from "./PlayHead";
 import { Provider } from "../../hooks/useStore";
 import useTimer from "../../hooks/useTimer";
-import useStyles from "../../hooks/useStyles";
+import useStyles from "../../hooks/useBassStyles";
 
 const Bass = () => {
   const baseBPMPerOneSecond = 60;

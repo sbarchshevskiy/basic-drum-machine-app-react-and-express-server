@@ -11,7 +11,7 @@ const defaults = {
   __color_orange: "#eda42d",
   __base_font_size: 12,
   __number_of_steps: 16,
-  __number_of_tracks: 8,
+  __number_of_tracks: 4,
   __grid_unit: 2,
   __play_head_width: 2,
   __form_element_height: 30,
@@ -86,11 +86,11 @@ const setStyles = (totalSteps) => {
   );
 };
 
-const useStyles = (totalSteps) => {
+const useDrumStyles = (totalSteps) => {
   useEffect(() => {
     setStyles(totalSteps);
   }, [totalSteps]);
   return [getNotesAreaWidthInPixels];
 };
 
-export default useStyles;
+export default useDrumStyles;
