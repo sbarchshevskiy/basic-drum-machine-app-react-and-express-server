@@ -1,12 +1,11 @@
 import React, { useState, useEffect, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-
 import Session from "./components/Session";
-
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
-import Customers from "./components/creators";
+import Creators from "./components/creators";
+import ClientIO from "./components/ClientIO";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -34,7 +33,8 @@ function App() {
         <button onClick={() => osc1.stop()}>off</button>
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
-      <Customers />
+      <Creators />
+      <ClientIO />
       <Router>
         <div>
           <Route path="/session" component={Session} />
