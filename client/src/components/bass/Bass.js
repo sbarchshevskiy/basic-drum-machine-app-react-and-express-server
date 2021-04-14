@@ -4,7 +4,7 @@ import Steps from "./Steps";
 import TrackList from "./TrackList";
 
 import PlayHead from "./PlayHead";
-import { Provider } from "../../hooks/useStore";
+import { Provider } from "../../hooks/useBassStore";
 import useTimer from "../../hooks/useTimer";
 import useStyles from "../../hooks/useBassStyles";
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, memo } from "react";
 import classNames from "classnames";
-import { Context } from "../../hooks/useStore";
+import { Context } from "../../hooks/useBassStore";
 import "./Note.css";
 
 const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
