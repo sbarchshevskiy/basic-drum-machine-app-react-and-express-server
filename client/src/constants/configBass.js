@@ -8,7 +8,7 @@ const bassSequenceList = [
       {
         title: "C2",
         soundFile: "bass_C2",
-        onNotes: [0, 4, 8, 12],
+        onNotes: [],
       },
       {
         title: "B1",
@@ -43,7 +43,7 @@ const bassSequenceList = [
       {
         title: "C1",
         soundFile: "bass_C1",
-        onNotes: [],
+        onNotes: [0, 4, 8, 12],
       },
     ],
   },
