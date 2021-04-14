@@ -25,7 +25,7 @@ const ToolBar = ({
     );
   }
 
-  function stopPlayback() {
+  function stopBassPlayback() {
     setBassPastLapse(0);
     setStartBassTime(null);
   }
@@ -38,7 +38,7 @@ const ToolBar = ({
     <nav className="toolbar">
       <button
         className="form_element button_stop"
-        onClick={stopPlayback}
+        onClick={stopBassPlayback}
         aria-label="Stop"
       >
         <svg width="14" height="14" viewBox="0 0 14 14">

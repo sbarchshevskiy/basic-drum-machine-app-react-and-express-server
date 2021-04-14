@@ -48,9 +48,31 @@ const Session = () => {
     synthPlayback();
   }
 
+  function stopDrumPlayback() {
+    setDrumPastLapse(0);
+    setStartDrumTime(null);
+  }
+
+  function stopBassPlayback() {
+    setBassPastLapse(0);
+    setStartBassTime(null);
+  }
+
+  function stopSynthPlayback() {
+    setSynthPastLapse(0);
+    setStartSynthTime(null);
+  }
+
+  function globalStopPlayback() {
+    stopDrumPlayback();
+    stopBassPlayback();
+    stopSynthPlayback();
+  }
+
   return (
     <div>
       <button>Save</button>
+      <button onClick={globalStopPlayback}>Stop!</button>
       <button onClick={globalPlayback}>Play!</button>
       <Instruments
         startBassTime={startBassTime}

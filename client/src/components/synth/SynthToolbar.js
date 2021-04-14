@@ -24,7 +24,7 @@ const ToolBar = ({
     }
   }
 
-  function stopPlayback() {
+  function stopSynthPlayback() {
     setSynthPastLapse(0);
     setStartSynthTime(null);
   }
@@ -37,7 +37,7 @@ const ToolBar = ({
     <nav className="toolbar">
       <button
         className="form_element button_stop"
-        onClick={stopPlayback}
+        onClick={stopSynthPlayback}
         aria-label="Stop"
       >
         <svg width="14" height="14" viewBox="0 0 14 14">
