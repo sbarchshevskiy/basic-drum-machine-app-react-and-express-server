@@ -1,5 +1,6 @@
 import React, { useContext, memo } from "react";
 import { Context } from "../../hooks/useBassStore";
+import { togglePlayback } from "../../helpers";
 import "./Toolbar.css";
 
 const ToolBar = ({
@@ -15,14 +16,12 @@ const ToolBar = ({
     selectSequence,
   } = useContext(Context);
 
-  function togglePlayback() {
-    if (isBassSequencePlaying) {
-      setBassPastLapse((l) => l + performance.now() - startBassTime);
-      setStartBassTime(null);
-    } else {
-      setStartBassTime(performance.now());
-    }
-  }
+  togglePlayback(
+    isBassSequencePlaying,
+    setBassPastLapse,
+    startBassTime,
+    setStartBassTime
+  );
 
   function stopPlayback() {
     setBassPastLapse(0);
@@ -52,7 +51,12 @@ const ToolBar = ({
       </button>
       <button
         className="form_element button_play_pause"
-        onClick={togglePlayback}
+        onClick={togglePlayback(
+          isBassSequencePlaying,
+          setBassPastLapse,
+          startBassTime,
+          setStartBassTime
+        )}
         aria-label="Play / Pause"
       >
         <svg width="14" height="14" viewBox="8 8 20 20">
