@@ -77,7 +77,7 @@ const Session = () => {
   };
   return (
     <div>
-      <button onClick={getTacksFromTrackList}>Save</button>
+      <button onClick={() => getTacksFromTrackList()}>Save</button>
       <button onClick={globalStopPlayback}>Stop!</button>
       <button onClick={globalPlayback}>Play!</button>
       <Instruments
