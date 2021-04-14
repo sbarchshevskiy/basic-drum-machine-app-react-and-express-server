@@ -17,8 +17,8 @@
     "nodemon": "^1.14.6"
   },
   "dependencies": {
-    "audio-react-recorder": "^1.0.4",
     "-": "0.0.1",
+    "audio-react-recorder": "^1.0.4",
     "classnames": "^2.3.1",
     "concurrently": "^3.5.1",
     "cors": "^2.8.5",
@@ -28,6 +28,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "save": "^2.4.0",
+    "socketio": "^1.0.0",
     "tone": "^14.8.15",
     "web-audio-daw": "^4.11.0"
   }
