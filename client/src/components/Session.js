@@ -11,7 +11,7 @@ const Session = () => {
   const [pastDrumLapsedTime, setDrumPastLapse] = useState(0);
   const isDrumSequencePlaying = startDrumTime !== null;
 
-  const [startSynthTime, setSynthstartSynthTime] = useState(null);
+  const [startSynthTime, setStartSynthTime] = useState(null);
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
 
@@ -30,7 +30,7 @@ const Session = () => {
         setDrumPastLapse={setDrumPastLapse}
         isDrumSequencePlaying={isDrumSequencePlaying}
         startSynthTime={startSynthTime}
-        setSynthstartSynthTime={setSynthstartSynthTime}
+        setStartSynthTime={setStartSynthTime}
         pastSynthLapsedTime={pastSynthLapsedTime}
         setSynthPastLapse={setSynthPastLapse}
         isSynthSequencePlaying={isSynthSequencePlaying}

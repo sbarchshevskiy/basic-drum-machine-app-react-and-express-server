@@ -15,7 +15,7 @@ const Instruments = ({
   setDrumPastLapse,
   isDrumSequencePlaying,
   startSynthTime,
-  setSynthstartSynthTime,
+  setStartSynthTime,
   pastSynthLapsedTime,
   setSynthPastLapse,
   isSynthSequencePlaying,
@@ -43,7 +43,7 @@ const Instruments = ({
       <div className="synth">
         <Synth
           startSynthTime={startSynthTime}
-          setSynthstartSynthTime={setSynthstartSynthTime}
+          setStartSynthTime={setStartSynthTime}
           pastSynthLapsedTime={pastSynthLapsedTime}
           setSynthPastLapse={setSynthPastLapse}
           isSynthSequencePlaying={isSynthSequencePlaying}

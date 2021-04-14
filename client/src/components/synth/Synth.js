@@ -10,7 +10,7 @@ import useStyles from "../../hooks/useSynthStyles";
 
 const Synth = ({
   startSynthTime,
-  setSynthstartSynthTime,
+  setStartSynthTime,
   pastSynthLapsedTime,
   setSynthPastLapse,
   isSynthSequencePlaying,
@@ -23,7 +23,7 @@ const Synth = ({
   const totalBeats = beatsPerBar * barsPerSequence;
 
   const [BPM, setBPM] = useState(128);
-  // const [startSynthTime, setSynthstartSynthTime] = useState(null);
+  // const [startSynthTime, setStartSynthTime] = useState(null);
   // const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const [currentStepID, setCurrentStep] = useState(null);
   const [getNotesAreaWidthInPixels] = useStyles(totalSteps);
@@ -47,7 +47,7 @@ const Synth = ({
   }, [isSynthSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
 
   const toolBarProps = {
-    setSynthstartSynthTime,
+    setStartSynthTime,
     setSynthPastLapse,
     setBPM,
     isSynthSequencePlaying,

@@ -3,7 +3,7 @@ import { Context } from "../../hooks/useSynthStore";
 import "./SynthToolbar.css";
 
 const ToolBar = ({
-  setSynthstartSynthTime,
+  setStartSynthTime,
   setSynthPastLapse,
   setBPM,
   isSynthSequencePlaying,
@@ -18,15 +18,15 @@ const ToolBar = ({
   function togglePlayback() {
     if (isSynthSequencePlaying) {
       setSynthPastLapse((l) => l + performance.now() - startSynthTime);
-      setSynthstartSynthTime(null);
+      setStartSynthTime(null);
     } else {
-      setSynthstartSynthTime(performance.now());
+      setStartSynthTime(performance.now());
     }
   }
 
   function stopPlayback() {
     setSynthPastLapse(0);
-    setSynthstartSynthTime(null);
+    setStartSynthTime(null);
   }
 
   function updateBPM(e) {
