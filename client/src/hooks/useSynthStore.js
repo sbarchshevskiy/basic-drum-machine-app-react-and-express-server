@@ -7,12 +7,24 @@ const Context = createContext({
   selectSequence: () => {},
 });
 
+let trackSequence = {
+  ...synthSequenceList[0],
+};
+
+function getSequence() {
+  return trackSequence;
+}
+
 const appReducer = (state, action) => {
+  let newSequence;
   switch (action.type) {
     case "SET_SEQUENCE":
-      return {
+      newSequence = {
         ...synthSequenceList.find((seq) => seq.id === action.value),
       };
+      trackSequence = newSequence;
+      return newSequence;
+
     case "SET_ON_NOTES":
       let newTrackList = state.trackList.map((track, trackID) => {
         if (action.trackID === trackID) {
@@ -24,10 +36,14 @@ const appReducer = (state, action) => {
           return track;
         }
       });
-      return {
+      newSequence = {
         ...state,
         trackList: newTrackList,
       };
+
+      trackSequence = newSequence;
+
+      return newSequence;
     default:
       return state;
   }
@@ -68,4 +84,4 @@ const Provider = ({ children }) => {
   );
 };
 
-export { Provider, Context };
+export { Provider, Context, getSequence };

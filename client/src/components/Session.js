@@ -3,6 +3,7 @@ import Instruments from "./Instruments";
 import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
+import { getSequence as getSynth } from "../hooks/useSynthStore";
 
 const Session = () => {
   const [startBassTime, setStartBassTime] = useState(null);
@@ -20,7 +21,8 @@ const Session = () => {
   const saveSession = (event) => {
     event.preventDefault();
     console.log(getBass().trackList["7"].onNotes);
-    console.log(getDrums().trackList["1"].onNotes);
+    console.log(getDrums().trackList["0"].onNotes);
+    console.log(getSynth().trackList["1"].onNotes);
   };
 
   function drumsPlayback() {
