@@ -1,7 +1,14 @@
-const express = require('express');
+const app = require('express')();
 const cors = require('cors');
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
 
-const app = express();
+io.on('connection', socket => {
+  socket.on('message', ({name, message}) => {
+    io.emit('message', {name, message})
+  })
+})
+
 
 app.get('/api/creators', cors(), (req, res) => {
   const creators = [
