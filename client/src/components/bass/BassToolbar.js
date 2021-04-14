@@ -17,21 +17,21 @@ const ToolBar = ({
   } = useContext(Context);
 
   // Also put the funciton into props below
-  // togglePlayback(
-  //   isBassSequencePlaying,
-  //   setBassPastLapse,
-  //   startBassTime,
-  //   setStartBassTime
-  // );
+  togglePlayback(
+    isBassSequencePlaying,
+    setBassPastLapse,
+    startBassTime,
+    setStartBassTime
+  );
 
-  function togglePlayback() {
-    if (isBassSequencePlaying) {
-      setBassPastLapse((l) => l + performance.now() - startBassTime);
-      setStartBassTime(null);
-    } else {
-      setStartBassTime(performance.now());
-    }
-  }
+  // function togglePlayback() {
+  //   if (isBassSequencePlaying) {
+  //     setBassPastLapse((l) => l + performance.now() - startBassTime);
+  //     setStartBassTime(null);
+  //   } else {
+  //     setStartBassTime(performance.now());
+  //   }
+  // }
 
   function stopPlayback() {
     setBassPastLapse(0);
