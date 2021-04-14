@@ -1,14 +1,14 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "./Toolbar";
-import Steps from "./Steps";
-import TrackList from "./TrackList";
+import ToolBar from "./SynthToolbar";
+import Steps from "./SynthSteps";
+import TrackList from "./SynthTrackList";
 
-import PlayHead from "./PlayHead";
-import { Provider } from "../../hooks/useBassStore";
+import PlayHead from "./SynthPlayHead";
+import { Provider } from "../../hooks/useSynthStore";
 import useTimer from "../../hooks/useTimer";
-import useStyles from "../../hooks/useBassStyles";
+import useStyles from "../../hooks/useSynthStyles";
 
-const Bass = () => {
+const Synth = () => {
   const baseBPMPerOneSecond = 60;
   const stepsPerBar = 16;
   const beatsPerBar = 4;
@@ -62,7 +62,7 @@ const Bass = () => {
     <Provider>
       <main className="app">
         <header className="app_header">
-          <h1 className="app_title">B-B-BASS</h1>
+          <h1 className="app_title">MEEEELOOODEEEE</h1>
           <ToolBar {...toolBarProps} />
         </header>
         <Steps count={totalSteps} />
@@ -75,4 +75,4 @@ const Bass = () => {
   );
 };
 
-export default Bass;
+export default Synth;
