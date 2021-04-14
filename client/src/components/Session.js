@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
 import Instruments from "./Instruments";
-// import globalTogglePlayback from "../helpers/globalTogglePlayback";
+import { togglePlayback } from "../helpers";
 
 const Session = () => {
   const [startBassTime, setStartBassTime] = useState(null);
@@ -15,10 +15,43 @@ const Session = () => {
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
 
+  function drumsPlayback() {
+    togglePlayback(
+      isDrumSequencePlaying,
+      setDrumPastLapse,
+      startDrumTime,
+      setStartDrumTime
+    );
+  }
+
+  function bassPlayback() {
+    togglePlayback(
+      isBassSequencePlaying,
+      setBassPastLapse,
+      startBassTime,
+      setStartBassTime
+    );
+  }
+
+  function synthPlayback() {
+    togglePlayback(
+      isSynthSequencePlaying,
+      setSynthPastLapse,
+      startSynthTime,
+      setStartSynthTime
+    );
+  }
+
+  function globalPlayback() {
+    drumsPlayback();
+    bassPlayback();
+    synthPlayback();
+  }
+
   return (
     <div>
       <button>Save</button>
-      <button>Play!</button>
+      <button onClick={globalPlayback}>Play!</button>
       <Instruments
         startBassTime={startBassTime}
         setStartBassTime={setStartBassTime}
