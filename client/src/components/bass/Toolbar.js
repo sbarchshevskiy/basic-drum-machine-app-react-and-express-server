@@ -16,6 +16,14 @@ const ToolBar = ({
     selectSequence,
   } = useContext(Context);
 
+  // Also put the funciton into props below
+  // togglePlayback(
+  //   isBassSequencePlaying,
+  //   setBassPastLapse,
+  //   startBassTime,
+  //   setStartBassTime
+  // );
+
   function togglePlayback() {
     if (isBassSequencePlaying) {
       setBassPastLapse((l) => l + performance.now() - startBassTime);
