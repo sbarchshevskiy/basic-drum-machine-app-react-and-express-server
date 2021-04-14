@@ -7,6 +7,8 @@ import Osc1 from "./components/Osc1";
 import Creators from "./components/creators";
 import ClientIO from "./components/ClientIO";
 
+
+
 const actx = new AudioContext();
 let out = actx.destination;
 
@@ -34,7 +36,6 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Creators />
-      <ClientIO />
       <Router>
         <div>
           <Route path="/session" component={Session} />
@@ -43,6 +44,8 @@ function App() {
           <Route exact path="/" />
         </div>
       </Router>
+      <ClientIO />
+
     </div>
   );
 }

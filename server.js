@@ -1,10 +1,17 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
+const server = require('http').createServer(app)
+const io = require('socket.io')(server, {cors: {origin: "http://localhost:3000",
+  methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+  credentials: true}})
 const cors = require('cors');
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
+
 
 io.on('connection', socket => {
+  console.log('socket id',socket.id)
   socket.on('message', ({name, message}) => {
+    console.log("name/message",name, message )
     io.emit('message', {name, message})
   })
 })

@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client'
-import TextField from '@material-ui/core';
-const socket = io.connect('http://localhost:3000')
+import { TextField } from '@material-ui/core';
+import './ClientIO.css'
+const socket = io('http://localhost:5000', {
+  withCredentials: true,
+  extraHeaders:
+    {
+      "my-custom-header": "abcd"}
+})
+
 
 
 export default function ClientIO() {
+
   const [state, setState] = useState({
     message: '',
     name: ''
   })
   const [chat, setChat] = useState([])
 
-  const onTextChane = event => {
+  const onTextChange = event => {
     setState(
       {
         ...state, [event.target.name]: event.target.value
@@ -48,11 +56,13 @@ export default function ClientIO() {
     ))
   }
 
+  console.log('',renderChat())
+
    return(
-    <div>
+    <div className="card">
       <form onSubmit={onMessageSubmit}>
         <hi>Orca Chat</hi>
-        <div>
+        <div className="name-field">
           <TextField
             name="name"
             onChange={event => onTextChange(event)}
@@ -65,6 +75,8 @@ export default function ClientIO() {
             name="message"
             onChange={event => onTextChange(event)}
             value={state.message}
+            id="outlined-multiline-static"
+            variant='outlined'
             label="Message"
           />
         </div>
@@ -72,7 +84,7 @@ export default function ClientIO() {
           Send!
         </button>
       </form>
-      <div>
+      <div className="render-chat">
         <h1>Here's what orca's been saying</h1>
         {renderChat()}
       </div>
