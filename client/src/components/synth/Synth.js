@@ -17,35 +17,35 @@ const Synth = () => {
   const totalBeats = beatsPerBar * barsPerSequence;
 
   const [BPM, setBPM] = useState(128);
-  const [startTime, setStartTime] = useState(null);
-  const [pastLapsedTime, setPastLapse] = useState(0);
+  const [startSynthTime, setSynthstartSynthTime] = useState(null);
+  const [pastLapsedTime, setSynthPastLapse] = useState(0);
   const [currentStepID, setCurrentStep] = useState(null);
   const [getNotesAreaWidthInPixels] = useStyles(totalSteps);
 
   const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps);
   const timePerSequence = (baseBPMPerOneSecond / BPM) * 1000 * totalBeats;
   const timePerStep = timePerSequence / totalSteps;
-  const isSequencePlaying = startTime !== null;
-  const playerTime = useTimer(isSequencePlaying);
-  const lapsedTime = isSequencePlaying
-    ? Math.max(0, playerTime - startTime)
+  const isSynthSequencePlaying = startSynthTime !== null;
+  const playerTime = useTimer(isSynthSequencePlaying);
+  const lapsedTime = isSynthSequencePlaying
+    ? Math.max(0, playerTime - startSynthTime)
     : 0;
   const totalLapsedTime = pastLapsedTime + lapsedTime;
 
   useEffect(() => {
-    if (isSequencePlaying) {
+    if (isSynthSequencePlaying) {
       setCurrentStep(Math.floor(totalLapsedTime / timePerStep) % totalSteps);
     } else {
       setCurrentStep(null);
     }
-  }, [isSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
+  }, [isSynthSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
 
   const toolBarProps = {
-    setStartTime,
-    setPastLapse,
+    setSynthstartSynthTime,
+    setSynthPastLapse,
     setBPM,
-    isSequencePlaying,
-    startTime,
+    isSynthSequencePlaying,
+    startSynthTime,
     BPM,
   };
 

@@ -3,11 +3,11 @@ import { Context } from "../../hooks/useDrumStore";
 import "./DrumToolbar.css";
 
 const ToolBar = ({
-  setStartTime,
-  setPastLapse,
+  setStartDrumTime,
+  setDrumPastLapse,
   setBPM,
-  isSequencePlaying,
-  startTime,
+  isDrumSequencePlaying,
+  startDrumTime,
   BPM,
 }) => {
   const {
@@ -16,17 +16,17 @@ const ToolBar = ({
   } = useContext(Context);
 
   function togglePlayback() {
-    if (isSequencePlaying) {
-      setPastLapse((l) => l + performance.now() - startTime);
-      setStartTime(null);
+    if (isDrumSequencePlaying) {
+      setDrumPastLapse((l) => l + performance.now() - startDrumTime);
+      setStartDrumTime(null);
     } else {
-      setStartTime(performance.now());
+      setStartDrumTime(performance.now());
     }
   }
 
   function stopPlayback() {
-    setPastLapse(0);
-    setStartTime(null);
+    setDrumPastLapse(0);
+    setStartDrumTime(null);
   }
 
   function updateBPM(e) {
@@ -56,7 +56,7 @@ const ToolBar = ({
         aria-label="Play / Pause"
       >
         <svg width="14" height="14" viewBox="8 8 20 20">
-          {isSequencePlaying && (
+          {isDrumSequencePlaying && (
             <path
               className="button_icon_path"
               id="pause-icon"
@@ -64,7 +64,7 @@ const ToolBar = ({
               d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26"
             />
           )}
-          {!isSequencePlaying && (
+          {!isDrumSequencePlaying && (
             <path
               className="button_icon_path"
               id="play-icon"
