@@ -20,6 +20,35 @@ const Session = () => {
 
   const saveSession = (event) => {
     event.preventDefault();
+
+    const trackValues = {
+      drums_kick: getDrums().trackList["0"].onNotes,
+      drums_snare: getDrums().trackList["1"].onNotes,
+      drums_ho: getDrums().trackList["2"].onNotes,
+      drums_hc: getDrums().trackList["3"].onNotes,
+
+      bass_c2: getBass().trackList["0"].onNotes,
+      bass_b1: getBass().trackList["1"].onNotes,
+      bass_a1: getBass().trackList["2"].onNotes,
+      bass_g1: getBass().trackList["3"].onNotes,
+      bass_f1: getBass().trackList["4"].onNotes,
+      bass_e1: getBass().trackList["5"].onNotes,
+      bass_d1: getBass().trackList["6"].onNotes,
+      bass_c1: getBass().trackList["7"].onNotes,
+
+      synth_c4: getSynth().trackList["0"].onNotes,
+      synth_b3: getSynth().trackList["1"].onNotes,
+      synth_a3: getSynth().trackList["2"].onNotes,
+      synth_g3: getSynth().trackList["3"].onNotes,
+      synth_f3: getSynth().trackList["4"].onNotes,
+      synth_e3: getSynth().trackList["5"].onNotes,
+      synth_d3: getSynth().trackList["6"].onNotes,
+      synth_c3: getSynth().trackList["7"].onNotes,
+    };
+    console.log(trackValues);
+    //1. Map trackID to a db line
+    //2. Create an object with proper values
+    //3. Create an axios requests
     console.log(getBass().trackList["7"].onNotes);
     console.log(getDrums().trackList["0"].onNotes);
     console.log(getSynth().trackList["1"].onNotes);
