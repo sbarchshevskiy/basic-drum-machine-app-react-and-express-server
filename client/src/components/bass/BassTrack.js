@@ -12,7 +12,7 @@ const Track = ({
   soundFilePath,
 }) => {
   const [play] = useSound(soundFilePath);
-
+  console.log("ON NOTES: ", onNotes);
   const notes = [...Array(noteCount)].map((el, i) => {
     const isNoteOn = onNotes.indexOf(i) !== -1;
     const isNoteOnCurrentStep = currentStepID === i;

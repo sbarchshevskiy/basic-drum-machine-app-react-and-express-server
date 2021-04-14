@@ -13,6 +13,7 @@ const appReducer = (state, action) => {
       return {
         ...bassSequenceList.find((seq) => seq.id === action.value),
       };
+    // This is where onNotes come from
     case "SET_ON_NOTES":
       let newTrackList = state.trackList.map((track, trackID) => {
         if (action.trackID === trackID) {
