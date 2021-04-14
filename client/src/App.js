@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Component } from "react";
-import Instruments from "./components/Instruments";
 
 import logo from "./orca-logo.png";
 import "./App.css";
