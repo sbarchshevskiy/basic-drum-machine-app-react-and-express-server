@@ -40,7 +40,7 @@ function App() {
       <Router>
         <Nav />
         <div>
-          <Route path="/session" component={Session} />
+          <Route path="/sessions/:sessionID" component={Session} />
           <Route path="/users" />
           <Route path="/tracks" />
           <Route path="/tracks/new" component={NewTrack} />

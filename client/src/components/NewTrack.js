@@ -8,8 +8,8 @@ import "./Nav.css";
 const NewTrack = () => {
   const history = useHistory();
 
-  const handleClick = () => {
-    history.push("/session");
+  const handleClick = (id) => {
+    history.push(`/sessions/${id}`);
   };
 
   const [newTrack, setNewTrack] = useState({
@@ -44,11 +44,11 @@ const NewTrack = () => {
           console.log("CREATED!", trackID);
           axios
             .post("http://localhost:5000/sessions/new", { trackID })
-            .then((res) => console.log("RESSS: ", res.data))
+            .then((res) => handleClick(res.data.id))
             .catch((err) => console.log("ERROR!", err));
         })
         .then((res) => {
-          handleClick();
+          console.log(res);
         })
         .catch((err) => console.log("ERROR!", err));
     }
