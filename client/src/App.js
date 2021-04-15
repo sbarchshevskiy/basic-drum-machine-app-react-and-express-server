@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import Session from "./components/Session";
+import Nav from "./components/Nav";
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
@@ -36,6 +37,7 @@ function App() {
       </header>
       <Customers />
       <Router>
+        <Nav />
         <div>
           <Route path="/session" component={Session} />
           <Route path="/users" />
