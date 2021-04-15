@@ -27,17 +27,17 @@ INSERT INTO sessions (user_id, track_id) VALUES (2, 4);
 INSERT INTO sessions (user_id, track_id) VALUES (3, 5);
 INSERT INTO sessions (user_id, track_id) VALUES (4, 6);
 
-INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
+INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
 VALUES (1, ARRAY[1, 5, 9, 13], ARRAY[5, 13], ARRAY[1, 3, 5, 7, 9, 11, 13, 15], ARRAY[15]);
-INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
+INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
 VALUES (2, ARRAY[1, 5, 9, 13], ARRAY[5, 13], ARRAY[1, 3, 5, 7, 9, 11, 13, 15], ARRAY[15]);
-INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
+INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
 VALUES (3, ARRAY[1, 3, 9, 11], ARRAY[5, 13], ARRAY[1, 3, 5, 7, 9, 11, 13, 15], ARRAY[15]);
-INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
+INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
 VALUES (4, ARRAY[1, 3, 9, 11], ARRAY[5, 13], ARRAY[1, 3, 5, 7, 9, 11, 13, 15], ARRAY[15]);
-INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
+INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
 VALUES (5, ARRAY[1, 5, 9, 13], ARRAY[5, 13], ARRAY[1, 3, 5, 7, 9, 11, 13, 15], ARRAY[15]);
-INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
+INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
 VALUES (6, ARRAY[1, 5, 9, 13], ARRAY[5, 13], ARRAY[1, 3, 5, 7, 9, 11, 13, 15], ARRAY[15]);
 
 INSERT INTO bass_sequence (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2) 

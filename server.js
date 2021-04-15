@@ -42,16 +42,15 @@ const port = 5000;
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
   const data = req.body.drumValues;
-  console.log("REQBODY: ", data);
   res.json({});
   const queryParams = [
     "1",
     data.drums_kick,
     data.drums_snare,
-    data.drums_hc,
     data.drums_ho,
+    data.drums_hc,
   ];
-  const queryString = `INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
+  const queryString = `INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
   VALUES ($1, $2, $3, $4, $5);`;
   db.query(queryString, queryParams)
     .then((res) => console.log("DONE!", res.rows))
@@ -61,7 +60,6 @@ app.post("/session/drums", (req, res) => {
 //send bass values to the db
 app.post("/session/bass", (req, res) => {
   const data = req.body.bassValues;
-  console.log("REQBODY: ", data);
   res.json({});
   const queryParams = [
     "1",
@@ -84,7 +82,6 @@ app.post("/session/bass", (req, res) => {
 //send synth values to the db
 app.post("/session/synth", (req, res) => {
   const data = req.body.synthValues;
-  console.log("REQBODY: ", data);
   res.json({});
   const queryParams = [
     "1",
