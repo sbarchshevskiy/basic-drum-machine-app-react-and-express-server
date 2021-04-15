@@ -1,9 +1,12 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const cors = require("cors");
 
+const jsonParser = bodyParser.json();
 const app = express();
 app.use(cors());
+app.use(jsonParser);
 
 app.get("/api/creators", (req, res) => {
   const creators = [
@@ -19,6 +22,7 @@ const port = 5000;
 
 app.post("/session", (req, res) => {
   console.log("REQBODY: ", req.body);
+  res.json({});
 });
 
 app.listen(port, () => `Server running on port ${port}`);

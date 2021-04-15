@@ -49,7 +49,7 @@ const Session = () => {
     };
 
     axios
-      .post("http://localhost:5000/session", trackValues)
+      .post("http://localhost:5000/session", { trackValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     console.log(trackValues);
