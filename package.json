@@ -30,6 +30,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "save": "^2.4.0",
+    "sql-template-strings": "^2.2.2",
     "tone": "^14.8.15",
     "web-audio-daw": "^4.11.0"
   }

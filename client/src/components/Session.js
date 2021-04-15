@@ -23,12 +23,14 @@ const Session = () => {
   const saveSession = (event) => {
     event.preventDefault();
 
-    const trackValues = {
+    const drumValues = {
       drums_kick: getDrums().trackList["0"].onNotes,
       drums_snare: getDrums().trackList["1"].onNotes,
       drums_ho: getDrums().trackList["2"].onNotes,
       drums_hc: getDrums().trackList["3"].onNotes,
+    };
 
+    const bassValues = {
       bass_c2: getBass().trackList["0"].onNotes,
       bass_b1: getBass().trackList["1"].onNotes,
       bass_a1: getBass().trackList["2"].onNotes,
@@ -37,7 +39,9 @@ const Session = () => {
       bass_e1: getBass().trackList["5"].onNotes,
       bass_d1: getBass().trackList["6"].onNotes,
       bass_c1: getBass().trackList["7"].onNotes,
+    };
 
+    const synthValues = {
       synth_c4: getSynth().trackList["0"].onNotes,
       synth_b3: getSynth().trackList["1"].onNotes,
       synth_a3: getSynth().trackList["2"].onNotes,
@@ -49,10 +53,17 @@ const Session = () => {
     };
 
     axios
-      .post("http://localhost:5000/session", { trackValues })
+      .post("http://localhost:5000/session/drums", { drumValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
-    console.log(trackValues);
+    axios
+      .post("http://localhost:5000/session/bass", { bassValues })
+      .then((res) => console.log("SAVED!", res))
+      .catch((err) => console.log("ERROR!", err));
+    axios
+      .post("http://localhost:5000/session/synth", { synthValues })
+      .then((res) => console.log("SAVED!", res))
+      .catch((err) => console.log("ERROR!", err));
   };
 
   function drumsPlayback() {

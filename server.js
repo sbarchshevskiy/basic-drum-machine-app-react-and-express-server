@@ -39,8 +39,9 @@ app.get("/api/creators", (req, res) => {
 
 const port = 5000;
 
-app.post("/session", (req, res) => {
-  const data = req.body.trackValues;
+//send drum values to the db
+app.post("/session/drums", (req, res) => {
+  const data = req.body.drumValues;
   console.log("REQBODY: ", data);
   res.json({});
   const queryParams = [
@@ -51,7 +52,53 @@ app.post("/session", (req, res) => {
     data.drums_ho,
   ];
   const queryString = `INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_hc, drums_ho) 
-  VALUES (1, ARRAY[1, 5, 9, 13], ARRAY[5, 13], ARRAY[1, 3, 5, 7, 9, 11, 13, 15], ARRAY[15]);`;
+  VALUES ($1, $2, $3, $4, $5);`;
+  db.query(queryString, queryParams)
+    .then((res) => console.log("DONE!", res.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//send bass values to the db
+app.post("/session/bass", (req, res) => {
+  const data = req.body.bassValues;
+  console.log("REQBODY: ", data);
+  res.json({});
+  const queryParams = [
+    "1",
+    data.bass_c2,
+    data.bass_b1,
+    data.bass_a1,
+    data.bass_g1,
+    data.bass_f1,
+    data.bass_e1,
+    data.bass_d1,
+    data.bass_c1,
+  ];
+  const queryString = `INSERT INTO bass_sequence (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2) 
+  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2);`;
+  db.query(queryString, queryParams)
+    .then((res) => console.log("DONE!", res.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//send synth values to the db
+app.post("/session/synth", (req, res) => {
+  const data = req.body.synthValues;
+  console.log("REQBODY: ", data);
+  res.json({});
+  const queryParams = [
+    "1",
+    data.synth_c4,
+    data.synth_b3,
+    data.synth_a3,
+    data.synth_g3,
+    data.synth_f3,
+    data.synth_e3,
+    data.synth_d3,
+    data.synth_c3,
+  ];
+  const queryString = `INSERT INTO synth_sequence (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4) 
+  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2);`;
   db.query(queryString, queryParams)
     .then((res) => console.log("DONE!", res.rows))
     .catch((err) => console.log("ERRRRROR!", err));
