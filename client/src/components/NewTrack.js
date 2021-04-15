@@ -28,33 +28,36 @@ const NewTrack = () => {
     });
   };
 
-  const createTrack = () => {
+  const createTrack = (event) => {
+    event.preventDefault();
     const createNewTrack = {
       title: newTrack.title,
       category: newTrack.category,
       description: newTrack.description,
     };
-
+    //(create track, get its id, inside .then create a new session using this track id, insert the track id to create new session, get the session id and use it inside the handleClick, )
     if (createNewTrack.title && createNewTrack.category) {
       axios
         .post("http://localhost:5000/tracks/new", { createNewTrack })
         .then((res) => {
-          console.log("CREATED!", res);
+          const trackID = res.data.id;
+          console.log("CREATED!", trackID);
+          axios
+            .post("http://localhost:5000/sessions/new", { trackID })
+            .then((res) => console.log("RESSS: ", res.data))
+            .catch((err) => console.log("ERROR!", err));
+        })
+        .then((res) => {
+          handleClick();
         })
         .catch((err) => console.log("ERROR!", err));
     }
   };
 
-  const sendAndRedirect = (event) => {
-    event.preventDefault();
-    createTrack();
-    handleClick();
-  };
-
   return (
     <div className="new-track-form">
       <h1>Create New Track</h1>
-      <form onSubmit={sendAndRedirect}>
+      <form onSubmit={createTrack}>
         <div className="form-group">
           <input
             type="text"

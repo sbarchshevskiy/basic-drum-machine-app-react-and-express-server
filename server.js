@@ -51,7 +51,7 @@ app.post("/session/drums", (req, res) => {
     data.drums_hc,
   ];
   const queryString = `INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
-  VALUES ($1, $2, $3, $4, $5);`;
+  VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
   db.query(queryString, queryParams)
     .then((res) => console.log("DONE!", res.rows))
     .catch((err) => console.log("ERRRRROR!", err));
@@ -73,7 +73,7 @@ app.post("/session/bass", (req, res) => {
     data.bass_c1,
   ];
   const queryString = `INSERT INTO bass_sequence (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2) 
-  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2);`;
+  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2) RETURNING *;`;
   db.query(queryString, queryParams)
     .then((res) => console.log("DONE!", res.rows))
     .catch((err) => console.log("ERRRRROR!", err));
@@ -82,7 +82,6 @@ app.post("/session/bass", (req, res) => {
 //send synth values to the db
 app.post("/session/synth", (req, res) => {
   const data = req.body.synthValues;
-  res.json({});
   const queryParams = [
     "1",
     data.synth_c4,
@@ -95,9 +94,9 @@ app.post("/session/synth", (req, res) => {
     data.synth_c3,
   ];
   const queryString = `INSERT INTO synth_sequence (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4) 
-  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2);`;
+  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2) RETURNING *;`;
   db.query(queryString, queryParams)
-    .then((res) => console.log("DONE!", res.rows))
+    .then((result) => res.json(result.rows[0]))
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
@@ -105,9 +104,19 @@ app.post("/tracks/new", (req, res) => {
   const data = req.body.createNewTrack;
   const queryParams = ["1", data.title, data.category, data.description];
   const queryString = `INSERT INTO tracks (user_id, title, category, description)
-  VALUES ($1, $2, $3, $4);`;
+  VALUES ($1, $2, $3, $4) RETURNING *;`;
   db.query(queryString, queryParams)
-    .then((res) => console.log("DONE!", res.rows))
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+app.post("/sessions/new", (req, res) => {
+  const data = req.body.trackID;
+  const queryParams = ["1", data];
+  const queryString = `INSERT INTO sessions (user_id, track_id) VALUES ($1, $2) RETURNING *;
+  `;
+  db.query(queryString, queryParams)
+    .then((result) => res.json(result.rows[0]))
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
