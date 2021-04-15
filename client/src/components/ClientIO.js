@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client'
 import { TextField } from '@material-ui/core';
 import './ClientIO.css'
-const socket = io('http://localhost:5000', { withCredentials: true})
+// const socket = io()
 
 
 
 
 export default function ClientIO() {
-
+  const [socket, setSocket] = useState(null)
   const [state, setState] = useState({
-    message: '',
-    name: ''
+    name: '',
+    message: ''
   })
   const [chat, setChat] = useState([])
 
@@ -23,8 +23,19 @@ export default function ClientIO() {
     )
   }
 
+  const onMessageSubmit = event => {
+    event.preventDefault();
+    const {name, message} = state;
+    console.log('submit ', state);
+    // socket.emit('test')
+
+    socket.emit('message', {name, message})
+    setState({message: '', name})
+  }
+
   useEffect(() => {
-    socket.on('message', ({
+    const newSocket = io()
+    newSocket.on('message', ({
       name,
       message
     }) => {
@@ -33,14 +44,11 @@ export default function ClientIO() {
         message
       }])
     })
-  })
+    setSocket(newSocket)
+  },[])
 
-  const onMessageSubmit = event => {
-    event.preventDefault();
-    const {name, message} = state;
-    socket.emit('message', {name, message})
-    setState({message: '', name})
-  }
+
+
 
   const renderChat = () => {
     return chat.map(({ name, message }, index) =>(
@@ -52,12 +60,11 @@ export default function ClientIO() {
     ))
   }
 
-  console.log('',renderChat())
 
    return(
     <div className="card">
       <form onSubmit={onMessageSubmit}>
-        <hi>Orca Chat</hi>
+        <h1>Orca Chat</h1>
         <div className="name-field">
           <TextField
             name="name"
@@ -76,7 +83,7 @@ export default function ClientIO() {
             label="Message"
           />
         </div>
-        <button>
+        <button type="submit">
           Send!
         </button>
       </form>

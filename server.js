@@ -3,12 +3,10 @@ const socketio = require('socket.io');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-const io = socketio(server, {
-  cors: {
-    origins: "*:*",
-    methods: ["GET", "POST"],
-  }
-});
+const io = socketio(server);
+const cors = require('cors');
+
+app.use(cors());
 
 io.on('connection', socket => {
   console.log('socket id',socket.id);
@@ -17,6 +15,8 @@ io.on('connection', socket => {
     io.emit('message', {name, message});
   });
 });
+
+
 
 app.get('/', (req, res) => {
   res.send('ok');
@@ -34,4 +34,4 @@ app.get('/api/creators', (req, res) => {
 });
 
 const port = 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+server.listen(port, () => console.log(`Server running on port ${port}`));
