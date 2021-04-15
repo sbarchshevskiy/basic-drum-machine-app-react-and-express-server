@@ -1,18 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 import "./Nav.css";
 
 const NewTrack = () => {
+  const [newTrack, setNewTrack] = useState({
+    title: "",
+    category: "",
+    description: "",
+  });
+
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+
+    setNewTrack({
+      ...newTrack,
+      [name]: value,
+    });
+  };
+
+  const createTrack = (event) => {
+    event.preventDefault();
+
+    const createNewTrack = {
+      title: newTrack.title,
+      category: newTrack.category,
+      description: newTrack.description,
+    };
+    if (createNewTrack.title && createNewTrack.category) {
+      axios
+        .post("http://localhost:5000/tracks/new", {})
+        .then((res) => console.log("CREATED!", res))
+        .catch((err) => console.log("ERROR!", err));
+    }
+  };
+
   return (
     <div className="new-track-form">
       <h1>Create New Track</h1>
-      <form id="register-form" method="POST" action="/tracks/new">
+      <form>
         <div className="form-group">
           <input
             type="text"
             name="title"
+            value={newTrack.title}
             className="form-control"
             placeholder="Track Title"
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -20,8 +56,9 @@ const NewTrack = () => {
             name="track-category"
             id="track-category"
             className=" form-control"
+            onChange={handleChange}
           >
-            <option value="" disabled selected>
+            <option value={newTrack.category} disabled selected>
               Please Select a Category...
             </option>
             <option value="House">House</option>
@@ -35,12 +72,14 @@ const NewTrack = () => {
         <div className="form-group">
           <input
             type="text"
+            value={newTrack.description}
             name="description"
             className="form-control"
             placeholder="Description"
+            onChange={handleChange}
           />
         </div>
-        <button type="submit" className="">
+        <button type="submit" className="" onClick={createTrack}>
           Create
         </button>
       </form>
