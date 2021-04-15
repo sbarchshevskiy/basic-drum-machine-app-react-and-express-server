@@ -14,7 +14,7 @@ const NewTrack = () => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-
+    console.log("VALUE: ", name);
     setNewTrack({
       ...newTrack,
       [name]: value,
@@ -29,9 +29,10 @@ const NewTrack = () => {
       category: newTrack.category,
       description: newTrack.description,
     };
+    console.log("CREATE NEW: ", createNewTrack);
     if (createNewTrack.title && createNewTrack.category) {
       axios
-        .post("http://localhost:5000/tracks/new", {})
+        .post("http://localhost:5000/tracks/new", { createNewTrack })
         .then((res) => console.log("CREATED!", res))
         .catch((err) => console.log("ERROR!", err));
     }
@@ -40,7 +41,7 @@ const NewTrack = () => {
   return (
     <div className="new-track-form">
       <h1>Create New Track</h1>
-      <form>
+      <form onSubmit={createTrack}>
         <div className="form-group">
           <input
             type="text"
@@ -53,7 +54,7 @@ const NewTrack = () => {
         </div>
         <div className="form-group">
           <select
-            name="track-category"
+            name="category"
             id="track-category"
             className=" form-control"
             onChange={handleChange}
@@ -79,7 +80,7 @@ const NewTrack = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="" onClick={createTrack}>
+        <button type="submit" className="">
           Create
         </button>
       </form>
