@@ -7,19 +7,19 @@ const NewTrack = () => {
     <div className="new-track-form">
       <h1>Create New Track</h1>
       <form id="register-form" method="POST" action="/tracks/new">
-        <div class="form-group">
+        <div className="form-group">
           <input
             type="text"
             name="title"
-            class="form-control"
+            className="form-control"
             placeholder="Track Title"
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <select
             name="track-category"
             id="track-category"
-            class=" form-control"
+            className=" form-control"
           >
             <option value="" disabled selected>
               Please Select a Category...
@@ -32,15 +32,15 @@ const NewTrack = () => {
             <option value="Other">Other</option>
           </select>
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <input
             type="text"
             name="description"
-            class="form-control"
+            className="form-control"
             placeholder="Description"
           />
         </div>
-        <button type="submit" class="">
+        <button type="submit" className="">
           Create
         </button>
       </form>
