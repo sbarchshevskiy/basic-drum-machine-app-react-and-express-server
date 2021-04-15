@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from "react";
 
 import "./Nav.css";
 
@@ -7,7 +6,7 @@ const NewTrack = () => {
   return (
     <div className="new-track-form">
       <h1>Create New Track</h1>
-      <form id="register-form" method="POST" action="/login">
+      <form id="register-form" method="POST" action="/tracks/new">
         <div class="form-group">
           <input
             type="text"
