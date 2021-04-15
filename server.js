@@ -102,7 +102,13 @@ app.post("/session/synth", (req, res) => {
 });
 
 app.post("/tracks/new", (req, res) => {
-  console.log(req.body);
+  const data = req.body.createNewTrack;
+  const queryParams = ["1", data.title, data.category, data.description];
+  const queryString = `INSERT INTO tracks (user_id, title, category, description)
+  VALUES ($1, $2, $3, $4);`;
+  db.query(queryString, queryParams)
+    .then((res) => console.log("DONE!", res.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
 });
 
 app.listen(port, () => `Server running on port ${port}`);

@@ -33,7 +33,10 @@ const NewTrack = () => {
     if (createNewTrack.title && createNewTrack.category) {
       axios
         .post("http://localhost:5000/tracks/new", { createNewTrack })
-        .then((res) => console.log("CREATED!", res))
+        .then((res) => {
+          console.log("CREATED!", res);
+          res.redirect("http://localhost:3000//session");
+        })
         .catch((err) => console.log("ERROR!", err));
     }
   };
@@ -55,7 +58,6 @@ const NewTrack = () => {
         <div className="form-group">
           <select
             name="category"
-            id="track-category"
             className=" form-control"
             onChange={handleChange}
           >
