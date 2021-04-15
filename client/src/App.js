@@ -5,6 +5,7 @@ import "./App.css";
 import Session from "./components/Session";
 import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
+import Track from "./components/Track";
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
@@ -42,7 +43,7 @@ function App() {
         <div>
           <Route path="/sessions/:sessionID" component={Session} />
           <Route path="/users" />
-          <Route path="/tracks" />
+          <Route path="/tracks" component={Track} />
           <Route path="/tracks/new" component={NewTrack} />
           <Route exact path="/" />
         </div>
