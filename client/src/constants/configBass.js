@@ -1,4 +1,5 @@
-const sequenceList = [
+// Bass sounds
+const bassSequenceList = [
   {
     id: 0,
     title: "Pulse",
@@ -7,7 +8,7 @@ const sequenceList = [
       {
         title: "C2",
         soundFile: "bass_C2",
-        onNotes: [0, 4, 8, 12],
+        onNotes: [],
       },
       {
         title: "B1",
@@ -42,13 +43,13 @@ const sequenceList = [
       {
         title: "C1",
         soundFile: "bass_C1",
-        onNotes: [],
+        onNotes: [0, 4, 8, 12],
       },
     ],
   },
 ];
 
-const soundFiles = {
+const bassSoundFiles = {
   bass_C2: "/sounds/bass/bass_C2.wav",
   bass_B1: "/sounds/bass/bass_B1.wav",
   bass_A1: "/sounds/bass/bass_A1.wav",
@@ -59,4 +60,4 @@ const soundFiles = {
   bass_C1: "/sounds/bass/bass_C1.wav",
 };
 
-export { sequenceList, soundFiles };
+export { bassSequenceList, bassSoundFiles };
