@@ -101,4 +101,8 @@ app.post("/session/synth", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+app.post("/tracks/new", (req, res) => {
+  console.log(req.body);
+});
+
 app.listen(port, () => `Server running on port ${port}`);
