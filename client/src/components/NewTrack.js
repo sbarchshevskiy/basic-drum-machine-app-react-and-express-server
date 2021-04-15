@@ -45,7 +45,8 @@ const NewTrack = () => {
     }
   };
 
-  const sendAndRedirect = () => {
+  const sendAndRedirect = (event) => {
+    event.preventDefault();
     createTrack();
     handleClick();
   };
