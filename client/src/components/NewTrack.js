@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+
 import axios from "axios";
 
 import "./Nav.css";
 
 const NewTrack = () => {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/session");
+  };
+
   const [newTrack, setNewTrack] = useState({
     title: "",
     category: "",
@@ -20,9 +28,7 @@ const NewTrack = () => {
     });
   };
 
-  const createTrack = (event) => {
-    event.preventDefault();
-
+  const createTrack = () => {
     const createNewTrack = {
       title: newTrack.title,
       category: newTrack.category,
@@ -39,10 +45,15 @@ const NewTrack = () => {
     }
   };
 
+  const sendAndRedirect = () => {
+    createTrack();
+    handleClick();
+  };
+
   return (
     <div className="new-track-form">
       <h1>Create New Track</h1>
-      <form onSubmit={createTrack}>
+      <form onSubmit={sendAndRedirect}>
         <div className="form-group">
           <input
             type="text"
