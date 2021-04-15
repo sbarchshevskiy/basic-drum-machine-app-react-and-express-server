@@ -14,7 +14,6 @@ const NewTrack = () => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    console.log("VALUE: ", name);
     setNewTrack({
       ...newTrack,
       [name]: value,
@@ -29,13 +28,12 @@ const NewTrack = () => {
       category: newTrack.category,
       description: newTrack.description,
     };
-    console.log("CREATE NEW: ", createNewTrack);
+
     if (createNewTrack.title && createNewTrack.category) {
       axios
         .post("http://localhost:5000/tracks/new", { createNewTrack })
         .then((res) => {
           console.log("CREATED!", res);
-          res.redirect("http://localhost:3000//session");
         })
         .catch((err) => console.log("ERROR!", err));
     }
