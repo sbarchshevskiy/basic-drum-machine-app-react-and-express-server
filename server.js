@@ -57,22 +57,24 @@ app.post("/session/drums", (req, res) => {
     })
     .catch((err) => console.log("ERRRRROR!", err));
 });
-// app.post("/session/drums", (req, res) => {
-//   const data = req.body.drumValues;
-//   res.json({});
-//   const queryParams = [
-//     "1",
-//     data.drums_kick,
-//     data.drums_snare,
-//     data.drums_ho,
-//     data.drums_hc,
-//   ];
-//   const queryString = `INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc)
-//   VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
-//   db.query(queryString, queryParams)
-//     .then((res) => console.log("DONE!", res.rows))
-//     .catch((err) => console.log("ERRRRROR!", err));
-// });
+
+app.post("/session/:sessionID/drums", (req, res) => {
+  console.log("PARAMS: ", req.params);
+  const data = req.body.drumValues;
+  res.json({});
+  const queryParams = [
+    "1",
+    data.drums_kick,
+    data.drums_snare,
+    data.drums_ho,
+    data.drums_hc,
+  ];
+  const queryString = `INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc)
+  VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((res) => console.log("DONE!", res.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
 
 // send bass values to the db
 app.post("/session/bass", (req, res) => {
