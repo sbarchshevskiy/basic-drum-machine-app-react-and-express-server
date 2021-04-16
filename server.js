@@ -8,31 +8,43 @@ const cors = require('cors');
 
 app.use(cors());
 
+// chat client
+// io.on('connection', socket => {
+//   socket.on('message', ({name, message}) => {
+//     console.log("name/message",name, message);
+//     io.emit('message', {name, message});
+//   });
+// });
+// test socket for drum machine
 io.on('connection', socket => {
-  console.log('socket id',socket.id);
-  socket.on('message', ({name, message}) => {
-    console.log("name/message",name, message);
-    io.emit('message', {name, message});
-  });
-});
-
+  console.log('drum socket id',socket.id);
+  socket.on('drumNoteClick', ({trackID, stepID}) => {
+    console.log('drumNoteClick',trackID, stepID);
+    io.emit('drumNoteClick', {trackID, stepID})
+  })
+})
+// alternative socket
+// io.sockets.on('connection', newListener)
+// function newListener(socket) {
+//   console.log('connected', socket.id)
+//
+//   socket.on('onNoteClick', onNoteClick);
+//   function onNoteClick(data) {
+//     console.log(data)
+//   }
+// }
 
 app.get('/', (req, res) => {
   res.send('ok');
 });
 
 
-app.get('/api/creators', (req, res) => {
-const express = require("express");
 const bodyParser = require("body-parser");
 const { Pool } = require("pg");
 require("dotenv").config();
 
-const cors = require("cors");
 
 const jsonParser = bodyParser.json();
-const app = express();
-app.use(cors());
 app.use(jsonParser);
 
 let dbParams = {};
@@ -62,8 +74,7 @@ app.get("/api/creators", (req, res) => {
   res.json(creators);
 });
 
-const port = 5000;
-server.listen(port, () => console.log(`Server running on port ${port}`));
+
 
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
@@ -127,4 +138,6 @@ app.post("/session/synth", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
-app.listen(port, () => `Server running on port ${port}`);
+
+const port = 5000;
+server.listen(port, () => console.log(`Server running on port ${port}`));

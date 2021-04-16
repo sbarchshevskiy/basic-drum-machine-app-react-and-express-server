@@ -47,9 +47,6 @@ export default function ClientIO() {
     setSocket(newSocket)
   },[])
 
-
-
-
   const renderChat = () => {
     return chat.map(({ name, message }, index) =>(
       <div key={index}>
