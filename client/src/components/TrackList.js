@@ -1,18 +1,24 @@
 import React from "react";
 import useTrackListData from "../hooks/useTrackListData";
+import Track from "./Track";
 
-import "./Track.css";
+import "./TrackList.css";
 
 const TrackList = () => {
   const { state } = useTrackListData();
-
+  const allTracks = state.trackListData.map((track) => (
+    <div>
+      <Track
+        key={track.id}
+        title={track.title}
+        category={track.category}
+        description={track.description}
+      />
+    </div>
+  ));
   return (
     <div>
-      <div>
-        {state.trackListData.map((track) => (
-          <div>{track.title}</div>
-        ))}
-      </div>
+      <div>{allTracks}</div>
     </div>
   );
 };

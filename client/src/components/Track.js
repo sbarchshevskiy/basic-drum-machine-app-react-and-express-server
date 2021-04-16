@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 
 import "./Track.css";
 
-const Track = () => {
+const Track = (props) => {
   return (
-    <nav className="navbar">
-      <div className="navbar-title">Orca</div>
-      <Link to="/">Home</Link>
-      <Link to="/track">Tracks</Link>
-      <Link to="/tracks/new">New Track</Link>
-    </nav>
+    <div className="single-track">
+      <div className="track-title">Title: {props.title}</div>
+      <div className="track-category">Category: {props.category}</div>
+      <div className="track-description">Description: {props.description}</div>
+    </div>
   );
 };
 
