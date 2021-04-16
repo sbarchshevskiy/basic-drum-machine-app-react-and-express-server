@@ -44,24 +44,27 @@ const NewTrack = () => {
           console.log("CREATED!", trackID);
           axios
             .post("http://localhost:5000/sessions/new", { trackID })
-            .then((res) => handleClick(res.data.id))
+            .then((res) => {
+              const newSessionID = res.data.id;
+              handleClick(newSessionID);
+              axios
+                .post("http://localhost:5000/session/drums", { newSessionID })
+                .then((res) => console.log("SAVED!", res))
+                .catch((err) => console.log("ERROR!", err));
+              axios
+                .post("http://localhost:5000/session/bass", { newSessionID })
+                .then((res) => console.log("SAVED!", res))
+                .catch((err) => console.log("ERROR!", err));
+              axios
+                .post("http://localhost:5000/session/synth", { newSessionID })
+                .then((res) => console.log("SAVED!", res))
+                .catch((err) => console.log("ERROR!", err));
+            })
             .catch((err) => console.log("ERROR!", err));
         })
         .then((res) => {
           console.log(res);
         })
-        .catch((err) => console.log("ERROR!", err));
-      axios
-        .post("http://localhost:5000/session/drums", {})
-        .then((res) => console.log("SAVED!", res))
-        .catch((err) => console.log("ERROR!", err));
-      axios
-        .post("http://localhost:5000/session/bass", {})
-        .then((res) => console.log("SAVED!", res))
-        .catch((err) => console.log("ERROR!", err));
-      axios
-        .post("http://localhost:5000/session/synth", {})
-        .then((res) => console.log("SAVED!", res))
         .catch((err) => console.log("ERROR!", err));
     }
   };

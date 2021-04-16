@@ -41,16 +41,17 @@ const port = 5000;
 
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
-  // const data = req.body.drumValues;
+  const data = req.body.newSessionID;
   // res.json({});
+  const queryParams = [data];
   const queryString = `INSERT INTO drum_sequence 
   (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
-  VALUES (1, 
+  VALUES ($1, 
   ARRAY[]::integer[], 
   ARRAY[]::integer[], 
   ARRAY[]::integer[], 
   ARRAY[]::integer[]) RETURNING *;`;
-  db.query(queryString)
+  db.query(queryString, queryParams)
     .then((result) => {
       res.json(result.rows[0]);
     })
@@ -75,11 +76,12 @@ app.post("/session/drums", (req, res) => {
 
 // send bass values to the db
 app.post("/session/bass", (req, res) => {
-  // const data = req.body.bassValues;
+  const data = req.body.newSessionID;
   // res.json({});
+  const queryParams = [data];
   const queryString = `INSERT INTO bass_sequence
   (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2)
-  VALUES (1,
+  VALUES ($1,
   ARRAY[]::integer[],
   ARRAY[]::integer[],
   ARRAY[]::integer[],
@@ -88,7 +90,7 @@ app.post("/session/bass", (req, res) => {
   ARRAY[]::integer[],
   ARRAY[]::integer[],
   ARRAY[]::integer[]) RETURNING *;`;
-  db.query(queryString)
+  db.query(queryString, queryParams)
     .then((result) => {
       res.json(result.rows[0]);
     })
@@ -117,10 +119,11 @@ app.post("/session/bass", (req, res) => {
 
 //send synth values to the db
 app.post("/session/synth", (req, res) => {
-  // const data = req.body.synthValues;
+  const data = req.body.newSessionID;
+  const queryParams = [data];
   const queryString = `INSERT INTO synth_sequence
   (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4)
-  VALUES (1,
+  VALUES ($1,
   ARRAY[]::integer[],
   ARRAY[]::integer[],
   ARRAY[]::integer[],
@@ -129,7 +132,7 @@ app.post("/session/synth", (req, res) => {
   ARRAY[]::integer[],
   ARRAY[]::integer[],
   ARRAY[]::integer[]) RETURNING *;`;
-  db.query(queryString)
+  db.query(queryString, queryParams)
     .then((result) => {
       res.json(result.rows[0]);
     })
