@@ -100,6 +100,14 @@ app.post("/session/synth", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+app.get("/tracks", (req, res) => {
+  const queryString = `SELECT * FROM tracks;
+  `;
+  db.query(queryString)
+    .then((result) => res.json(result.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
 app.post("/tracks/new", (req, res) => {
   const data = req.body.createNewTrack;
   const queryParams = ["1", data.title, data.category, data.description];

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import "./Track.css";
 
-const Track = () => {
+const TrackList = () => {
+  axios
+    .get("http://localhost:5000/tracks/")
+    .then((res) => console.log("SAVED!", res.data))
+    .catch((err) => console.log("ERROR!", err));
+
   return (
     <nav className="navbar">
       <div className="navbar-title">Orca</div>
@@ -14,4 +20,4 @@ const Track = () => {
   );
 };
 
-export default Track;
+export default TrackList;
