@@ -51,6 +51,18 @@ const NewTrack = () => {
           console.log(res);
         })
         .catch((err) => console.log("ERROR!", err));
+      axios
+        .post("http://localhost:5000/session/drums", {})
+        .then((res) => console.log("SAVED!", res))
+        .catch((err) => console.log("ERROR!", err));
+      axios
+        .post("http://localhost:5000/session/bass", {})
+        .then((res) => console.log("SAVED!", res))
+        .catch((err) => console.log("ERROR!", err));
+      axios
+        .post("http://localhost:5000/session/synth", {})
+        .then((res) => console.log("SAVED!", res))
+        .catch((err) => console.log("ERROR!", err));
     }
   };
 
