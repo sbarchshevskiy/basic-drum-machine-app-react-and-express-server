@@ -43,8 +43,8 @@ function App() {
         <div>
           <Route path="/sessions/:sessionID" component={Session} />
           <Route path="/users" />
-          <Route path="/tracks" component={TrackList} />
-          <Route path="/tracks/new" component={NewTrack} />
+          <Route exact path="/tracks/new" component={NewTrack} />
+          <Route exact path="/tracks" component={TrackList} />
           <Route exact path="/" />
         </div>
       </Router>
