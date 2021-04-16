@@ -180,7 +180,9 @@ app.post("/session/:sessionID/synth", (req, res) => {
   synth_c4 = $2
   WHERE synth_sequence.session_id = $1 RETURNING *;`;
   db.query(queryString, queryParams)
-    .then((result) => res.json(result.rows[0]))
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
@@ -188,7 +190,9 @@ app.get("/tracks", (req, res) => {
   const queryString = `SELECT * FROM tracks;
   `;
   db.query(queryString)
-    .then((result) => res.json(result.rows))
+    .then((result) => {
+      res.json(result.rows);
+    })
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
