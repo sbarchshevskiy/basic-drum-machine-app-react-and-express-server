@@ -180,9 +180,7 @@ app.post("/session/:sessionID/synth", (req, res) => {
   synth_c4 = $2
   WHERE synth_sequence.session_id = $1 RETURNING *;`;
   db.query(queryString, queryParams)
-    .then((result) => {
-      res.json(result.rows[0]);
-    })
+    .then((res) => console.log("DONE!", res.rows))
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
