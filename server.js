@@ -20,7 +20,6 @@ if (process.env.DATABASE_URL) {
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    api: process.env.DB_GMAPS,
   };
 }
 
@@ -41,28 +40,74 @@ const port = 5000;
 
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
+  const data = req.body.newSessionID;
+  // res.json({});
+  const queryParams = [data];
+  const queryString = `INSERT INTO drum_sequence 
+  (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
+  VALUES ($1, 
+  ARRAY[]::integer[], 
+  ARRAY[]::integer[], 
+  ARRAY[]::integer[], 
+  ARRAY[]::integer[]) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//update drum values in the db
+app.post("/session/:sessionID/drums", (req, res) => {
   const data = req.body.drumValues;
   res.json({});
   const queryParams = [
-    "1",
+    req.params.sessionID,
     data.drums_kick,
     data.drums_snare,
     data.drums_ho,
     data.drums_hc,
   ];
-  const queryString = `INSERT INTO drum_sequence (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
-  VALUES ($1, $2, $3, $4, $5);`;
+  const queryString = `UPDATE drum_sequence
+        SET drums_kick = $2,
+        drums_snare = $3,
+        drums_ho = $4,
+        drums_hc = $5
+        WHERE drum_sequence.session_id = $1 RETURNING *;`;
   db.query(queryString, queryParams)
     .then((res) => console.log("DONE!", res.rows))
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
-//send bass values to the db
+// send bass values to the db
 app.post("/session/bass", (req, res) => {
+  const data = req.body.newSessionID;
+  // res.json({});
+  const queryParams = [data];
+  const queryString = `INSERT INTO bass_sequence
+  (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2)
+  VALUES ($1,
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[]) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//update bass values in the db
+app.post("/session/:sessionID/bass", (req, res) => {
   const data = req.body.bassValues;
   res.json({});
   const queryParams = [
-    "1",
+    req.params.sessionID,
     data.bass_c2,
     data.bass_b1,
     data.bass_a1,
@@ -72,8 +117,16 @@ app.post("/session/bass", (req, res) => {
     data.bass_d1,
     data.bass_c1,
   ];
-  const queryString = `INSERT INTO bass_sequence (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2) 
-  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2);`;
+  const queryString = `UPDATE bass_sequence
+  SET bass_c1 = $9,
+  bass_d1 = $8,
+  bass_e1 = $7,
+  bass_f1 = $6,
+  bass_g1 = $5,
+  bass_a1 = $4,
+  bass_b1 = $3,
+  bass_c2 = $2
+  WHERE bass_sequence.session_id = $1 RETURNING *;`;
   db.query(queryString, queryParams)
     .then((res) => console.log("DONE!", res.rows))
     .catch((err) => console.log("ERRRRROR!", err));
@@ -81,10 +134,32 @@ app.post("/session/bass", (req, res) => {
 
 //send synth values to the db
 app.post("/session/synth", (req, res) => {
+  const data = req.body.newSessionID;
+  const queryParams = [data];
+  const queryString = `INSERT INTO synth_sequence
+  (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4)
+  VALUES ($1,
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[],
+  ARRAY[]::integer[]) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//update synth values in the db
+app.post("/session/:sessionID/synth", (req, res) => {
   const data = req.body.synthValues;
   res.json({});
   const queryParams = [
-    "1",
+    req.params.sessionID,
     data.synth_c4,
     data.synth_b3,
     data.synth_a3,
@@ -94,10 +169,52 @@ app.post("/session/synth", (req, res) => {
     data.synth_d3,
     data.synth_c3,
   ];
-  const queryString = `INSERT INTO synth_sequence (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4) 
-  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2);`;
+  const queryString = `UPDATE synth_sequence
+  SET synth_c3 = $9,
+  synth_d3 = $8,
+  synth_e3 = $7,
+  synth_f3 = $6,
+  synth_g3 = $5,
+  synth_a3 = $4,
+  synth_b3 = $3,
+  synth_c4 = $2
+  WHERE synth_sequence.session_id = $1 RETURNING *;`;
   db.query(queryString, queryParams)
-    .then((res) => console.log("DONE!", res.rows))
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+app.get("/tracks", (req, res) => {
+  const queryString = `SELECT * FROM tracks;
+  `;
+  db.query(queryString)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+app.post("/tracks/new", (req, res) => {
+  const data = req.body.createNewTrack;
+  const queryParams = ["1", data.title, data.category, data.description];
+  const queryString = `INSERT INTO tracks (user_id, title, category, description)
+  VALUES ($1, $2, $3, $4) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+app.post("/sessions/new", (req, res) => {
+  const data = req.body.trackID;
+  const queryParams = ["1", data];
+  const queryString = `INSERT INTO sessions (user_id, track_id) VALUES ($1, $2) RETURNING *;
+  `;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
