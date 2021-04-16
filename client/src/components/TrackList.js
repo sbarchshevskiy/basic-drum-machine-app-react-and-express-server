@@ -12,6 +12,7 @@ const TrackList = () => {
     <div>
       <Track
         key={track.id}
+        trackID={track.id}
         name={track.name}
         title={track.title}
         category={track.category}
