@@ -124,7 +124,9 @@ app.post("/sessions/new", (req, res) => {
   const queryString = `INSERT INTO sessions (user_id, track_id) VALUES ($1, $2) RETURNING *;
   `;
   db.query(queryString, queryParams)
-    .then((result) => res.json(result.rows[0]))
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
     .catch((err) => console.log("ERRRRROR!", err));
 });
 

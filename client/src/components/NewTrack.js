@@ -35,7 +35,7 @@ const NewTrack = () => {
       category: newTrack.category,
       description: newTrack.description,
     };
-    //(create track, get its id, inside .then create a new session using this track id, insert the track id to create new session, get the session id and use it inside the handleClick, )
+
     if (createNewTrack.title && createNewTrack.category) {
       axios
         .post("http://localhost:5000/tracks/new", { createNewTrack })
