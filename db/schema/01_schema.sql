@@ -20,7 +20,7 @@ CREATE TABLE tracks (
   category VARCHAR(255) NOT NULL,
   tags TEXT,
   description TEXT,
-  published BOOLEAN NOT NULL DEFAULT FALSE
+  published BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE sessions (
