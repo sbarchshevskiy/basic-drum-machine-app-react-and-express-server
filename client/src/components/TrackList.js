@@ -1,4 +1,5 @@
 import React from "react";
+
 import useTrackListData from "../hooks/useTrackListData";
 import Track from "./Track";
 
@@ -6,7 +7,7 @@ import "./TrackList.css";
 
 const TrackList = () => {
   const { state } = useTrackListData();
-  console.log("STATE: ", state);
+
   const allTracks = state.trackListData.map((track) => (
     <div>
       <Track
