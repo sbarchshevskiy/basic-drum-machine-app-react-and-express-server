@@ -53,15 +53,15 @@ const Session = () => {
     };
 
     axios
-      .post("http://localhost:5000/session/drums", { drumValues })
+      .post("http://localhost:5000/session/:sessionID/drums", { drumValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/bass", { bassValues })
+      .post("http://localhost:5000/session/:sessionID/bass", { bassValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/synth", { synthValues })
+      .post("http://localhost:5000/session/:sessionID/synth", { synthValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
   };

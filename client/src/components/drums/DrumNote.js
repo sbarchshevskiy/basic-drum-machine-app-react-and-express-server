@@ -3,13 +3,13 @@ import classNames from "classnames";
 import { Context } from "../../hooks/useDrumStore";
 import "./DrumNote.css";
 import { io } from 'socket.io-client';
-
+import $ from 'jquery';
+import { findDOMNode } from 'react-dom'
 const newSocket = io();
 
 
 
 const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
-
 
   const { toggleNote } = useContext(Context);
 
@@ -18,6 +18,12 @@ const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
     playing: isNoteOn && isNoteOnCurrentStep,
   });
 
+  //// jQuery function to indicate that the note was played on client UI
+  // function displayNote() {
+  //   const element = findDOMNode();
+  //   $(element).replaceWith("X")
+  // }
+
 
   const onNoteClick = event => {
     event.preventDefault();
@@ -25,7 +31,8 @@ const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
     console.log('prev state', state)
     console.log(`note clicked on ${trackID} and ${stepID}`)
     // socket.emit('notes played: ', state)
-    socket.emit('drumNoteClick', {stepID, trackID});
+    // socket.broadcast.emit(`stepID ${stepID} and trackID ${trackID}`)
+    socket.emit('drumNoteClick', {stepID, trackID})
     setState({stepID: '', trackID: ''})
     console.log('state after click', state)
 
@@ -68,7 +75,15 @@ const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
   };
 
 
-  return <div className={noteClassNames} onClick={(event) => {onNoteClick(event); noteClicked(event)}} />;
+  return (
+    <div
+    className={noteClassNames}
+    onClick={(event) => {
+      onNoteClick(event);
+      noteClicked(event);
+    // displayNote(event) //in case when jQuery is active
+    }} />
+)
 
 };
 

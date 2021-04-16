@@ -2,6 +2,10 @@ import React, { useState, useEffect, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Session from "./components/Session";
+import Nav from "./components/Nav";
+import NewTrack from "./components/NewTrack";
+import TrackList from "./components/TrackList";
+
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
 import Creators from "./components/creators";
@@ -37,10 +41,12 @@ function App() {
       </header>
       <Creators />
       <Router>
+        <Nav />
         <div>
-          <Route path="/session" component={Session} />
+          <Route path="/sessions/:sessionID" component={Session} />
           <Route path="/users" />
-          <Route path="/tracks" />
+          <Route exact path="/tracks/new" component={NewTrack} />
+          <Route exact path="/tracks" component={TrackList} />
           <Route exact path="/" />
         </div>
       </Router>
