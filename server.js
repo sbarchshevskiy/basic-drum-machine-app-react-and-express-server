@@ -38,6 +38,18 @@ app.get("/api/creators", (req, res) => {
 
 const port = 5000;
 
+app.get("/sessions/:trackID", (req, res) => {
+  const queryString = `SELECT * FROM sessions WHERE track_id = ${req.params.trackID}
+ ;
+  `;
+  console.log("QUERY: ", queryString);
+  db.query(queryString)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
   const data = req.body.newSessionID;
@@ -184,6 +196,7 @@ app.post("/session/:sessionID/synth", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//render track info
 app.get("/tracks", (req, res) => {
   const queryString = `SELECT * , users.name FROM tracks
   JOIN users ON user_id = users.id;
@@ -195,6 +208,7 @@ app.get("/tracks", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//create a new track
 app.post("/tracks/new", (req, res) => {
   const data = req.body.createNewTrack;
   const queryParams = ["1", data.title, data.category, data.description];
@@ -205,6 +219,7 @@ app.post("/tracks/new", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//create a new session
 app.post("/sessions/new", (req, res) => {
   const data = req.body.trackID;
   const queryParams = ["1", data];
