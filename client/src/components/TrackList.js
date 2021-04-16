@@ -6,10 +6,12 @@ import "./TrackList.css";
 
 const TrackList = () => {
   const { state } = useTrackListData();
+  console.log("STATE: ", state);
   const allTracks = state.trackListData.map((track) => (
     <div>
       <Track
         key={track.id}
+        name={track.name}
         title={track.title}
         category={track.category}
         description={track.description}
