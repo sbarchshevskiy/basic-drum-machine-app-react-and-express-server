@@ -58,12 +58,13 @@ app.post("/session/drums", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//update drum values in the db
 app.post("/session/:sessionID/drums", (req, res) => {
   console.log("PARAMS: ", req.params);
   const data = req.body.drumValues;
   res.json({});
   const queryParams = [
-    "1",
+    req.params.sessionID,
     data.drums_kick,
     data.drums_snare,
     data.drums_ho,
@@ -98,26 +99,28 @@ app.post("/session/bass", (req, res) => {
     })
     .catch((err) => console.log("ERRRRROR!", err));
 });
-// app.post("/session/bass", (req, res) => {
-//   const data = req.body.bassValues;
-//   res.json({});
-//   const queryParams = [
-//     "1",
-//     data.bass_c2,
-//     data.bass_b1,
-//     data.bass_a1,
-//     data.bass_g1,
-//     data.bass_f1,
-//     data.bass_e1,
-//     data.bass_d1,
-//     data.bass_c1,
-//   ];
-//   const queryString = `INSERT INTO bass_sequence (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2)
-//   VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2) RETURNING *;`;
-//   db.query(queryString, queryParams)
-//     .then((res) => console.log("DONE!", res.rows))
-//     .catch((err) => console.log("ERRRRROR!", err));
-// });
+
+//update bass values in the db
+app.post("/session/:sessionID/bass", (req, res) => {
+  const data = req.body.bassValues;
+  res.json({});
+  const queryParams = [
+    req.params.sessionID,
+    data.bass_c2,
+    data.bass_b1,
+    data.bass_a1,
+    data.bass_g1,
+    data.bass_f1,
+    data.bass_e1,
+    data.bass_d1,
+    data.bass_c1,
+  ];
+  const queryString = `INSERT INTO bass_sequence (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2)
+  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((res) => console.log("DONE!", res.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
 
 //send synth values to the db
 app.post("/session/synth", (req, res) => {
@@ -140,25 +143,28 @@ app.post("/session/synth", (req, res) => {
     })
     .catch((err) => console.log("ERRRRROR!", err));
 });
-// app.post("/session/synth", (req, res) => {
-//   const data = req.body.synthValues;
-//   const queryParams = [
-//     "1",
-//     data.synth_c4,
-//     data.synth_b3,
-//     data.synth_a3,
-//     data.synth_g3,
-//     data.synth_f3,
-//     data.synth_e3,
-//     data.synth_d3,
-//     data.synth_c3,
-//   ];
-//   const queryString = `INSERT INTO synth_sequence (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4)
-//   VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2) RETURNING *;`;
-//   db.query(queryString, queryParams)
-//     .then((result) => res.json(result.rows[0]))
-//     .catch((err) => console.log("ERRRRROR!", err));
-// });
+
+//update synth values in the db
+app.post("/session/:sessionID/synth", (req, res) => {
+  const data = req.body.synthValues;
+  res.json({});
+  const queryParams = [
+    req.params.sessionID,
+    data.synth_c4,
+    data.synth_b3,
+    data.synth_a3,
+    data.synth_g3,
+    data.synth_f3,
+    data.synth_e3,
+    data.synth_d3,
+    data.synth_c3,
+  ];
+  const queryString = `INSERT INTO synth_sequence (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4)
+  VALUES ($1, $9, $8, $7, $6, $5, $4, $3, $2) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
 
 app.get("/tracks", (req, res) => {
   const queryString = `SELECT * FROM tracks;

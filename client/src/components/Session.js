@@ -19,9 +19,10 @@ const Session = (props) => {
   const [startSynthTime, setStartSynthTime] = useState(null);
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
-  console.log("PARAMS: ", props.match.params);
   const saveSession = (event) => {
     event.preventDefault();
+
+    const sessionID = props.match.params.sessionID;
 
     const drumValues = {
       drums_kick: getDrums().trackList["0"].onNotes,
@@ -53,15 +54,15 @@ const Session = (props) => {
     };
 
     axios
-      .post("http://localhost:5000/session/:sessionID/drums", { drumValues })
+      .post(`http://localhost:5000/session/${sessionID}/drums`, { drumValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/:sessionID/bass", { bassValues })
+      .post(`http://localhost:5000/session/${sessionID}/bass`, { bassValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/:sessionID/synth", { synthValues })
+      .post(`http://localhost:5000/session/${sessionID}/synth`, { synthValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
   };
