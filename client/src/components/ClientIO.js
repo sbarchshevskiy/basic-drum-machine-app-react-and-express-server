@@ -1,57 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client'
 import { TextField } from '@material-ui/core';
 import './ClientIO.css'
-// const socket = io()
-
 
 
 
 export default function ClientIO() {
-  const [socket, setSocket] = useState(null)
-  const [state, setState] = useState({
-    name: '',
-    message: ''
-  })
-  const [chat, setChat] = useState([])
+  const [ state, setState ] = useState({ message: "", name: "" })
+  const [ chat, setChat ] = useState([])
 
-  const onTextChange = event => {
-    setState(
-      {
-        ...state, [event.target.name]: event.target.value
-      }
-    )
+  const socketRef = useRef()
+
+  useEffect(
+    () => {
+      socketRef.current = io.connect("http://localhost:3000")
+      socketRef.current.on("message", ({ name, message }) => {
+        setChat([ ...chat, { name, message } ])
+      })
+      return () => socketRef.current.disconnect()
+    },
+    [ chat ]
+  )
+
+  const onTextChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value })
   }
 
-  const onMessageSubmit = event => {
-    event.preventDefault();
-    const {name, message} = state;
-    console.log('submit ', state);
-    // socket.emit('test')
-
-    socket.emit('message', {name, message})
-    setState({message: '', name})
+  const onMessageSubmit = (e) => {
+    const { name, message } = state
+    socketRef.current.emit("message", { name, message })
+    e.preventDefault()
+    setState({ message: "", name })
   }
-
-  useEffect(() => {
-    const newSocket = io()
-    newSocket.on('message', ({
-      name,
-      message
-    }) => {
-      setChat([...chat, {
-        name,
-        message
-      }])
-    })
-    setSocket(newSocket)
-  },[])
-
-
-
 
   const renderChat = () => {
-    return chat.map(({ name, message }, index) =>(
+    return chat.map(({ name, message }, index) => (
       <div key={index}>
         <h3>
           {name}: <span>{message}</span>
@@ -64,7 +47,8 @@ export default function ClientIO() {
    return(
     <div className="card">
       <form onSubmit={onMessageSubmit}>
-        <h1>Orca Chat</h1>
+        <h1>Here's what orca's been saying</h1>
+        {renderChat()}
         <div className="name-field">
           <TextField
             name="name"
@@ -84,13 +68,9 @@ export default function ClientIO() {
           />
         </div>
         <button type="submit">
-          Send!
+          send
         </button>
       </form>
-      <div className="render-chat">
-        <h1>Here's what orca's been saying</h1>
-        {renderChat()}
-      </div>
     </div>
   )
 }
