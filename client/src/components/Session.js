@@ -7,7 +7,7 @@ import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
 
-const Session = () => {
+const Session = (props) => {
   const [startBassTime, setStartBassTime] = useState(null);
   const [pastBassLapsedTime, setBassPastLapse] = useState(0);
   const isBassSequencePlaying = startBassTime !== null;
@@ -19,9 +19,10 @@ const Session = () => {
   const [startSynthTime, setStartSynthTime] = useState(null);
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
-
   const saveSession = (event) => {
     event.preventDefault();
+
+    const sessionID = props.match.params.sessionID;
 
     const drumValues = {
       drums_kick: getDrums().trackList["0"].onNotes,
@@ -53,15 +54,15 @@ const Session = () => {
     };
 
     axios
-      .post("http://localhost:5000/session/:sessionID/drums", { drumValues })
+      .post(`http://localhost:5000/session/${sessionID}/drums`, { drumValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/:sessionID/bass", { bassValues })
+      .post(`http://localhost:5000/session/${sessionID}/bass`, { bassValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/:sessionID/synth", { synthValues })
+      .post(`http://localhost:5000/session/${sessionID}/synth`, { synthValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
   };
