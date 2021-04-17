@@ -1,6 +1,12 @@
 import React, { useReducer, createContext } from "react";
 import { bassSequenceList } from "../constants/configBass";
 
+let bassDataObj = {};
+function loadBass(bassData) {
+  bassDataObj = bassData;
+  console.log("BASS DATA: ", bassDataObj);
+}
+
 const Context = createContext({
   sequence: {},
   toggleNote: () => {},
@@ -8,7 +14,7 @@ const Context = createContext({
 });
 
 let trackSequence = {
-  ...bassSequenceList[0],
+  ...bassDataObj[0],
 };
 
 function getSequence() {
@@ -20,7 +26,7 @@ const appReducer = (state, action) => {
   switch (action.type) {
     case "SET_SEQUENCE":
       newSequence = {
-        ...bassSequenceList.find((seq) => seq.id === action.value),
+        ...bassDataObj.find((seq) => seq.id === action.value),
       };
       trackSequence = newSequence;
       return newSequence;
@@ -83,4 +89,4 @@ const Provider = ({ children }) => {
   );
 };
 
-export { Provider, Context, getSequence };
+export { Provider, Context, getSequence, loadBass };

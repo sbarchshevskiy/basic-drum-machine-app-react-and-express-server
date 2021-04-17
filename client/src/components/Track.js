@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import { loadBass } from "../hooks/useBassStore";
+
 import axios from "axios";
 
 import "./Track.css";
@@ -22,11 +24,15 @@ const Track = (props) => {
 
         axios
           .get(`http://localhost:5000/sessions/${sessionID}`)
-          .then((res) => console.log("FETCHED!", res.data[0]))
+          .then((res) => {
+            console.log("FETCHED!", res.data[0]);
+            loadBass(res.data[0]);
+          })
           .catch((err) => console.log("ERROR!", err));
       })
       .catch((err) => console.log("ERROR!", err));
   };
+
   return (
     <div className="single-track">
       <a href="#">

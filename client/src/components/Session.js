@@ -19,6 +19,7 @@ const Session = (props) => {
   const [startSynthTime, setStartSynthTime] = useState(null);
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
+
   const saveSession = (event) => {
     event.preventDefault();
 
