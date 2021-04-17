@@ -18,13 +18,27 @@
   },
   "dependencies": {
     "-": "0.0.1",
+    "@auth0/auth0-react": "^1.4.0",
+    "audio-react-recorder": "^1.0.4",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "classnames": "^2.3.1",
     "concurrently": "^3.5.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.2",
+    "firebase": "^8.4.1",
+    "pg": "^8.6.0",
     "pg-native": "^3.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
     "save": "^2.4.0",
     "socket.io": "^4.0.1",
+    "sql-template-strings": "^2.2.2",
+    "tone": "^14.8.15",
     "web-audio-daw": "^4.11.0"
   }
 }
