@@ -38,11 +38,11 @@ app.get("/api/creators", (req, res) => {
 
 const port = 5000;
 
-app.get("/sessions/:trackID", (req, res) => {
+//get session id from the db
+app.get("/tracks/:trackID", (req, res) => {
   const queryString = `SELECT * FROM sessions WHERE track_id = ${req.params.trackID}
  ;
   `;
-  console.log("QUERY: ", queryString);
   db.query(queryString)
     .then((result) => {
       res.json(result.rows);
@@ -50,6 +50,21 @@ app.get("/sessions/:trackID", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+app.get("/sessions/:sessionID", (req, res) => {
+  const queryString = `SELECT * 
+  FROM drum_sequence, bass_sequence, synth_sequence
+  WHERE drum_sequence.session_id = ${req.params.sessionID} 
+  AND bass_sequence.session_id = ${req.params.sessionID} 
+  AND synth_sequence.session_id = ${req.params.sessionID};
+  `;
+  console.log("QUERY: ", queryString);
+
+  db.query(queryString)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
   const data = req.body.newSessionID;
