@@ -190,4 +190,17 @@ app.post("/sessions/new", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+app.post("/api/login", (req, res) => {
+  console.log("test welcome asdkjdgasg")
+  const email = req.body.email;
+  const queryParams = [email];
+  const queryString = `SELECT * FROM users WHERE email = $1;`;
+  console.log('mushroomasdkjaglsfdkj', email)
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
 app.listen(port, () => `Server running on port ${port}`);

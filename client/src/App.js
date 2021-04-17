@@ -6,6 +6,8 @@ import Session from "./components/Session";
 import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
 import TrackList from "./components/TrackList";
+import Login from "./pages/Login";
+import Index from "./pages/index"
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
@@ -29,23 +31,15 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">w e l c o m e t o o r c a</h1>
-        <button onClick={() => osc1.start()}>on</button>
-        <button onClick={() => osc1.stop()}>off</button>
-        <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
-      </header>
-      <Customers />
+    <div className="App">  
       <Router>
-        <Nav />
         <div>
           <Route path="/sessions/:sessionID" component={Session} />
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />
           <Route exact path="/tracks" component={TrackList} />
-          <Route exact path="/" />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Index} />
         </div>
       </Router>
     </div>
