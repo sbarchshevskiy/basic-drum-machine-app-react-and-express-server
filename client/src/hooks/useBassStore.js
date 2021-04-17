@@ -8,8 +8,6 @@ function loadBass(bassData) {
   bassDataObj = bassData;
 }
 
-// console.log("BASS ARR: ", bassDataArr);
-
 const Context = createContext({
   sequence: {},
   toggleNote: () => {},
@@ -30,8 +28,10 @@ const appReducer = (stateReducer, action) => {
   let newSequence;
   switch (action.type) {
     case "SET_SEQUENCE":
+      const { state } = useSequenceData();
+
       newSequence = {
-        ...bassSequenceList[0].find((seq) => seq.id === action.value),
+        ...state.bassData[0][0].find((seq) => seq.id === action.value),
       };
       trackSequence = newSequence;
       return newSequence;
@@ -57,22 +57,11 @@ const appReducer = (stateReducer, action) => {
       return newSequence;
     default:
       return stateReducer;
-
-    // case "SET_ON_SEQUENCE":
   }
 };
 
 const Provider = ({ children }) => {
-  const { trackID, setTrackID, state } = useSequenceData();
-
-  // const getSequenceData = (trackID, setTrackID, state) => {
-  //   dispatch({
-  //     type: "SET_ON_SEQUENCE",
-  //     value: trackID,
-  //     setTrackID,
-  //     state,
-  //   });
-  // };
+  const { state } = useSequenceData();
 
   console.log("SEQUENCE Provider: ", state.bassData[0][0]);
 

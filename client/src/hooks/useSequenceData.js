@@ -21,7 +21,7 @@ const useSequenceData = () => {
     axios
       .get(`http://localhost:5000/tracks/${trackID}`)
       .then((res) => {
-        console.log("DONE!", res);
+        console.log("SEQUENCE DONE!", res);
         const sessionID = res.data[0].id;
 
         handleClick(sessionID);
