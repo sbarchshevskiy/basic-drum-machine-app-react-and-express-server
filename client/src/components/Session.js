@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
+import DraggableElement from "./DraggableElement";
 
 import Instruments from "./Instruments";
 import { togglePlayback } from "../helpers";
@@ -123,9 +124,11 @@ const Session = (props) => {
 
   return (
     <div>
-      <button onClick={saveSession}>Save</button>
-      <button onClick={globalStopPlayback}>Stop!</button>
-      <button onClick={globalPlayback}>Play!</button>
+      <DraggableElement>
+        <button onClick={saveSession}>Save</button>
+        <button onClick={globalStopPlayback}>Stop!</button>
+        <button onClick={globalPlayback}>Play!</button>
+      </DraggableElement>
       <Instruments
         startBassTime={startBassTime}
         setStartBassTime={setStartBassTime}
