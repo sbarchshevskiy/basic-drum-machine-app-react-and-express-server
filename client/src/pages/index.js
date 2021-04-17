@@ -1,22 +1,16 @@
 import React, { useState, useEffect, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
-import Session from "./components/Session";
-<<<<<<< HEAD
-=======
-import Nav from "./components/Nav";
-import NewTrack from "./components/NewTrack";
-import TrackList from "./components/TrackList";
-import Login from "./pages/Login";
-import Index from "./pages/index"
+import "../App.css";
 
->>>>>>> d086de3a3d72086c96280cb75fd588848b72d419
-import logo from "./orca-logo.png";
-import Osc1 from "./components/Osc1";
-import Creators from "./components/creators";
-import ClientIO from "./components/ClientIO";
+import Session from "../components/Session";
+import Nav from "../components/Nav";
+import NewTrack from "../components/NewTrack";
+import TrackList from "../components/TrackList";
+import Login from "./Login";
 
-
+import logo from "../orca-logo.png";
+import Osc1 from "../components/Osc1";
+import Customers from "../components/creators";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -37,6 +31,21 @@ function App() {
 
   return (
     <div className="App">
+      <nav className="navbar navbar-expand navbar-light fixed-top">
+        <div className="container">
+          <a href="" className="navbar-brand">Orca Records</a>
+          <div className="collapse navbar-collapse">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <a href="" className="nav-link">Login</a>
+              </li>
+              <li className="nav-item">
+                <a href="" className="nav-link">Sign up</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">w e l c o m e t o o r c a</h1>
@@ -44,19 +53,7 @@ function App() {
         <button onClick={() => osc1.stop()}>off</button>
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
-      <Creators />
-      <Router>
-        <div>
-          <Route path="/sessions/:sessionID" component={Session} />
-          <Route path="/users" />
-          <Route exact path="/tracks/new" component={NewTrack} />
-          <Route exact path="/tracks" component={TrackList} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/" component={Index} />
-        </div>
-      </Router>
-      <ClientIO />
-
+      <Customers />
     </div>
   );
 }

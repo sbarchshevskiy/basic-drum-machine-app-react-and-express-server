@@ -4,8 +4,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@material-ui/core": "^4.11.3",
     "classnames": "^2.3.1",
+=======
+    "axios": "^0.21.1",
+>>>>>>> d086de3a3d72086c96280cb75fd588848b72d419
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-draggable": "^4.4.3",
@@ -18,5 +22,21 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+<<<<<<< HEAD
+=======
+  },
+  "proxy": "http://localhost:5000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+>>>>>>> d086de3a3d72086c96280cb75fd588848b72d419
   }
 }

@@ -20,7 +20,7 @@ CREATE TABLE tracks (
   category VARCHAR(255) NOT NULL,
   tags TEXT,
   description TEXT,
-  published BOOLEAN NOT NULL DEFAULT FALSE
+  published BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE sessions (
@@ -34,34 +34,34 @@ CREATE TABLE drum_sequence (
   session_id INTEGER REFERENCES sessions(id) ON DELETE CASCADE,
   drums_kick INTEGER ARRAY,
   drums_snare INTEGER ARRAY,
-  drums_hc INTEGER ARRAY,
-  drums_ho INTEGER ARRAY
+  drums_ho INTEGER ARRAY,
+  drums_hc INTEGER ARRAY
 );
 
 CREATE TABLE bass_sequence (
   id SERIAL PRIMARY KEY NOT NULL,
   session_id INTEGER REFERENCES sessions(id) ON DELETE CASCADE,
-  bass_c1 INTEGER ARRAY,
-  bass_d1 INTEGER ARRAY,
-  bass_e1 INTEGER ARRAY,
-  bass_f1 INTEGER ARRAY,
-  bass_g1 INTEGER ARRAY,
-  bass_a1 INTEGER ARRAY,
+  bass_c2 INTEGER ARRAY,
   bass_b1 INTEGER ARRAY,
-  bass_c2 INTEGER ARRAY
+  bass_a1 INTEGER ARRAY,
+  bass_g1 INTEGER ARRAY,
+  bass_f1 INTEGER ARRAY,
+  bass_e1 INTEGER ARRAY,
+  bass_d1 INTEGER ARRAY,
+  bass_c1 INTEGER ARRAY
 );
 
 CREATE TABLE synth_sequence (
   id SERIAL PRIMARY KEY NOT NULL,
   session_id INTEGER REFERENCES sessions(id) ON DELETE CASCADE,
-  synth_c3 INTEGER ARRAY,
-  synth_d3 INTEGER ARRAY,
-  synth_e3 INTEGER ARRAY,
-  synth_f3 INTEGER ARRAY,
-  synth_g3 INTEGER ARRAY,
-  synth_a3 INTEGER ARRAY,
+  synth_c4 INTEGER ARRAY,
   synth_b3 INTEGER ARRAY,
-  synth_c4 INTEGER ARRAY
+  synth_a3 INTEGER ARRAY,
+  synth_g3 INTEGER ARRAY,
+  synth_f3 INTEGER ARRAY,
+  synth_e3 INTEGER ARRAY,
+  synth_d3 INTEGER ARRAY,
+  synth_c3 INTEGER ARRAY
 );
 
 CREATE TABLE favourites (
