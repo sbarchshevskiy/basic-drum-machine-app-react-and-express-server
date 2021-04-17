@@ -57,7 +57,6 @@ app.get("/sessions/:sessionID", (req, res) => {
   AND bass_sequence.session_id = ${req.params.sessionID} 
   AND synth_sequence.session_id = ${req.params.sessionID};
   `;
-  console.log("QUERY: ", queryString);
 
   db.query(queryString)
     .then((result) => {
