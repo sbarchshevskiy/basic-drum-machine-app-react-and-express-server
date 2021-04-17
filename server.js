@@ -24,8 +24,8 @@ if (process.env.DATABASE_URL) {
   };
 }
 
-const db = new Pool(dbParams);
-db.connect();
+// const db = new Pool(dbParams);
+// db.connect();
 
 app.get("/api/creators", (req, res) => {
   const creators = [
@@ -183,19 +183,6 @@ app.post("/sessions/new", (req, res) => {
   const queryParams = ["1", data];
   const queryString = `INSERT INTO sessions (user_id, track_id) VALUES ($1, $2) RETURNING *;
   `;
-  db.query(queryString, queryParams)
-    .then((result) => {
-      res.json(result.rows[0]);
-    })
-    .catch((err) => console.log("ERRRRROR!", err));
-});
-
-app.post("/api/login", (req, res) => {
-  console.log("test welcome asdkjdgasg")
-  const email = req.body.email;
-  const queryParams = [email];
-  const queryString = `SELECT * FROM users WHERE email = $1;`;
-  console.log('mushroomasdkjaglsfdkj', email)
   db.query(queryString, queryParams)
     .then((result) => {
       res.json(result.rows[0]);
