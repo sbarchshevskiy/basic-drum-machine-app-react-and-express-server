@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, useRef } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Session from "./components/Session";
@@ -6,6 +6,7 @@ import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
 import Creators from "./components/creators";
 import ClientIO from "./components/ClientIO";
+import DraggableElement from "./components/DraggableElement";
 
 
 
@@ -17,6 +18,8 @@ let gain1 = actx.createGain();
 
 osc1.connect(gain1);
 gain1.connect(out);
+
+
 
 function App() {
   const [osc1Freq, setOsc1Freq] = useState(osc1.frequency.value);
@@ -36,6 +39,9 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Creators />
+      <div className="container">
+        <DraggableElement><ClientIO /></DraggableElement>
+      </div>
       <Router>
         <div>
           <Route path="/session" component={Session} />
@@ -44,11 +50,11 @@ function App() {
           <Route exact path="/" />
         </div>
       </Router>
-      <ClientIO />
-
     </div>
   );
 }
+
+
 
 export default App;
 
