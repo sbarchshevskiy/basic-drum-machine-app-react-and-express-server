@@ -7,6 +7,7 @@ import "./TrackList.css";
 
 const TrackList = () => {
   const { state } = useTrackListData();
+  console.log("STATE: ", state.trackListData);
 
   const allTracks = state.trackListData.map((track, index) => (
     <div key={index}>

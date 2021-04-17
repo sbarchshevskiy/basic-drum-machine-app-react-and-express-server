@@ -212,8 +212,9 @@ app.post("/session/:sessionID/synth", (req, res) => {
 
 //render track info
 app.get("/tracks", (req, res) => {
-  const queryString = `SELECT * , users.name FROM tracks
-  JOIN users ON user_id = users.id;
+  const queryString = `SELECT tracks.*, users.name FROM tracks, users
+  WHERE users.id = tracks.user_id
+  ;
   `;
   db.query(queryString)
     .then((result) => {

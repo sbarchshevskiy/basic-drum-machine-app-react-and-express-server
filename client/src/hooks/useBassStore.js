@@ -26,6 +26,7 @@ function getSequence() {
 }
 
 const appReducer = (stateReducer, action) => {
+  console.log("REDUCER: ", stateReducer);
   let newSequence;
   switch (action.type) {
     case "SET_SEQUENCE":
@@ -56,11 +57,23 @@ const appReducer = (stateReducer, action) => {
       return newSequence;
     default:
       return stateReducer;
+
+    // case "SET_ON_SEQUENCE":
   }
 };
 
 const Provider = ({ children }) => {
   const { trackID, setTrackID, state } = useSequenceData();
+
+  // const getSequenceData = (trackID, setTrackID, state) => {
+  //   dispatch({
+  //     type: "SET_ON_SEQUENCE",
+  //     value: trackID,
+  //     setTrackID,
+  //     state,
+  //   });
+  // };
+
   console.log("SEQUENCE Provider: ", state.bassData[0][0]);
 
   const [sequence, dispatch] = useReducer(appReducer, {
@@ -82,10 +95,11 @@ const Provider = ({ children }) => {
       trackID,
     });
   };
-  const selectSequence = (sequenceID) => {
+  const selectSequence = (sequenceID, state) => {
     dispatch({
       type: "SET_SEQUENCE",
       value: sequenceID,
+      state,
     });
   };
 

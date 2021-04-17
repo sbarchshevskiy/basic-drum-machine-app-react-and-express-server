@@ -13,6 +13,8 @@ const useTrackListData = () => {
       .catch((err) => console.log("ERROR!", err));
   }, []);
 
+  console.log("TRACK STATE: ", state.trackListData);
+
   return {
     state,
     setState,
