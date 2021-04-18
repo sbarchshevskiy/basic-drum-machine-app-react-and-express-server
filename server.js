@@ -1,12 +1,34 @@
-const express = require("express");
+const express = require('express');
+const socketio = require('socket.io');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const io = socketio(server);
+const cors = require('cors');
 const bodyParser = require("body-parser");
+
+app.use(cors());
+
+io.on('connection', socket => {
+  console.log('socket id',socket.id);
+  socket.on('message', ({name, message}) => {
+    console.log("name/message",name, message);
+    io.emit('message', {name, message});
+  });
+});
+
+
+
+app.get('/', (req, res) => {
+  res.send('ok');
+});
+
+
 const { Pool } = require("pg");
 require("dotenv").config();
 
-const cors = require("cors");
 
 const jsonParser = bodyParser.json();
-const app = express();
 app.use(cors());
 app.use(jsonParser);
 
@@ -24,7 +46,7 @@ if (process.env.DATABASE_URL) {
 }
 
 const db = new Pool(dbParams);
-db.connect();
+// db.connect();
 
 app.get("/api/creators", (req, res) => {
   const creators = [
@@ -37,6 +59,7 @@ app.get("/api/creators", (req, res) => {
 });
 
 const port = 5000;
+server.listen(port, () => console.log(`Server running on port ${port}`));
 
 //get session id from the db
 app.get("/tracks/:trackID", (req, res) => {
@@ -247,4 +270,16 @@ app.post("/sessions/new", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
-app.listen(port, () => `Server running on port ${port}`);
+app.post("/api/login", (req, res) => {
+  console.log("test welcome asdkjdgasg")
+  const email = req.body.email;
+  const queryParams = [email];
+  const queryString = `SELECT * FROM users WHERE email = $1;`;
+  console.log('mushroomasdkjaglsfdkj', email)
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
+import DraggableElement from "./DraggableElement";
 
 import Instruments from "./Instruments";
 import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
+import { TextField } from "@material-ui/core";
 
 const Session = (props) => {
   const [startBassTime, setStartBassTime] = useState(null);
@@ -124,9 +126,14 @@ const Session = (props) => {
 
   return (
     <div>
-      <button onClick={saveSession}>Save</button>
-      <button onClick={globalStopPlayback}>Stop!</button>
-      <button onClick={globalPlayback}>Play!</button>
+      <DraggableElement>
+        <form-play>
+          <button onClick={saveSession}>Save</button>
+          <button onClick={globalStopPlayback}>Stop!</button>
+          <button onClick={globalPlayback}>Play!</button>
+        </form-play>
+      </DraggableElement>
+
       <Instruments
         startBassTime={startBassTime}
         setStartBassTime={setStartBassTime}

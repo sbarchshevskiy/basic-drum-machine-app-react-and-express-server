@@ -1,15 +1,18 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, useRef } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-
 import Session from "./components/Session";
 import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
 import TrackList from "./components/TrackList";
+import Login from "./pages/Login";
+import Index from "./pages/index";
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
-import Customers from "./components/creators";
+import Creators from "./components/creators";
+import ClientIO from "./components/ClientIO";
+import DraggableElement from "./components/DraggableElement";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -37,7 +40,7 @@ function App() {
         <button onClick={() => osc1.stop()}>off</button>
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
-      <Customers />
+      <Creators />
       <Router>
         <Nav />
         <div>
@@ -45,12 +48,17 @@ function App() {
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />
           <Route exact path="/tracks" component={TrackList} />
-          <Route exact path="/" />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Index} />
         </div>
       </Router>
+      <div className="container">
+        <DraggableElement>
+          <ClientIO />
+        </DraggableElement>
+      </div>
     </div>
   );
 }
 
 export default App;
-
