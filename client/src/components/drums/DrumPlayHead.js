@@ -20,7 +20,7 @@ const PlayHead = ({
       "px, 0, 0px)";
   }, [notesAreaWidthInPixels, timePerSequence, totalLapsedTime]);
 
-  return <div className="play_head" ref={PlayHead}></div>;
+  return <div className="drum_play_head" ref={PlayHead}></div>;
 };
 
 export default memo(PlayHead);
