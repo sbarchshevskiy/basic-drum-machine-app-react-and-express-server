@@ -18,7 +18,6 @@ function getSequence() {
 }
 
 const appReducer = (stateReducer, action) => {
-  console.log("REDUCER: ", stateReducer);
   let newSequence;
   switch (action.type) {
     case "SET_SEQUENCE":
@@ -56,8 +55,6 @@ const appReducer = (stateReducer, action) => {
 
 const Provider = ({ children }) => {
   const { state } = useSequenceData();
-
-  console.log("SEQUENCE Provider: ", state.bassData[0][0]);
 
   const [sequence, dispatch] = useReducer(appReducer, {
     ...state.bassData[0][0],

@@ -13,9 +13,11 @@ const useSequenceData = () => {
 
   const [state, setState] = useState({
     bassData: bassDataArr,
+    synthData: synthDataArr,
   });
 
   const setBassData = (bassData) => setState({ ...state, bassData });
+  const setSynthData = (synthData) => setState({ ...state, synthData });
 
   useEffect(() => {
     axios
@@ -36,6 +38,11 @@ const useSequenceData = () => {
                 res.data[0][track.soundFile.toLocaleLowerCase()];
             });
             setBassData(bassDataArr);
+            synthDataArr[0][0].trackList.map((track, index) => {
+              synthDataArr[0][0].trackList[index].onNotes =
+                res.data[0][track.soundFile.toLocaleLowerCase()];
+            });
+            setSynthData(synthDataArr);
           })
           .catch((err) => console.log("ERROR!", err));
       })
@@ -92,6 +99,58 @@ let bassDataArr = [
         {
           title: "C1",
           soundFile: "bass_C1",
+          onNotes: [],
+        },
+      ],
+    },
+  ],
+];
+
+let synthDataArr = [
+  [
+    {
+      id: 0,
+      title: "Pulse",
+      noteCount: 16,
+      trackList: [
+        {
+          title: "C4",
+          soundFile: "synth_C4",
+          onNotes: [],
+        },
+        {
+          title: "B3",
+          soundFile: "synth_B3",
+          onNotes: [],
+        },
+        {
+          title: "A3",
+          soundFile: "synth_A3",
+          onNotes: [],
+        },
+        {
+          title: "G3",
+          soundFile: "synth_G3",
+          onNotes: [],
+        },
+        {
+          title: "F3",
+          soundFile: "synth_F3",
+          onNotes: [],
+        },
+        {
+          title: "E3",
+          soundFile: "synth_E3",
+          onNotes: [],
+        },
+        {
+          title: "D3",
+          soundFile: "synth_D3",
+          onNotes: [],
+        },
+        {
+          title: "C3",
+          soundFile: "synth_C3",
           onNotes: [],
         },
       ],
