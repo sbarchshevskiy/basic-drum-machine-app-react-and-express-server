@@ -2,12 +2,6 @@ import React, { useReducer, createContext } from "react";
 import { bassSequenceList } from "../constants/configBass";
 import useSequenceData from "../hooks/useSequenceData";
 
-let bassDataObj = {};
-
-function loadBass(bassData) {
-  bassDataObj = bassData;
-}
-
 const Context = createContext({
   sequence: {},
   toggleNote: () => {},
@@ -84,6 +78,7 @@ const Provider = ({ children }) => {
       trackID,
     });
   };
+
   const selectSequence = (sequenceID, state) => {
     dispatch({
       type: "SET_SEQUENCE",
@@ -106,4 +101,4 @@ const Provider = ({ children }) => {
   );
 };
 
-export { Provider, Context, getSequence, loadBass };
+export { Provider, Context, getSequence };

@@ -14,10 +14,10 @@ const useSequenceData = () => {
   const [state, setState] = useState({
     bassData: bassDataArr,
   });
+
   const setBassData = (bassData) => setState({ ...state, bassData });
 
   useEffect(() => {
-    console.log("TRACK ID: ", trackID);
     axios
       .get(`http://localhost:5000/tracks/${trackID}`)
       .then((res) => {
@@ -30,23 +30,10 @@ const useSequenceData = () => {
           .get(`http://localhost:5000/sessions/${sessionID}`)
           .then((res) => {
             console.table(res.data[0]);
+
             bassDataArr[0][0].trackList.map((track, index) => {
-              // console.log(
-              //   "BASS INDEX: ",
-              //   bassDataArr[0][0].trackList[index].onNotes,
-              //   index
-              // );
-              // console.log("SOUNDFILE: ", track.soundFile.toLocaleLowerCase());
-              // console.log(
-              //   "RES.SOUNDFILE: ",
-              //   res.data[0][track.soundFile.toLocaleLowerCase()]
-              // );
               bassDataArr[0][0].trackList[index].onNotes =
                 res.data[0][track.soundFile.toLocaleLowerCase()];
-              // console.log(
-              //   "LINE 46: ",
-              //   res.data[0][track.soundFile.toLocaleLowerCase()]
-              // );
             });
             setBassData(bassDataArr);
           })
