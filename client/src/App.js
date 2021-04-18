@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import fire from './fire'
+import fire from "./fire";
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
@@ -11,8 +11,8 @@ import TrackList from "./components/TrackList";
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
 import Customers from "./components/creators";
-import Login from './Login'
-import Hero from './Hero'
+import Login from "./Login";
+import Hero from "./Hero";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -24,28 +24,29 @@ osc1.connect(gain1);
 gain1.connect(out);
 
 function App() {
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
 
   const clearInputs = () => {
-    setEmail('');
-    setPassword('');
-  }
+    setEmail("");
+    setPassword("");
+  };
 
   const clearErrors = () => {
-    setEmailError('');
-    setPasswordError('');
-  }
+    setEmailError("");
+    setPasswordError("");
+  };
 
   const handleLogin = () => {
     clearErrors();
     fire
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .then((res) => console.log("RESSSS: ", res))
       .catch((err) => {
         switch (err.code) {
           case "auth/invalid-email":
@@ -57,9 +58,8 @@ function App() {
             setPasswordError(err.mesage);
             break;
         }
-        
-      })
-  }
+      });
+  };
 
   const handleSignup = () => {
     clearErrors();
@@ -77,27 +77,27 @@ function App() {
             setPasswordError(err.mesage);
             break;
         }
-      })
-  }
+      });
+  };
 
   const handleLogout = () => {
-    fire.auth().signOut()
-  }
+    fire.auth().signOut();
+  };
 
   const authListener = () => {
-    fire.auth().onAuthStateChanged(user => {
-      if(user){
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
         clearInputs();
         setUser(user);
       } else {
-        setUser('');
+        setUser("");
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     authListener();
-  }, [])
+  }, []);
 
   const [osc1Freq, setOsc1Freq] = useState(osc1.frequency.value);
   const changeOsc1Freq = (event) => {
@@ -121,17 +121,17 @@ function App() {
         {user ? (
           <Hero handleLogout={handleLogout} />
         ) : (
-          <Login 
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          handleLogin={handleLogin}
-          handleSignup={handleSignup}
-          hasAccount={hasAccount}
-          setHasAccount={setHasAccount}
-          emailError={emailError}
-          passwordError={passwordError}
+          <Login
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            handleLogin={handleLogin}
+            handleSignup={handleSignup}
+            hasAccount={hasAccount}
+            setHasAccount={setHasAccount}
+            emailError={emailError}
+            passwordError={passwordError}
           />
         )}
         <div>
@@ -147,4 +147,3 @@ function App() {
 }
 
 export default App;
-
