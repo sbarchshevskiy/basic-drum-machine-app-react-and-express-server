@@ -45,32 +45,35 @@ export default function ClientIO() {
 
 
    return(
-    <div className="card">
-      <form onSubmit={onMessageSubmit}>
-        <h1>Here's what orca's been saying</h1>
-        {renderChat()}
-        <div className="name-field">
-          <TextField
-            name="name"
-            onChange={event => onTextChange(event)}
-            value={state.name}
-            label="Name"
-          />
-        </div>
-        <div>
-          <TextField
-            name="message"
-            onChange={event => onTextChange(event)}
-            value={state.message}
-            id="outlined-multiline-static"
-            variant='outlined'
-            label="Message"
-          />
-        </div>
-        <button type="submit">
-          send
-        </button>
-      </form>
-    </div>
+       <div className="card">
+         <form onSubmit={onMessageSubmit}>
+           <h1>Here's what orca's been saying</h1>
+           {renderChat()}
+           <div className="name-field">
+
+             <TextField
+               name="name"
+               onChange={event => onTextChange(event)}
+               value={state.name}
+               label="Name"
+             />
+
+           </div>
+           <div>
+             <TextField
+               name="message"
+               onChange={event => onTextChange(event)}
+               value={state.message}
+               id="outlined-multiline-static"
+               variant='outlined'
+               label="Message"
+             />
+           </div>
+           <button type="submit">
+             send
+           </button>
+         </form>
+       </div>
+
   )
 }
