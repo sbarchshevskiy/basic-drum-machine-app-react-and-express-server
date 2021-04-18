@@ -26,6 +26,7 @@ const Instruments = ({
     <div>
       <div className="container">
         <DraggableElement>
+          <form>
           <div className="drums">
             <Drums
               startDrumTime={startDrumTime}
@@ -35,10 +36,13 @@ const Instruments = ({
               isDrumSequencePlaying={isDrumSequencePlaying}
             />
           </div>
+          </form>
+
         </DraggableElement>
-        <DraggableElement>
 
+      <DraggableElement>
 
+        <form>
           <div className="bass">
             <Bass
               startBassTime={startBassTime}
@@ -48,9 +52,12 @@ const Instruments = ({
               isBassSequencePlaying={isBassSequencePlaying}
             />
           </div>
-        </DraggableElement>
+        </form>
+
+      </DraggableElement>
         <DraggableElement>
 
+          <form>
           <div className="synth">
             <Synth
               startSynthTime={startSynthTime}
@@ -60,7 +67,9 @@ const Instruments = ({
               isSynthSequencePlaying={isSynthSequencePlaying}
             />
           </div>
-        </DraggableElement>
+        </form>
+
+      </DraggableElement>
 
 
       </div>
