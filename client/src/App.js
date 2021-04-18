@@ -6,15 +6,13 @@ import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
 import TrackList from "./components/TrackList";
 import Login from "./pages/Login";
-import Index from "./pages/index"
+import Index from "./pages/index";
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
 import Creators from "./components/creators";
 import ClientIO from "./components/ClientIO";
 import DraggableElement from "./components/DraggableElement";
-
-
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -24,8 +22,6 @@ let gain1 = actx.createGain();
 
 osc1.connect(gain1);
 gain1.connect(out);
-
-
 
 function App() {
   const [osc1Freq, setOsc1Freq] = useState(osc1.frequency.value);
@@ -45,10 +41,8 @@ function App() {
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
       <Creators />
-      <div className="container">
-        <DraggableElement><ClientIO /></DraggableElement>
-      </div>
       <Router>
+        <Nav />
         <div>
           <Route path="/sessions/:sessionID" component={Session} />
           <Route path="/users" />
@@ -58,11 +52,13 @@ function App() {
           <Route exact path="/" component={Index} />
         </div>
       </Router>
+      <div className="container">
+        <DraggableElement>
+          <ClientIO />
+        </DraggableElement>
+      </div>
     </div>
   );
 }
 
-
-
 export default App;
-

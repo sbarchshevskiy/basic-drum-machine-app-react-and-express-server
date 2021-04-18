@@ -33,30 +33,35 @@ function App() {
     <div className="App">
       <nav className="navbar navbar-expand navbar-light fixed-top">
         <div className="container">
-          <a href="" className="navbar-brand">Orca Records</a>
+          <a href="" className="navbar-brand">
+            Orca Records
+          </a>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a href="" className="nav-link">Login</a>
+                <a href="" className="nav-link">
+                  Login
+                </a>
               </li>
               <li className="nav-item">
-                <a href="" className="nav-link">Sign up</a>
+                <a href="" className="nav-link">
+                  Sign up
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">w e l c o m e t o o r c a</h1>
         <button onClick={() => osc1.start()}>on</button>
         <button onClick={() => osc1.stop()}>off</button>
         <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
       </header>
-      <Customers />
+      <Customers /> */}
     </div>
   );
 }
 
 export default App;
-

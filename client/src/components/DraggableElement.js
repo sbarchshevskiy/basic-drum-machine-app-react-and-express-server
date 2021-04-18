@@ -1,15 +1,15 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import useDraggabe from "../hooks/useDraggable";
 
-const DraggableElement = ({children}) => {
+const DraggableElement = ({ children }) => {
   const cardRef = useRef(null);
-  useDraggabe(cardRef)
+  useDraggabe(cardRef);
 
   return (
-  <div className="move" ref={cardRef} >
-    {children}
-  </div>
-  )
-}
+    <div className="move" ref={cardRef}>
+      {children}
+    </div>
+  );
+};
 
 export default DraggableElement;

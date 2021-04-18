@@ -22,58 +22,49 @@ const Instruments = ({
   isSynthSequencePlaying,
 }) => {
   return (
-
     <div>
       <div className="container">
         <DraggableElement>
-          <form>
-          <div className="drums">
-            <Drums
-              startDrumTime={startDrumTime}
-              setStartDrumTime={setStartDrumTime}
-              pastDrumLapsedTime={pastDrumLapsedTime}
-              setDrumPastLapse={setDrumPastLapse}
-              isDrumSequencePlaying={isDrumSequencePlaying}
-            />
+          <div className="instrument-wrapper">
+            <div className="drums">
+              <Drums
+                startDrumTime={startDrumTime}
+                setStartDrumTime={setStartDrumTime}
+                pastDrumLapsedTime={pastDrumLapsedTime}
+                setDrumPastLapse={setDrumPastLapse}
+                isDrumSequencePlaying={isDrumSequencePlaying}
+              />
+            </div>
           </div>
-          </form>
-
         </DraggableElement>
 
-      <DraggableElement>
-
-        <form>
-          <div className="bass">
-            <Bass
-              startBassTime={startBassTime}
-              setStartBassTime={setStartBassTime}
-              pastBassLapsedTime={pastBassLapsedTime}
-              setBassPastLapse={setBassPastLapse}
-              isBassSequencePlaying={isBassSequencePlaying}
-            />
-          </div>
-        </form>
-
-      </DraggableElement>
         <DraggableElement>
-
-          <form>
-          <div className="synth">
-            <Synth
-              startSynthTime={startSynthTime}
-              setStartSynthTime={setStartSynthTime}
-              pastSynthLapsedTime={pastSynthLapsedTime}
-              setSynthPastLapse={setSynthPastLapse}
-              isSynthSequencePlaying={isSynthSequencePlaying}
-            />
+          <div className="instrument-wrapper">
+            <div className="bass">
+              <Bass
+                startBassTime={startBassTime}
+                setStartBassTime={setStartBassTime}
+                pastBassLapsedTime={pastBassLapsedTime}
+                setBassPastLapse={setBassPastLapse}
+                isBassSequencePlaying={isBassSequencePlaying}
+              />
+            </div>
           </div>
-        </form>
-
-      </DraggableElement>
-
-
+        </DraggableElement>
+        <DraggableElement>
+          <div className="instrument-wrapper">
+            <div className="synth">
+              <Synth
+                startSynthTime={startSynthTime}
+                setStartSynthTime={setStartSynthTime}
+                pastSynthLapsedTime={pastSynthLapsedTime}
+                setSynthPastLapse={setSynthPastLapse}
+                isSynthSequencePlaying={isSynthSequencePlaying}
+              />
+            </div>
+          </div>
+        </DraggableElement>
       </div>
-
     </div>
   );
 };
