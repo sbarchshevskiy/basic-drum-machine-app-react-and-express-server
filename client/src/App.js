@@ -23,7 +23,12 @@ let gain1 = actx.createGain();
 osc1.connect(gain1);
 gain1.connect(out);
 
+//.then((res) => res.token ? res.email .then((res.email) => axios.get(users to get user.id))
+//.then((res) => setToken(res.user.id))
+//props down to components token (from state)
 function App() {
+  const [token, setToken] = useState(null);
+
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +51,13 @@ function App() {
     fire
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((res) => console.log("RESSSS: ", res))
+      .then((res) => {
+        const userToken =
+          res.user.ha.b.b[
+            "firebase:authUser:AIzaSyClVNWuo-QrzMSOoEx0mRKvKXQQcoDksM8:[DEFAULT]"
+          ].uid;
+        const userEmail = res.user.email;
+      })
       .catch((err) => {
         switch (err.code) {
           case "auth/invalid-email":
