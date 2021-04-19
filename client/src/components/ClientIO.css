@@ -27,7 +27,7 @@ form-play {
 button {
   margin-top: 20px;
   padding: 10px;
-  background: transparent;
+  /* background: transparent; */
   border-radius: 5px;
 }
 
