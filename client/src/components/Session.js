@@ -85,11 +85,7 @@ const Session = (props) => {
   const contributeToSession = (event) => {
     event.preventDefault();
 
-    //create a copy of the current session in the db
-    //add a coulmn to the db isOriginal with default true
-    //the new query creates a new entry in the db but sets isOriginal to false
-    //make a new route "Contributions" that renders all isOriginal false
-    //for the current user
+    //create new track with the same info
 
     const drumValues = {
       drums_kick: getDrums().trackList["0"].onNotes,
