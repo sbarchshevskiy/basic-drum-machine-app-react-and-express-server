@@ -21,11 +21,16 @@ const Instruments = ({
   setSynthPastLapse,
   isSynthSequencePlaying,
 }) => {
-  return (
 
+  const [showDrums, setShowDrums] = useState(false);
+  const [showBass, setShowBass] = useState(false);
+  const [showSynth, setShowSynth] = useState(false);
+
+  return (
     <div>
       <div className="container">
-        <DraggableElement>
+          {
+          showDrums? <DraggableElement>
           <form>
           <div className="drums">
             <Drums
@@ -37,26 +42,28 @@ const Instruments = ({
             />
           </div>
           </form>
+        </DraggableElement> : <span></span>
+        }  
 
-        </DraggableElement>
+        {
+          showBass?<DraggableElement>
+          <form>
+            <div className="bass">
+              <Bass
+                startBassTime={startBassTime}
+                setStartBassTime={setStartBassTime}
+                pastBassLapsedTime={pastBassLapsedTime}
+                setBassPastLapse={setBassPastLapse}
+                isBassSequencePlaying={isBassSequencePlaying}
+              />
+            </div>
+          </form>
+  
+        </DraggableElement> : <span></span>
+        }
 
-      <DraggableElement>
-
-        <form>
-          <div className="bass">
-            <Bass
-              startBassTime={startBassTime}
-              setStartBassTime={setStartBassTime}
-              pastBassLapsedTime={pastBassLapsedTime}
-              setBassPastLapse={setBassPastLapse}
-              isBassSequencePlaying={isBassSequencePlaying}
-            />
-          </div>
-        </form>
-
-      </DraggableElement>
-        <DraggableElement>
-
+        {
+          showSynth?<DraggableElement>
           <form>
           <div className="synth">
             <Synth
@@ -68,12 +75,18 @@ const Instruments = ({
             />
           </div>
         </form>
+        </DraggableElement> : <span></span>
+        }
+        <DraggableElement>
+          <form-play>
 
-      </DraggableElement>
-
-
+          <button onClick={() => setShowDrums(!showDrums)}>Drums</button>
+        <button onClick={() => setShowBass(!showBass)}>Bass</button>
+        <button onClick={() => setShowSynth(!showSynth)}>Synth</button>
+        </form-play>
+        
+        </DraggableElement>
       </div>
-
     </div>
   );
 };
