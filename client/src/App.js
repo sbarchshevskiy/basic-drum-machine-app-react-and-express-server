@@ -35,10 +35,10 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   const { state } = useUserData();
-  console.log("STATE USER DATA: ", state.userData);
+  // console.log("STATE USER DATA: ", state.userData);
 
   const { sessionInfo } = useSessionData();
-  console.log("STATE SESSION DATA: ", sessionInfo.sessionData);
+  // console.log("STATE SESSION DATA: ", sessionInfo.sessionData);
 
   const clearInputs = () => {
     setEmail("");

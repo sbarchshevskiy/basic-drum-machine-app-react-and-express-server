@@ -284,4 +284,6 @@ app.post("/sessions/new", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//contribute to a session
+
 // app.listen(port, () => `Server running on port ${port}`);

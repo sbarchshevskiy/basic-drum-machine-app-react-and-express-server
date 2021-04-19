@@ -34,9 +34,7 @@ const Session = (props) => {
     (session) => myUser.id === session.user_id
   );
   console.log("PROPS SESSION INFO: ", props.sessionInfo);
-  console.log("MY SESSION: ", mySession);
-
-  //if mySession.id === sessionID render save : render Contribute
+  console.log("MY SESSION ID: ", mySession.id);
 
   const saveSession = (event) => {
     event.preventDefault();
@@ -80,6 +78,64 @@ const Session = (props) => {
       .catch((err) => console.log("ERROR!", err));
     axios
       .post(`http://localhost:5000/session/${sessionID}/synth`, { synthValues })
+      .then((res) => console.log("SAVED!", res))
+      .catch((err) => console.log("ERROR!", err));
+  };
+
+  const contributeToSession = (event) => {
+    event.preventDefault();
+
+    //create a copy of the current session in the db
+    //add a coulmn to the db isOriginal with default true
+    //the new query creates a new entry in the db but sets isOriginal to false
+    //make a new route "Contributions" that renders all isOriginal false
+    //for the current user
+
+    const drumValues = {
+      drums_kick: getDrums().trackList["0"].onNotes,
+      drums_snare: getDrums().trackList["1"].onNotes,
+      drums_ho: getDrums().trackList["2"].onNotes,
+      drums_hc: getDrums().trackList["3"].onNotes,
+    };
+
+    const bassValues = {
+      bass_c2: getBass().trackList["0"].onNotes,
+      bass_b1: getBass().trackList["1"].onNotes,
+      bass_a1: getBass().trackList["2"].onNotes,
+      bass_g1: getBass().trackList["3"].onNotes,
+      bass_f1: getBass().trackList["4"].onNotes,
+      bass_e1: getBass().trackList["5"].onNotes,
+      bass_d1: getBass().trackList["6"].onNotes,
+      bass_c1: getBass().trackList["7"].onNotes,
+    };
+
+    const synthValues = {
+      synth_c4: getSynth().trackList["0"].onNotes,
+      synth_b3: getSynth().trackList["1"].onNotes,
+      synth_a3: getSynth().trackList["2"].onNotes,
+      synth_g3: getSynth().trackList["3"].onNotes,
+      synth_f3: getSynth().trackList["4"].onNotes,
+      synth_e3: getSynth().trackList["5"].onNotes,
+      synth_d3: getSynth().trackList["6"].onNotes,
+      synth_c3: getSynth().trackList["7"].onNotes,
+    };
+
+    axios
+      .post(`http://localhost:5000/session/contribute/${sessionID}/drums`, {
+        drumValues,
+      })
+      .then((res) => console.log("SAVED!", res))
+      .catch((err) => console.log("ERROR!", err));
+    axios
+      .post(`http://localhost:5000/session/contribute/${sessionID}/bass`, {
+        bassValues,
+      })
+      .then((res) => console.log("SAVED!", res))
+      .catch((err) => console.log("ERROR!", err));
+    axios
+      .post(`http://localhost:5000/session/contribute/${sessionID}/synth`, {
+        synthValues,
+      })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
   };
@@ -142,7 +198,11 @@ const Session = (props) => {
     <div>
       <DraggableElement>
         <form-play>
-          <button onClick={saveSession}>Save</button>
+          {sessionID == mySession.id ? (
+            <button onClick={saveSession}>Save</button>
+          ) : (
+            <button onClick={contributeToSession}>Contribute</button>
+          )}
           <button onClick={globalStopPlayback}>Stop!</button>
           <button onClick={globalPlayback}>Play!</button>
         </form-play>
