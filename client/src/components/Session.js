@@ -168,21 +168,21 @@ const Session = (props) => {
               .catch((err) => console.log("ERROR!", err));
             axios
               .post(
-                `http://localhost:5000/session/contribute/${sessionID}/bass`,
+                `http://localhost:5000/session/contribute/${contribSessionID}/bass`,
                 {
                   bassValues,
                 }
               )
-              .then((res) => console.log("SAVED!", res))
+              .then((res) => console.log("CONTRIB BASS!", res))
               .catch((err) => console.log("ERROR!", err));
             axios
               .post(
-                `http://localhost:5000/session/contribute/${sessionID}/synth`,
+                `http://localhost:5000/session/contribute/${contribSessionID}/synth`,
                 {
                   synthValues,
                 }
               )
-              .then((res) => console.log("SAVED!", res))
+              .then((res) => console.log("CONTRIB SYNTH!", res))
               .catch((err) => console.log("ERROR!", err));
           });
       })

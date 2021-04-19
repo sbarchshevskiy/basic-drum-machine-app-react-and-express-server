@@ -188,7 +188,62 @@ app.post("/session/contribute/:contribSessionID/drums", (req, res) => {
   VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
   db.query(queryString, queryParams)
     .then((result) => {
-      console.log("CONTRIB DONE!", result.rows[0]);
+      console.log("DRUM CONTRIB DONE!", result.rows[0]);
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//contribute bass values to the db
+app.post("/session/contribute/:contribSessionID/bass", (req, res) => {
+  const data = req.body.bassValues;
+  const sessionID = req.params.contribSessionID;
+  console.log("DRUM DATA: ", data);
+  // res.json({});
+  const queryParams = [
+    sessionID,
+    data.bass_c1,
+    data.bass_d1,
+    data.bass_e1,
+    data.bass_f1,
+    data.bass_g1,
+    data.bass_a1,
+    data.bass_b1,
+    data.bass_c2,
+  ];
+  const queryString = `INSERT INTO bass_sequence
+  (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      console.log("BASS CONTRIB DONE!", result.rows[0]);
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//contribute synth values to the db
+app.post("/session/contribute/:contribSessionID/synth", (req, res) => {
+  const data = req.body.synthValues;
+  const sessionID = req.params.contribSessionID;
+  // res.json({});
+  const queryParams = [
+    sessionID,
+    data.synth_c3,
+    data.synth_d3,
+    data.synth_e3,
+    data.synth_f3,
+    data.synth_g3,
+    data.synth_a3,
+    data.synth_b3,
+    data.synth_c4,
+  ];
+  const queryString = `INSERT INTO synth_sequence
+  (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      console.log("SYNTH CONTRIB DONE!", result.rows[0]);
       res.json(result.rows[0]);
     })
     .catch((err) => console.log("ERRRRROR!", err));
