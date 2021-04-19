@@ -19,12 +19,13 @@ app.use(cors());
 
 // test socket for drum machine
 io.on('connection', socket => {
+
   console.log('drum socket id',socket.id);
   socket.on('drumNoteClick', ({trackID, stepID}) => {
-    console.log('drumNoteClick',trackID, stepID);
-    io.emit('drumNoteClick', {trackID, stepID})
-  })
-})
+    console.log('drumNoteClickServer',trackID, stepID);
+    io.emit('drumNoteClick', {trackID, stepID});
+  });
+});
 
 // alternative socket setup
 // io.sockets.on('connection', newListener)
@@ -65,7 +66,7 @@ if (process.env.DATABASE_URL) {
 }
 
 const db = new Pool(dbParams);
-db.connect(); // disable if not in vagrant
+// db.connect(); // disable if not in vagrant
 
 app.get("/api/creators", (req, res) => {
   const creators = [

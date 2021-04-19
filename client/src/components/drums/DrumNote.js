@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Context } from "../../hooks/useDrumStore";
 import "./DrumNote.css";
 import { io } from 'socket.io-client';
-import $ from 'jquery';
+// import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 const newSocket = io();
 
@@ -57,8 +57,12 @@ const Note = ({ trackID, stepID, isNoteOn, isNoteOnCurrentStep, play }) => {
         stepID
       }])
     })
+
+
     setSocket(newSocket)
   }, [])
+  console.log('new socket',newSocket);
+  console.log('set note:', setNote);
 
 
   useEffect(() => {
