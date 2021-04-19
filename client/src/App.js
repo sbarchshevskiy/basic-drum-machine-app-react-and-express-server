@@ -13,6 +13,7 @@ import Osc1 from "./components/Osc1";
 import Customers from "./components/creators";
 import Login from "./Login";
 import Hero from "./Hero";
+import axios from "axios";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -57,6 +58,13 @@ function App() {
             "firebase:authUser:AIzaSyClVNWuo-QrzMSOoEx0mRKvKXQQcoDksM8:[DEFAULT]"
           ].uid;
         const userEmail = res.user.email;
+        if (userToken) {
+          axios.get(`/users/data`, { params: { userEmail } }).then((res) => {
+            const id = res.data[0].id;
+            setToken(id);
+            console.log("USERS RESP: ", id);
+          });
+        }
       })
       .catch((err) => {
         switch (err.code) {
@@ -71,6 +79,9 @@ function App() {
         }
       });
   };
+
+  console.log("TOKEN: ", token);
+  console.log("USER: ", user);
 
   const handleSignup = () => {
     clearErrors();
@@ -146,7 +157,9 @@ function App() {
           />
         )}
         <div>
-          <Route path="/sessions/:sessionID" component={Session} />
+          <Route path="/sessions/:sessionID">
+            <Session user={user} />
+          </Route>
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />
           <Route exact path="/tracks" component={TrackList} />

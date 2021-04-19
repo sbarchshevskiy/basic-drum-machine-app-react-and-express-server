@@ -7,7 +7,7 @@ import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
 
-const Session = () => {
+const Session = ({ user }) => {
   const [startBassTime, setStartBassTime] = useState(null);
   const [pastBassLapsedTime, setBassPastLapse] = useState(0);
   const isBassSequencePlaying = startBassTime !== null;
@@ -19,6 +19,8 @@ const Session = () => {
   const [startSynthTime, setStartSynthTime] = useState(null);
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
+
+  console.log("PROPS USER: ", user);
 
   const saveSession = (event) => {
     event.preventDefault();

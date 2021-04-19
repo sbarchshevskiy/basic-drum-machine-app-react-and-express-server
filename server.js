@@ -24,8 +24,21 @@ if (process.env.DATABASE_URL) {
   };
 }
 
-// const db = new Pool(dbParams);
+const db = new Pool(dbParams);
 // db.connect();
+
+app.get("/users/data", (req, res) => {
+  const email = req.query.userEmail;
+
+  console.log("REQ: ", req.query.userEmail);
+
+  const queryString = `SELECT id FROM users WHERE email='${email}';
+  `;
+
+  db.query(queryString)
+    .then((result) => res.json(result.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
 
 app.get("/api/creators", (req, res) => {
   const creators = [
