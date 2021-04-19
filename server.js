@@ -44,6 +44,17 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 // db.connect();
 
+//get all track info
+app.get("/tracks/all", (req, res) => {
+  const queryString = `SELECT * FROM tracks;
+  `;
+  db.query(queryString)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
 app.get("/users", (req, res) => {
   const queryString = `SELECT * FROM users;
   `;
@@ -251,18 +262,6 @@ app.post("/session/:sessionID/synth", (req, res) => {
 app.get("/tracks", (req, res) => {
   const queryString = `SELECT tracks.*, users.name FROM tracks, users
   WHERE users.id = tracks.user_id
-  ;
-  `;
-  db.query(queryString)
-    .then((result) => {
-      res.json(result.rows);
-    })
-    .catch((err) => console.log("ERRRRROR!", err));
-});
-
-//get all track info
-app.get("/tracks/all", (req, res) => {
-  const queryString = `SELECT * FROM tracks RETURNING *
   ;
   `;
   db.query(queryString)

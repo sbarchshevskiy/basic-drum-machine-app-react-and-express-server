@@ -4,6 +4,7 @@ import "./App.css";
 import fire from "./fire";
 import useUserData from "./hooks/useUserData";
 import useSessionData from "./hooks/useSessionData";
+import useTrackData from "./hooks/useTrackData";
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
@@ -39,6 +40,9 @@ function App() {
 
   const { sessionInfo } = useSessionData();
   // console.log("STATE SESSION DATA: ", sessionInfo.sessionData);
+
+  const { trackInfo } = useTrackData();
+  console.log("STATE TRACK DATA: ", trackInfo);
 
   const clearInputs = () => {
     setEmail("");
