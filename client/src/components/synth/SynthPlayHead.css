@@ -1,7 +1,7 @@
 .synth_play_head {
   position: absolute;
   top: var(--note-margin-vert);
-  left: calc(var(--track-title-width) + (var(--spacer) * 2));
+  left: calc(var(--track-title-width) + (var(--spacer) * 0.5));
   height: var(--synth-play-head-height);
   width: var(--play-head-width);
   background-color: var(--color-orange);

@@ -146,7 +146,7 @@ html {
 .bass {
   margin-left: auto;
   margin-right: auto;
-  width: var(--app-max-width);
+  /* width: var(--app-max-width); */
   visibility: var(--app-visibility);
   background-color: var(--color-bg);
   padding: 20px;
@@ -155,7 +155,7 @@ html {
 .drums {
   margin-left: auto;
   margin-right: auto;
-  width: var(--app-max-width);
+  /* width: var(--app-max-width); */
   visibility: var(--app-visibility);
   background-color: var(--color-orange);
   padding: 20px;
@@ -164,7 +164,7 @@ html {
 .synth {
   margin-left: auto;
   margin-right: auto;
-  width: var(--app-max-width);
+  /* width: var(--app-max-width); */
   visibility: var(--app-visibility);
   background-color: var(--color-red);
   padding: 20px;

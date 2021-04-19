@@ -16,7 +16,7 @@ const defaults = {
   __form_element_height: 30,
   __input_bpm_width: 45,
   __step_height: 32,
-  __track_title_width: 20,
+  __track_title_width: 120,
   __note_width: 32,
   __note_height: 49,
   __note_border_size: 1,
