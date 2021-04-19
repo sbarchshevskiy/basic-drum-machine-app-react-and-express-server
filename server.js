@@ -27,12 +27,8 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 // db.connect();
 
-app.get("/users/data", (req, res) => {
-  const email = req.query.userEmail;
-
-  console.log("REQ: ", req.query.userEmail);
-
-  const queryString = `SELECT id FROM users WHERE email='${email}';
+app.get("/users", (req, res) => {
+  const queryString = `SELECT * FROM users;
   `;
 
   db.query(queryString)

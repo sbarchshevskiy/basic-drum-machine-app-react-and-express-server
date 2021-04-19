@@ -2,6 +2,7 @@ import React, { useState, useEffect, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import fire from "./fire";
+import useUserData from "./hooks/useUserData";
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
@@ -36,6 +37,9 @@ function App() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+
+  const { state } = useUserData();
+  console.log("STATE USER DATA: ", state.userData);
 
   const clearInputs = () => {
     setEmail("");
