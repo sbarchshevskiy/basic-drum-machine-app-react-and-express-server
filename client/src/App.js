@@ -29,14 +29,13 @@ gain1.connect(out);
 //.then((res) => setToken(res.user.id))
 //props down to components token (from state)
 function App() {
-  const [token, setToken] = useState(null);
-
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const { state } = useUserData();
   console.log("STATE USER DATA: ", state.userData);
@@ -56,20 +55,6 @@ function App() {
     fire
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        const userToken =
-          res.user.ha.b.b[
-            "firebase:authUser:AIzaSyClVNWuo-QrzMSOoEx0mRKvKXQQcoDksM8:[DEFAULT]"
-          ].uid;
-        const userEmail = res.user.email;
-        if (userToken) {
-          axios.get(`/users/data`, { params: { userEmail } }).then((res) => {
-            const id = res.data[0].id;
-            setToken(id);
-            console.log("USERS RESP: ", id);
-          });
-        }
-      })
       .catch((err) => {
         switch (err.code) {
           case "auth/invalid-email":
@@ -82,9 +67,10 @@ function App() {
             break;
         }
       });
+    setShowLogin(false);
   };
 
-  console.log("TOKEN: ", token);
+  // console.log("TOKEN: ", token);
   console.log("USER: ", user);
 
   const handleSignup = () => {
@@ -143,8 +129,23 @@ function App() {
       </header>
       <Customers />
       <Router>
-        <Nav />
-        {user ? (
+        <Nav
+          user={user}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          handleSignup={handleSignup}
+          hasAccount={hasAccount}
+          setHasAccount={setHasAccount}
+          emailError={emailError}
+          passwordError={passwordError}
+          showLogin={showLogin}
+          setShowLogin={setShowLogin}
+        />
+        {/* {user ? (
           <Hero handleLogout={handleLogout} />
         ) : (
           <Login
@@ -159,7 +160,7 @@ function App() {
             emailError={emailError}
             passwordError={passwordError}
           />
-        )}
+        )} */}
         <div>
           <Route path="/sessions/:sessionID">
             <Session user={user} state={state} />
