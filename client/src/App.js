@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import fire from "./fire";
 import useUserData from "./hooks/useUserData";
+import useSessionData from "./hooks/useSessionData";
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
@@ -35,6 +36,9 @@ function App() {
 
   const { state } = useUserData();
   console.log("STATE USER DATA: ", state.userData);
+
+  const { sessionInfo } = useSessionData();
+  console.log("STATE SESSION DATA: ", sessionInfo.sessionData);
 
   const clearInputs = () => {
     setEmail("");
@@ -141,7 +145,7 @@ function App() {
 
         <div>
           <Route path="/sessions/:sessionID">
-            <Session user={user} state={state} />
+            <Session user={user} state={state} sessionInfo={sessionInfo} />
           </Route>
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />

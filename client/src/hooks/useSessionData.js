@@ -2,21 +2,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useSessionData = () => {
-  const [state, setState] = useState({ sessionData: [] });
+  const [sessionInfo, setSessionInfo] = useState({ sessionData: [] });
 
   useEffect(() => {
     axios
       .get(`/sessions`)
       .then((result) =>
-        setState((prev) => ({ ...prev, sessionData: result.data }))
+        setSessionInfo((prev) => ({ ...prev, sessionData: result.data }))
       )
       .catch((err) => console.log("ERROR!", err));
   }, []);
 
   return {
-    state,
-    setState,
+    sessionInfo,
+    setSessionInfo,
   };
 };
 
-export default useSessionata;
+export default useSessionData;

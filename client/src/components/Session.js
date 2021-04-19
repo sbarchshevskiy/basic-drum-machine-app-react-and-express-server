@@ -25,17 +25,18 @@ const Session = (props) => {
 
   const { sessionID } = useParams();
   console.log("SESSION ID: ", sessionID);
-  console.log("PROPS STATE: ", props.state);
-  console.log("PROPS USER: ", props.user);
-
-  // const myUser = props.state.userData.find(user => user.email === props.user.email)
-  //if myUser === session.user_id render save button : render contribute button
-  //make hook to get user_id by session.id
 
   const myUser = props.state.userData.find(
     (user) => user.email === props.user.email
   );
   console.log("MA USER: ", myUser);
+  const mySession = props.sessionInfo.sessionData.find(
+    (session) => myUser.id === session.user_id
+  );
+  console.log("PROPS SESSION INFO: ", props.sessionInfo);
+  console.log("MY SESSION: ", mySession);
+
+  //if mySession.id === sessionID render save : render Contribute
 
   const saveSession = (event) => {
     event.preventDefault();
