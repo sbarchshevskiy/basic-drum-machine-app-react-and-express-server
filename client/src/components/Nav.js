@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Login from "../Login";
 
@@ -20,8 +20,6 @@ const Nav = ({
   showLogin,
   setShowLogin,
 }) => {
-  // const [showLogin, setShowLogin] = useState(false);
-
   const onLoginClick = () => {
     setShowLogin(true);
   };

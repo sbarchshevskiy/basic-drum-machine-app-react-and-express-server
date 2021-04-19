@@ -1,13 +1,15 @@
 import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
+import DraggableElement from "./DraggableElement";
 
 import Instruments from "./Instruments";
 import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
+import { TextField } from "@material-ui/core";
 
-const Session = ({ user, state }) => {
+const Session = (props) => {
   const [startBassTime, setStartBassTime] = useState(null);
   const [pastBassLapsedTime, setBassPastLapse] = useState(0);
   const isBassSequencePlaying = startBassTime !== null;
@@ -20,11 +22,13 @@ const Session = ({ user, state }) => {
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
 
-  console.log("PROPS USER: ", user);
-  console.log("PROPS USER DATA: ", state.userData);
+  console.log("PROPS USER: ", props.user);
+  console.log("PROPS USER DATA: ", props.state.userData);
 
   const saveSession = (event) => {
     event.preventDefault();
+
+    const sessionID = props.match.params.sessionID;
 
     const drumValues = {
       drums_kick: getDrums().trackList["0"].onNotes,
@@ -56,15 +60,15 @@ const Session = ({ user, state }) => {
     };
 
     axios
-      .post("http://localhost:5000/session/:sessionID/drums", { drumValues })
+      .post(`http://localhost:5000/session/${sessionID}/drums`, { drumValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/:sessionID/bass", { bassValues })
+      .post(`http://localhost:5000/session/${sessionID}/bass`, { bassValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
     axios
-      .post("http://localhost:5000/session/:sessionID/synth", { synthValues })
+      .post(`http://localhost:5000/session/${sessionID}/synth`, { synthValues })
       .then((res) => console.log("SAVED!", res))
       .catch((err) => console.log("ERROR!", err));
   };
@@ -125,9 +129,14 @@ const Session = ({ user, state }) => {
 
   return (
     <div>
-      <button onClick={saveSession}>Save</button>
-      <button onClick={globalStopPlayback}>Stop!</button>
-      <button onClick={globalPlayback}>Play!</button>
+      <DraggableElement>
+        <form-play>
+          <button onClick={saveSession}>Save</button>
+          <button onClick={globalStopPlayback}>Stop!</button>
+          <button onClick={globalPlayback}>Play!</button>
+        </form-play>
+      </DraggableElement>
+
       <Instruments
         startBassTime={startBassTime}
         setStartBassTime={setStartBassTime}

@@ -1,5 +1,4 @@
 import React, { useContext, memo } from "react";
-
 import { Context } from "../../hooks/useDrumStore";
 import { drumSoundFiles } from "../../constants/configDrums";
 import Track from "./DrumTrack";

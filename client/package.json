@@ -1,12 +1,17 @@
 {
+  "proxy": "http://localhost:5000",
   "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "1.0.17",
+    "socket.io-client": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -14,7 +19,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
   "browserslist": {
     "production": [
       ">0.2%",
