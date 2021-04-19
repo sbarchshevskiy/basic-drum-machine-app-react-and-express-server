@@ -55,6 +55,28 @@ app.get("/tracks/all", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//insert contributed track into db
+app.post("/tracks/contribute", (req, res) => {
+  const data = req.body.contributedTrack;
+  console.log("CONTRIBUTED: ", data);
+  // res.json({});
+  const queryParams = [
+    data.user_id,
+    data.title,
+    data.category,
+    data.description,
+    data.is_original,
+  ];
+  const queryString = `INSERT INTO tracks 
+  (user_id, title, category, description, is_original)
+  VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
 app.get("/users", (req, res) => {
   const queryString = `SELECT * FROM users;
   `;
