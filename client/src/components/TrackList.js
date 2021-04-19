@@ -9,7 +9,7 @@ const TrackList = () => {
   const { state } = useTrackListData();
   const { trackID, setTrackID } = useSequenceData();
 
-  console.log("TL STATE: ", trackID);
+  // console.log("TL STATE: ", trackID);
 
   const allTracks = state.trackListData.map((track, index) => (
     <div key={index} onClick={() => setTrackID(track.id)}>

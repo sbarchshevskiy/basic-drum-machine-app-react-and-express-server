@@ -42,7 +42,7 @@ function App() {
   // console.log("STATE SESSION DATA: ", sessionInfo.sessionData);
 
   const { trackInfo } = useTrackData();
-  console.log("STATE TRACK DATA: ", trackInfo);
+  // console.log("STATE TRACK DATA: ", trackInfo);
 
   const clearInputs = () => {
     setEmail("");
@@ -149,7 +149,12 @@ function App() {
 
         <div>
           <Route path="/sessions/:sessionID">
-            <Session user={user} state={state} sessionInfo={sessionInfo} />
+            <Session
+              user={user}
+              state={state}
+              sessionInfo={sessionInfo}
+              trackInfo={trackInfo}
+            />
           </Route>
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />

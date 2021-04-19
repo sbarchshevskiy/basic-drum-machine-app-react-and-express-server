@@ -24,7 +24,7 @@ const Session = (props) => {
   const isSynthSequencePlaying = startSynthTime !== null;
 
   const { sessionID } = useParams();
-  console.log("SESSION ID: ", sessionID);
+  // console.log("SESSION ID: ", sessionID);
 
   const myUser = props.state.userData.find(
     (user) => user.email === props.user.email
@@ -34,6 +34,7 @@ const Session = (props) => {
     (session) => myUser.id === session.user_id
   );
   console.log("PROPS SESSION INFO: ", props.sessionInfo);
+  console.log("PROPS TRACK INFO: ", props.trackInfo);
   console.log("MY SESSION ID: ", mySession.id);
 
   const saveSession = (event) => {
