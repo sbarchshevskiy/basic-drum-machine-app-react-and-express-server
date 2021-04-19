@@ -12,9 +12,6 @@ import TrackList from "./components/TrackList";
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
 import Customers from "./components/creators";
-import Login from "./Login";
-import Hero from "./Hero";
-import axios from "axios";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -25,9 +22,6 @@ let gain1 = actx.createGain();
 osc1.connect(gain1);
 gain1.connect(out);
 
-//.then((res) => res.token ? res.email .then((res.email) => axios.get(users to get user.id))
-//.then((res) => setToken(res.user.id))
-//props down to components token (from state)
 function App() {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
@@ -69,9 +63,6 @@ function App() {
       });
     setShowLogin(false);
   };
-
-  // console.log("TOKEN: ", token);
-  console.log("USER: ", user);
 
   const handleSignup = () => {
     clearErrors();
@@ -145,22 +136,7 @@ function App() {
           showLogin={showLogin}
           setShowLogin={setShowLogin}
         />
-        {/* {user ? (
-          <Hero handleLogout={handleLogout} />
-        ) : (
-          <Login
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            handleLogin={handleLogin}
-            handleSignup={handleSignup}
-            hasAccount={hasAccount}
-            setHasAccount={setHasAccount}
-            emailError={emailError}
-            passwordError={passwordError}
-          />
-        )} */}
+
         <div>
           <Route path="/sessions/:sessionID">
             <Session user={user} state={state} />
