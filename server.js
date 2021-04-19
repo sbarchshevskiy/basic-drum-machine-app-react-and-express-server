@@ -53,6 +53,15 @@ app.get("/users", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+app.get("/sessions", (req, res) => {
+  const queryString = `SELECT * FROM sessions;
+  `;
+
+  db.query(queryString)
+    .then((result) => res.json(result.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
 app.get("/api/creators", (req, res) => {
   const creators = [
     { id: 1, firstName: "Nick", lastName: "Maniutin" },
