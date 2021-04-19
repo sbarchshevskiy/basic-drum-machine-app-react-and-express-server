@@ -275,4 +275,4 @@ app.post("/sessions/new", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
-app.listen(port, () => `Server running on port ${port}`);
+// app.listen(port, () => `Server running on port ${port}`);

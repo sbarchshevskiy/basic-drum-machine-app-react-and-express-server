@@ -5,7 +5,7 @@
   font-family: "Nunito", sans-serif;
 }
 
-button {
+/* button {
   border: none;
   outline: none;
   width: 100%;
@@ -15,7 +15,7 @@ button {
   letter-spacing: 1px;
   background: #603bbb;
   cursor: pointer;
-}
+} */
 
 .login {
   width: 100%;

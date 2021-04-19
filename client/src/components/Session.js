@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
+import { useParams } from "react-router-dom";
+
 import axios from "axios";
 import DraggableElement from "./DraggableElement";
 
@@ -7,7 +9,6 @@ import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
-import { TextField } from "@material-ui/core";
 
 const Session = (props) => {
   const [startBassTime, setStartBassTime] = useState(null);
@@ -22,13 +23,11 @@ const Session = (props) => {
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
 
-  console.log("PROPS USER: ", props.user);
-  console.log("PROPS USER DATA: ", props.state.userData);
+  const { sessionID } = useParams();
+  console.log("SESSION ID: ", sessionID);
 
   const saveSession = (event) => {
     event.preventDefault();
-
-    const sessionID = props.match.params.sessionID;
 
     const drumValues = {
       drums_kick: getDrums().trackList["0"].onNotes,
