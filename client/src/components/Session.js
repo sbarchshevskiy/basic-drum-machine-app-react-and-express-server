@@ -145,27 +145,48 @@ const Session = (props) => {
       .post(`http://localhost:5000/tracks/contribute`, {
         contributedTrack,
       })
-      .then((res) => console.log("SAVED!", res))
+      .then((res) => {
+        console.log("SAVED CONTRIB TRACK!", res);
+        axios
+          .post(`http://localhost:5000/sessions/contribute`, {
+            contributedSession: {
+              user_id: contributedTrack.user_id,
+              track_id: res.data.id,
+            },
+          })
+          .then((res) => {
+            console.log("SAVED CONTRIB SESH!", res);
+            const contribSessionID = res.data.id;
+            axios
+              .post(
+                `http://localhost:5000/session/contribute/${contribSessionID}/drums`,
+                {
+                  drumValues,
+                }
+              )
+              .then((res) => console.log("CONTRIB DRUMS!", res))
+              .catch((err) => console.log("ERROR!", err));
+            axios
+              .post(
+                `http://localhost:5000/session/contribute/${sessionID}/bass`,
+                {
+                  bassValues,
+                }
+              )
+              .then((res) => console.log("SAVED!", res))
+              .catch((err) => console.log("ERROR!", err));
+            axios
+              .post(
+                `http://localhost:5000/session/contribute/${sessionID}/synth`,
+                {
+                  synthValues,
+                }
+              )
+              .then((res) => console.log("SAVED!", res))
+              .catch((err) => console.log("ERROR!", err));
+          });
+      })
       .catch((err) => console.log("ERROR!", err));
-
-    // axios
-    //   .post(`http://localhost:5000/session/contribute/${sessionID}/drums`, {
-    //     drumValues,
-    //   })
-    //   .then((res) => console.log("SAVED!", res))
-    //   .catch((err) => console.log("ERROR!", err));
-    // axios
-    //   .post(`http://localhost:5000/session/contribute/${sessionID}/bass`, {
-    //     bassValues,
-    //   })
-    //   .then((res) => console.log("SAVED!", res))
-    //   .catch((err) => console.log("ERROR!", err));
-    // axios
-    //   .post(`http://localhost:5000/session/contribute/${sessionID}/synth`, {
-    //     synthValues,
-    //   })
-    //   .then((res) => console.log("SAVED!", res))
-    //   .catch((err) => console.log("ERROR!", err));
   };
 
   function drumsPlayback() {

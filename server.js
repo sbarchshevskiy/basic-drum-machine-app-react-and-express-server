@@ -58,7 +58,6 @@ app.get("/tracks/all", (req, res) => {
 //insert contributed track into db
 app.post("/tracks/contribute", (req, res) => {
   const data = req.body.contributedTrack;
-  console.log("CONTRIBUTED: ", data);
   // res.json({});
   const queryParams = [
     data.user_id,
@@ -70,6 +69,22 @@ app.post("/tracks/contribute", (req, res) => {
   const queryString = `INSERT INTO tracks 
   (user_id, title, category, description, is_original)
   VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//insert contributed session into db
+app.post("/sessions/contribute", (req, res) => {
+  const data = req.body.contributedSession;
+  console.log("CONTRIBUTED: ", data);
+  // res.json({});
+  const queryParams = [data.user_id, data.track_id];
+  const queryString = `INSERT INTO sessions 
+  (user_id, track_id)
+  VALUES ($1, $2) RETURNING *;`;
   db.query(queryString, queryParams)
     .then((result) => {
       res.json(result.rows[0]);
@@ -120,6 +135,7 @@ app.get("/tracks/:trackID", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//gett drum sequence info
 app.get("/sessions/:sessionID", (req, res) => {
   const queryString = `SELECT * 
   FROM drum_sequence, bass_sequence, synth_sequence
@@ -134,6 +150,7 @@ app.get("/sessions/:sessionID", (req, res) => {
     })
     .catch((err) => console.log("ERRRRROR!", err));
 });
+
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
   const data = req.body.newSessionID;
@@ -148,6 +165,30 @@ app.post("/session/drums", (req, res) => {
   ARRAY[]::integer[]) RETURNING *;`;
   db.query(queryString, queryParams)
     .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//contribute drum values to the db
+app.post("/session/contribute/:contribSessionID/drums", (req, res) => {
+  const data = req.body.drumValues;
+  const sessionID = req.params.contribSessionID;
+  console.log("DRUM DATA: ", data);
+  // res.json({});
+  const queryParams = [
+    sessionID,
+    data.drums_kick,
+    data.drums_snare,
+    data.drums_ho,
+    data.drums_hc,
+  ];
+  const queryString = `INSERT INTO drum_sequence 
+  (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
+  VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      console.log("CONTRIB DONE!", result.rows[0]);
       res.json(result.rows[0]);
     })
     .catch((err) => console.log("ERRRRROR!", err));
@@ -316,7 +357,5 @@ app.post("/sessions/new", (req, res) => {
     })
     .catch((err) => console.log("ERRRRROR!", err));
 });
-
-//contribute to a session
 
 // app.listen(port, () => `Server running on port ${port}`);
