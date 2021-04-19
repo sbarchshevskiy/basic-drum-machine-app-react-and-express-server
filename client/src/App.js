@@ -162,7 +162,7 @@ function App() {
         )}
         <div>
           <Route path="/sessions/:sessionID">
-            <Session user={user} />
+            <Session user={user} state={state} />
           </Route>
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />
