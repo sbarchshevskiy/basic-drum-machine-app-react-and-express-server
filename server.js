@@ -260,6 +260,18 @@ app.get("/tracks", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//get all track info
+app.get("/tracks/all", (req, res) => {
+  const queryString = `SELECT * FROM tracks RETURNING *
+  ;
+  `;
+  db.query(queryString)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
 //create a new track
 app.post("/tracks/new", (req, res) => {
   const data = req.body.createNewTrack;
