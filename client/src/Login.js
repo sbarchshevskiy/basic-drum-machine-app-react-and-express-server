@@ -77,7 +77,7 @@ const Login = (props) => {
         <div className="loginContainer">
           <Form onSubmit={handleLogin} ref={form}>
             <div>
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">Email</label>
               <Input
                   type="text"
                   name="email"
