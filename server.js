@@ -392,7 +392,7 @@ app.get("/tracks", (req, res) => {
 //create a new track
 app.post("/tracks/new", (req, res) => {
   const data = req.body.createNewTrack;
-  const queryParams = ["1", data.title, data.category, data.description];
+  const queryParams = ["3", data.title, data.category, data.description];
   const queryString = `INSERT INTO tracks (user_id, title, category, description)
   VALUES ($1, $2, $3, $4) RETURNING *;`;
   db.query(queryString, queryParams)
@@ -403,7 +403,7 @@ app.post("/tracks/new", (req, res) => {
 //create a new session
 app.post("/sessions/new", (req, res) => {
   const data = req.body.trackID;
-  const queryParams = ["1", data];
+  const queryParams = ["3", data];
   const queryString = `INSERT INTO sessions (user_id, track_id) VALUES ($1, $2) RETURNING *;
   `;
   db.query(queryString, queryParams)
