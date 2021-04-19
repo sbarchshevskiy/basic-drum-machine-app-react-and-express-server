@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import "./App.css";
-import fire from './fire'
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
@@ -12,7 +11,9 @@ import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
 import Customers from "./components/creators";
 import Login from './Login'
-import Hero from './Hero'
+import Register from './Register'
+
+import AuthService from "./services/auth.service";
 
 const actx = new AudioContext();
 let out = actx.destination;
@@ -23,81 +24,26 @@ let gain1 = actx.createGain();
 osc1.connect(gain1);
 gain1.connect(out);
 
-function App() {
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+const App = (props) => {
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showModal, setShowModal] = useState(false);
   const [hasAccount, setHasAccount] = useState(false);
 
-  const clearInputs = () => {
-    setEmail('');
-    setPassword('');
-  }
-
-  const clearErrors = () => {
-    setEmailError('');
-    setPasswordError('');
-  }
-
-  const handleLogin = () => {
-    clearErrors();
-    fire
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-            setEmailError(err.mesage);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.mesage);
-            break;
-        }
-        
-      })
-  }
-
-  const handleSignup = () => {
-    clearErrors();
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/email-already-in-use":
-          case "auth/invalid-email":
-          case "auth/user-not-found":
-            setEmailError(err.mesage);
-            break;
-          case "auth/weak-password":
-            setPasswordError(err.mesage);
-            break;
-        }
-      })
-  }
-
-  const handleLogout = () => {
-    fire.auth().signOut()
-  }
-
-  const authListener = () => {
-    fire.auth().onAuthStateChanged(user => {
-      if(user){
-        clearInputs();
-        setUser(user);
-      } else {
-        setUser('');
-      }
-    })
-  }
-
   useEffect(() => {
-    authListener();
-  }, [])
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  }
 
   const [osc1Freq, setOsc1Freq] = useState(osc1.frequency.value);
   const changeOsc1Freq = (event) => {
@@ -117,29 +63,29 @@ function App() {
       </header>
       <Customers />
       <Router>
-        <Nav />
-        {user ? (
-          <Hero handleLogout={handleLogout} />
-        ) : (
-          <Login 
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          handleLogin={handleLogin}
-          handleSignup={handleSignup}
-          hasAccount={hasAccount}
-          setHasAccount={setHasAccount}
-          emailError={emailError}
-          passwordError={passwordError}
-          />
-        )}
+        <Nav currentUser={currentUser} setShowModal={setShowModal} logOut={logOut} />
+
+        <div id="popupModal" className="overlay" style={{visibility: showModal ? 'visible' : 'hidden', opacity: showModal ? 1 : 0}}>
+          <div className="popup">
+            <a className="close" href="#" onClick={closeModal}>&times;</a>
+            {!hasAccount ? (
+                <Login hasAccount={hasAccount} setHasAccount={setHasAccount} />
+            ) : (
+                <Register hasAccount={hasAccount} setHasAccount={setHasAccount} />
+            )}
+          </div>
+        </div>
+
         <div>
-          <Route path="/sessions/:sessionID" component={Session} />
-          <Route path="/users" />
-          <Route exact path="/tracks/new" component={NewTrack} />
-          <Route exact path="/tracks" component={TrackList} />
-          <Route exact path="/" />
+          <Switch>
+            <Route exact path="/" />
+            {/*<Route exact path="/login" component={Login} />*/}
+            {/*<Route exact path="/register" component={Register} />*/}
+            <Route path="/sessions/:sessionID" component={Session} />
+            <Route path="/users" />
+            <Route exact path="/tracks/new" component={NewTrack} />
+            <Route exact path="/tracks" component={TrackList} />
+          </Switch>
         </div>
       </Router>
     </div>
