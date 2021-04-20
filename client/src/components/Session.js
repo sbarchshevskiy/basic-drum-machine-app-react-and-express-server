@@ -9,7 +9,7 @@ import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
-import './layout.css'
+import "./layout.css";
 
 const Session = (props) => {
   const [startBassTime, setStartBassTime] = useState(null);
@@ -271,6 +271,9 @@ const Session = (props) => {
     stopBassPlayback();
     stopSynthPlayback();
   }
+
+  console.log("SESH AIDI: ", sessionID);
+  console.log("MA SESH AIDI: ", mySession.id);
 
   //add column to sessions table
   return (

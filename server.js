@@ -462,6 +462,9 @@ app.post("/sessions/new", (req, res) => {
     .then((result) => {
       res.json(result.rows[0]);
     })
+    // .then((result) => {
+    //   res.redirect(`/sessions/${data}`);
+    // })
     .catch((err) => console.log("ERRRRROR!", err));
 });
 

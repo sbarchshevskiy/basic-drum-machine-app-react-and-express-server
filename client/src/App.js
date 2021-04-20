@@ -5,6 +5,8 @@ import fire from "./fire";
 import useUserData from "./hooks/useUserData";
 import useSessionData from "./hooks/useSessionData";
 import useTrackData from "./hooks/useTrackData";
+import useDelay from "./hooks/useDelay.ts";
+
 import Styling from "./components/Styling";
 
 import Session from "./components/Session";

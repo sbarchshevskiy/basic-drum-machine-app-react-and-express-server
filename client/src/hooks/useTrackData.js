@@ -11,7 +11,7 @@ const useTrackData = () => {
         setTrackInfo((prev) => ({ ...prev, trackData: result.data }))
       )
       .catch((err) => console.log("ERROR!", err));
-  }, []);
+  }, [trackInfo.trackData.length]);
 
   return {
     trackInfo,

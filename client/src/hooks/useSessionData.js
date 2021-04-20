@@ -11,7 +11,7 @@ const useSessionData = () => {
         setSessionInfo((prev) => ({ ...prev, sessionData: result.data }))
       )
       .catch((err) => console.log("ERROR!", err));
-  }, []);
+  }, [sessionInfo.sessionData.length]);
 
   return {
     sessionInfo,
