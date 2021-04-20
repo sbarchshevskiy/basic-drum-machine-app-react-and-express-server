@@ -122,7 +122,7 @@ function App() {
         <button onClick={() => osc1.stop()}>off</button> */}
         {/* <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} /> */}
       </header>
-      <Styling></Styling>
+      {/*<Styling></Styling>*/}
 
       {/*<Creators />*/}
       <Router>

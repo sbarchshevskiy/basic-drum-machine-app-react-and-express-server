@@ -42,7 +42,7 @@ if (process.env.DATABASE_URL) {
 }
 
 const db = new Pool(dbParams);
-// db.connect();
+db.connect();
 
 app.get("/users", (req, res) => {
   const queryString = `SELECT * FROM users;
