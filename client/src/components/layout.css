@@ -79,38 +79,38 @@ body {
 
 .motionblur span.eight {
     animation-delay: 0.6s;
-    transform: rotate(15deg);
+    transform: scale(15);
 }
 
 .motionblur span.nine {
     animation-delay: 0.9s;
-    transform: rotate(5deg);
+    transform: scale(5);
 }
 
 .motionblur span.ten {
     animation-delay: 1.3s;
-    transform: rotate(9deg);
+    transform: rotate(9);
 }
 
 .motionblur span.eleven {
     animation-delay: 2.3s;
-    transform: rotate(11deg);
+    transform: scale(11);
 }
 .motionblur span.twelve {
     animation-delay: 3.3s;
-    transform: rotate(45deg);
+    transform: scale(3);
 }
 .motionblur span.thirteen {
     animation-delay: 5.7s;
-    transform: rotate(51deg);
+    transform: scale(51);
 }
 .motionblur span.fourteen {
     animation-delay: 1.9s;
-    transform: rotate(68deg);
+    transform: scale(1.4);
 }
 .motionblur span.fifteen {
     animation-delay: 0.3s;
-    transform: rotate(90deg);
+    transform: scale(5);
 }
 
 .motionblur span:before {
@@ -120,7 +120,7 @@ body {
     top: 0;
     height: 60px;
     width: 40%;
-    transform: skew(45deg) translateX(150px);
+    transform: skew(45deg) translateX(15px);
     background: rgba(255, 255, 255, 0.15);
     animation: mirror 3s linear infinite;
 
@@ -160,8 +160,8 @@ body {
     animation-delay: 0.2s;
 }
 
-.container {
-    width: 360px;
+/* .container {
+    width: 2000px;
     padding: 15px;
     border-radius: 12px;
     backdrop-filter: blur(5px);
@@ -169,8 +169,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-top: 1px solid rgba(255, 255, 255, 0.5);
     border-left: 1px solid rgba(255, 255, 255, 0.5);
-
-}
+} */
 .container input[type="text"] {
     width: 100%;
     height: 100px;
@@ -194,7 +193,6 @@ body {
     outline: none;
     cursor: pointer;
     transition: all 0.3s ease;
-
 }
 .container input[type="button"]:hover {
     background: rgba(255, 255, 255, 0.1);

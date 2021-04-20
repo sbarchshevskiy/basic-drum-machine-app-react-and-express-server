@@ -3,6 +3,7 @@ import Bass from "./bass/Bass";
 import Drums from "./drums/Drums";
 import Synth from "./synth/Synth";
 import DraggableElement from "./DraggableElement";
+import Styling from './Styling'
 
 const Instruments = ({
   startBassTime,
@@ -27,6 +28,9 @@ const Instruments = ({
   const [showSynth, setShowSynth] = useState(false);
 
   return (
+   
+
+
     <div>
       <div className="container">
           {
@@ -44,7 +48,6 @@ const Instruments = ({
           </form>
         </DraggableElement> : <span></span>
         }  
-
         {
           showBass?<DraggableElement>
           <form>
@@ -88,6 +91,7 @@ const Instruments = ({
         </DraggableElement>
       </div>
     </div>
+
   );
 };
 

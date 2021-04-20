@@ -1,5 +1,4 @@
 import React, { useContext, memo } from "react";
-
 import { Context } from "../../hooks/useSynthStore";
 import { synthSoundFiles } from "../../constants/configSynth";
 import Track from "./SynthTrack";

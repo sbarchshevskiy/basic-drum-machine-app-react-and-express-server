@@ -12,7 +12,7 @@ const defaults = {
   __color_red: "#db482e",
   __base_font_size: 12,
   __number_of_steps: 16,
-  __number_of_tracks: 4,
+  __number_of_synth_tracks: 8,
   __grid_unit: 2,
   __play_head_width: 2,
   __form_element_height: 30,
@@ -50,8 +50,8 @@ const setStyles = (totalSteps) => {
   setProperty("--number-of-steps", defaults.__number_of_steps);
   setProperty("--play-head-width", defaults.__play_head_width + "px");
   setProperty(
-    "--play-head-height",
-    noteHeightFull * defaults.__number_of_tracks -
+    "--synth-play-head-height",
+    noteHeightFull * defaults.__number_of_synth_tracks -
       defaults.__note_margin_vert * 2 +
       "px"
   );

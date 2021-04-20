@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
+import { useParams } from "react-router-dom";
+
 import axios from "axios";
 import DraggableElement from "./DraggableElement";
 
@@ -7,8 +9,7 @@ import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
-import { TextField } from '@material-ui/core';
-
+import './layout.css'
 
 const Session = (props) => {
   const [startBassTime, setStartBassTime] = useState(null);
@@ -22,10 +23,12 @@ const Session = (props) => {
   const [startSynthTime, setStartSynthTime] = useState(null);
   const [pastSynthLapsedTime, setSynthPastLapse] = useState(0);
   const isSynthSequencePlaying = startSynthTime !== null;
+
+  const { sessionID } = useParams();
+  console.log("SESSION ID: ", sessionID);
+
   const saveSession = (event) => {
     event.preventDefault();
-
-    const sessionID = props.match.params.sessionID;
 
     const drumValues = {
       drums_kick: getDrums().trackList["0"].onNotes,
@@ -131,30 +134,26 @@ const Session = (props) => {
           <button onClick={saveSession}>Save</button>
           <button onClick={globalStopPlayback}>Stop!</button>
           <button onClick={globalPlayback}>Play!</button>
-
         </form-play>
-
-
       </DraggableElement>
 
-
-        <Instruments
-          startBassTime={startBassTime}
-          setStartBassTime={setStartBassTime}
-          pastBassLapsedTime={pastBassLapsedTime}
-          setBassPastLapse={setBassPastLapse}
-          isBassSequencePlaying={isBassSequencePlaying}
-          startDrumTime={startDrumTime}
-          setStartDrumTime={setStartDrumTime}
-          pastDrumLapsedTime={pastDrumLapsedTime}
-          setDrumPastLapse={setDrumPastLapse}
-          isDrumSequencePlaying={isDrumSequencePlaying}
-          startSynthTime={startSynthTime}
-          setStartSynthTime={setStartSynthTime}
-          pastSynthLapsedTime={pastSynthLapsedTime}
-          setSynthPastLapse={setSynthPastLapse}
-          isSynthSequencePlaying={isSynthSequencePlaying}
-        />
+      <Instruments
+        startBassTime={startBassTime}
+        setStartBassTime={setStartBassTime}
+        pastBassLapsedTime={pastBassLapsedTime}
+        setBassPastLapse={setBassPastLapse}
+        isBassSequencePlaying={isBassSequencePlaying}
+        startDrumTime={startDrumTime}
+        setStartDrumTime={setStartDrumTime}
+        pastDrumLapsedTime={pastDrumLapsedTime}
+        setDrumPastLapse={setDrumPastLapse}
+        isDrumSequencePlaying={isDrumSequencePlaying}
+        startSynthTime={startSynthTime}
+        setStartSynthTime={setStartSynthTime}
+        pastSynthLapsedTime={pastSynthLapsedTime}
+        setSynthPastLapse={setSynthPastLapse}
+        isSynthSequencePlaying={isSynthSequencePlaying}
+      />
     </div>
   );
 };

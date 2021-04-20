@@ -1,32 +1,28 @@
-const express = require('express');
-const socketio = require('socket.io');
+const express = require("express");
+const socketio = require("socket.io");
 const app = express();
-const http = require('http');
+const http = require("http");
 const server = http.createServer(app);
 const io = socketio(server);
-const cors = require('cors');
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 app.use(cors());
 
-io.on('connection', socket => {
-  console.log('socket id',socket.id);
-  socket.on('message', ({name, message}) => {
-    console.log("name/message",name, message);
-    io.emit('message', {name, message});
+io.on("connection", (socket) => {
+  console.log("socket id", socket.id);
+  socket.on("message", ({ name, message }) => {
+    console.log("name/message", name, message);
+    io.emit("message", { name, message });
   });
 });
 
-
-
-app.get('/', (req, res) => {
-  res.send('ok');
+app.get("/", (req, res) => {
+  res.send("ok");
 });
-
 
 const { Pool } = require("pg");
 require("dotenv").config();
-
 
 const jsonParser = bodyParser.json();
 app.use(cors());
@@ -48,15 +44,24 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 // db.connect();
 
-app.get("/api/creators", (req, res) => {
-  const creators = [
-    { id: 1, firstName: "Nick", lastName: "Maniutin" },
-    { id: 2, firstName: "Bobby", lastName: "Brown" },
-    { id: 3, firstName: "Sergey", lastName: "Barchshevskiy" },
-  ];
+app.get("/users", (req, res) => {
+  const queryString = `SELECT * FROM users;
+  `;
 
-  res.json(creators);
+  db.query(queryString)
+    .then((result) => res.json(result.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
 });
+
+// app.get("/api/creators", (req, res) => {
+//   const creators = [
+//     { id: 1, firstName: "Nick", lastName: "Maniutin" },
+//     { id: 2, firstName: "Bobby", lastName: "Brown" },
+//     { id: 3, firstName: "Sergey", lastName: "Barchshevskiy" },
+//   ];
+
+//   res.json(creators);
+// });
 
 const port = 5000;
 server.listen(port, () => console.log(`Server running on port ${port}`));
@@ -80,7 +85,6 @@ app.get("/sessions/:sessionID", (req, res) => {
   AND bass_sequence.session_id = ${req.params.sessionID} 
   AND synth_sequence.session_id = ${req.params.sessionID};
   `;
-  console.log("QUERY: ", queryString);
 
   db.query(queryString)
     .then((result) => {
@@ -236,8 +240,9 @@ app.post("/session/:sessionID/synth", (req, res) => {
 
 //render track info
 app.get("/tracks", (req, res) => {
-  const queryString = `SELECT * , users.name FROM tracks
-  JOIN users ON user_id = users.id;
+  const queryString = `SELECT tracks.*, users.name FROM tracks, users
+  WHERE users.id = tracks.user_id
+  ;
   `;
   db.query(queryString)
     .then((result) => {
@@ -270,16 +275,4 @@ app.post("/sessions/new", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
-app.post("/api/login", (req, res) => {
-  console.log("test welcome asdkjdgasg")
-  const email = req.body.email;
-  const queryParams = [email];
-  const queryString = `SELECT * FROM users WHERE email = $1;`;
-  console.log('mushroomasdkjaglsfdkj', email)
-  db.query(queryString, queryParams)
-    .then((result) => {
-      res.json(result.rows[0]);
-    })
-    .catch((err) => console.log("ERRRRROR!", err));
-});
-
+// app.listen(port, () => `Server running on port ${port}`);

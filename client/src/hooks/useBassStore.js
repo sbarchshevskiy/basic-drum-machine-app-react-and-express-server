@@ -1,10 +1,12 @@
 import React, { useReducer, createContext } from "react";
 import { bassSequenceList } from "../constants/configBass";
+import useSequenceData from "../hooks/useSequenceData";
 
 const Context = createContext({
   sequence: {},
   toggleNote: () => {},
   selectSequence: () => {},
+  useSequenceData: () => {},
 });
 
 let trackSequence = {
@@ -15,18 +17,20 @@ function getSequence() {
   return trackSequence;
 }
 
-const appReducer = (state, action) => {
+const appReducer = (stateReducer, action) => {
   let newSequence;
   switch (action.type) {
     case "SET_SEQUENCE":
+      const { state } = useSequenceData();
+
       newSequence = {
-        ...bassSequenceList.find((seq) => seq.id === action.value),
+        ...state.bassData[0][0].find((seq) => seq.id === action.value),
       };
       trackSequence = newSequence;
       return newSequence;
 
     case "SET_ON_NOTES":
-      let newTrackList = state.trackList.map((track, trackID) => {
+      let newTrackList = stateReducer.trackList.map((track, trackID) => {
         if (action.trackID === trackID) {
           return {
             ...track,
@@ -37,7 +41,7 @@ const appReducer = (state, action) => {
         }
       });
       newSequence = {
-        ...state,
+        ...stateReducer,
         trackList: newTrackList,
       };
 
@@ -45,13 +49,15 @@ const appReducer = (state, action) => {
 
       return newSequence;
     default:
-      return state;
+      return stateReducer;
   }
 };
 
 const Provider = ({ children }) => {
+  const { state } = useSequenceData();
+
   const [sequence, dispatch] = useReducer(appReducer, {
-    ...bassSequenceList[0],
+    ...state.bassData[0][0],
   });
 
   const toggleNote = ({ trackID, stepID }) => {
@@ -69,15 +75,24 @@ const Provider = ({ children }) => {
       trackID,
     });
   };
-  const selectSequence = (sequenceID) => {
+
+  const selectSequence = (sequenceID, state) => {
     dispatch({
       type: "SET_SEQUENCE",
       value: sequenceID,
+      state,
     });
   };
 
   return (
-    <Context.Provider value={{ sequence, toggleNote, selectSequence }}>
+    <Context.Provider
+      value={{
+        sequence,
+        toggleNote,
+        selectSequence,
+        useSequenceData,
+      }}
+    >
       {children}
     </Context.Provider>
   );
