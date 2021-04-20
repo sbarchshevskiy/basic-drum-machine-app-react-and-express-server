@@ -17,6 +17,11 @@ const ContribTrackList = ({ userData }) => {
         console.log("DELETE RES: ", res);
       });
   };
+  console.log("STATE: ", state);
+  // const handleAccept = ()
+  //using track id find the session id
+  //using session id find sequences in db
+  //
 
   const allTracks = state.trackListData
     .filter((track) => !track.is_original && track.user_id === userData.id)
