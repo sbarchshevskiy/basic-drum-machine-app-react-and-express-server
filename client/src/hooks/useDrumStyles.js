@@ -8,17 +8,18 @@ const defaults = {
   __color_dark_grey: "#2e2e2e",
   __color_light_grey: "#5d5d5d",
   __color_highlight: "#db482e",
+  __color_orange: "#eda42d",
   __base_font_size: 12,
   __number_of_steps: 16,
-  __number_of_tracks: 8,
+  __number_of_drum_tracks: 4,
   __grid_unit: 2,
   __play_head_width: 2,
   __form_element_height: 30,
   __input_bpm_width: 45,
   __step_height: 32,
   __track_title_width: 120,
-  __note_width: 32,
-  __note_height: 49,
+  __note_width: 24,
+  __note_height: 24,
   __note_border_size: 1,
   __note_margin_vert: 5,
   __note_margin_horz: 4,
@@ -42,12 +43,13 @@ const setStyles = (totalSteps) => {
   setProperty("--color-dark-grey", defaults.__color_dark_grey);
   setProperty("--color-light-grey", defaults.__color_light_grey);
   setProperty("--color-highlight", defaults.__color_highlight);
+  setProperty("--color-orange", defaults.__color_orange);
   setProperty("--base-font-size", defaults.__base_font_size + "px");
   setProperty("--number-of-steps", defaults.__number_of_steps);
   setProperty("--play-head-width", defaults.__play_head_width + "px");
   setProperty(
-    "--play-head-height",
-    noteHeightFull * defaults.__number_of_tracks -
+    "--drum-play-head-height",
+    noteHeightFull * defaults.__number_of_drum_tracks -
       defaults.__note_margin_vert * 2 +
       "px"
   );
@@ -84,11 +86,11 @@ const setStyles = (totalSteps) => {
   );
 };
 
-const useStyles = (totalSteps) => {
+const useDrumStyles = (totalSteps) => {
   useEffect(() => {
     setStyles(totalSteps);
   }, [totalSteps]);
   return [getNotesAreaWidthInPixels];
 };
 
-export default useStyles;
+export default useDrumStyles;

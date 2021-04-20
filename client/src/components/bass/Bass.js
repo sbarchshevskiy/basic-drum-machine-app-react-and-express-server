@@ -1,14 +1,20 @@
 import React, { useState, useEffect, Component } from "react";
-import ToolBar from "./Toolbar";
-import Steps from "./Steps";
-import TrackList from "./TrackList";
+import ToolBar from "./BassToolbar";
+import Steps from "./BassSteps";
+import TrackList from "./BassTrackList";
 
-import PlayHead from "./PlayHead";
-import { Provider } from "../../hooks/useStore";
+import PlayHead from "./BassPlayHead";
+import { Provider } from "../../hooks/useBassStore";
 import useTimer from "../../hooks/useTimer";
-import useStyles from "../../hooks/useStyles";
+import useStyles from "../../hooks/useBassStyles";
 
-const Bass = () => {
+const Bass = ({
+  startBassTime,
+  setStartBassTime,
+  pastBassLapsedTime,
+  setBassPastLapse,
+  isBassSequencePlaying,
+}) => {
   const baseBPMPerOneSecond = 60;
   const stepsPerBar = 16;
   const beatsPerBar = 4;
@@ -17,35 +23,35 @@ const Bass = () => {
   const totalBeats = beatsPerBar * barsPerSequence;
 
   const [BPM, setBPM] = useState(128);
-  const [startTime, setStartTime] = useState(null);
-  const [pastLapsedTime, setPastLapse] = useState(0);
+  // const [startBassTime, setStartBassTime] = useState(null);
+  // const [pastBassLapsedTime, setBassPastLapse] = useState(0);
   const [currentStepID, setCurrentStep] = useState(null);
   const [getNotesAreaWidthInPixels] = useStyles(totalSteps);
 
   const notesAreaWidthInPixels = getNotesAreaWidthInPixels(totalSteps);
   const timePerSequence = (baseBPMPerOneSecond / BPM) * 1000 * totalBeats;
   const timePerStep = timePerSequence / totalSteps;
-  const isSequencePlaying = startTime !== null;
-  const playerTime = useTimer(isSequencePlaying);
-  const lapsedTime = isSequencePlaying
-    ? Math.max(0, playerTime - startTime)
+  // const isBassSequencePlaying = startBassTime !== null;
+  const playerTime = useTimer(isBassSequencePlaying);
+  const lapsedTime = isBassSequencePlaying
+    ? Math.max(0, playerTime - startBassTime)
     : 0;
-  const totalLapsedTime = pastLapsedTime + lapsedTime;
+  const totalLapsedTime = pastBassLapsedTime + lapsedTime;
 
   useEffect(() => {
-    if (isSequencePlaying) {
+    if (isBassSequencePlaying) {
       setCurrentStep(Math.floor(totalLapsedTime / timePerStep) % totalSteps);
     } else {
       setCurrentStep(null);
     }
-  }, [isSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
+  }, [isBassSequencePlaying, timePerStep, totalLapsedTime, totalSteps]);
 
   const toolBarProps = {
-    setStartTime,
-    setPastLapse,
+    setStartBassTime,
+    setBassPastLapse,
     setBPM,
-    isSequencePlaying,
-    startTime,
+    isBassSequencePlaying,
+    startBassTime,
     BPM,
   };
 

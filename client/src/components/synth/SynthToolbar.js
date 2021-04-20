@@ -1,13 +1,13 @@
 import React, { useContext, memo } from "react";
-import { Context } from "../../hooks/useStore";
-import "./Toolbar.css";
+import { Context } from "../../hooks/useSynthStore";
+import "./SynthToolbar.css";
 
 const ToolBar = ({
-  setStartTime,
-  setPastLapse,
+  setStartSynthTime,
+  setSynthPastLapse,
   setBPM,
-  isSequencePlaying,
-  startTime,
+  isSynthSequencePlaying,
+  startSynthTime,
   BPM,
 }) => {
   const {
@@ -16,17 +16,17 @@ const ToolBar = ({
   } = useContext(Context);
 
   function togglePlayback() {
-    if (isSequencePlaying) {
-      setPastLapse((l) => l + performance.now() - startTime);
-      setStartTime(null);
+    if (isSynthSequencePlaying) {
+      setSynthPastLapse((l) => l + performance.now() - startSynthTime);
+      setStartSynthTime(null);
     } else {
-      setStartTime(performance.now());
+      setStartSynthTime(performance.now());
     }
   }
 
-  function stopPlayback() {
-    setPastLapse(0);
-    setStartTime(null);
+  function stopSynthPlayback() {
+    setSynthPastLapse(0);
+    setStartSynthTime(null);
   }
 
   function updateBPM(e) {
@@ -37,7 +37,7 @@ const ToolBar = ({
     <nav className="toolbar">
       <button
         className="form_element button_stop"
-        onClick={stopPlayback}
+        onClick={stopSynthPlayback}
         aria-label="Stop"
       >
         <svg width="14" height="14" viewBox="0 0 14 14">
@@ -56,7 +56,7 @@ const ToolBar = ({
         aria-label="Play / Pause"
       >
         <svg width="14" height="14" viewBox="8 8 20 20">
-          {isSequencePlaying && (
+          {isSynthSequencePlaying && (
             <path
               className="button_icon_path"
               id="pause-icon"
@@ -64,7 +64,7 @@ const ToolBar = ({
               d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26"
             />
           )}
-          {!isSequencePlaying && (
+          {!isSynthSequencePlaying && (
             <path
               className="button_icon_path"
               id="play-icon"
