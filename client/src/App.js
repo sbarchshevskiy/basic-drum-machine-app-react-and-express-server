@@ -5,7 +5,6 @@ import fire from "./fire";
 import useUserData from "./hooks/useUserData";
 import Styling from "./components/Styling";
 
-
 import Session from "./components/Session";
 import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
@@ -123,6 +122,10 @@ function App() {
         {/* <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} /> */}
       </header>
       {/*<Styling></Styling>*/}
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&display=swap');
+      </style>
 
       {/*<Creators />*/}
       <Router>
