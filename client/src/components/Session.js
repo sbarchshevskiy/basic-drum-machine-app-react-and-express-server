@@ -35,18 +35,11 @@ const Session = (props) => {
   const mySession = props.sessionInfo.sessionData.find(
     (session) => myUser.id === session.user_id
   );
-  // console.log("PROPS SESSION INFO: ", props.sessionInfo);
-  // console.log("PROPS TRACK INFO: ", props.trackInfo);
-  // console.log("MY SESSION: ", mySession);
-
-  //take current session id
-  //look into sessions to get current session obj
-  //use current session obj's track_id to get track info from all tracks
 
   const currentSesssionObj = props.sessionInfo.sessionData.find(
     (session) => sessionID == session.id
   );
-  // console.log("CURRENT SESH: ", currentSesssionObj);
+  console.log("CURRENT SESH: ", currentSesssionObj);
   const currentTrack = props.trackInfo.trackData.find(
     (track) => currentSesssionObj.track_id === track.id
   );
@@ -190,6 +183,35 @@ const Session = (props) => {
       .catch((err) => console.log("ERROR!", err));
   };
 
+  const originalSessionObj = props.sessionInfo.sessionData.find(
+    (session) => session.id === currentSesssionObj.original_session
+  );
+  console.log("ORIGN SESH OBJ: ", originalSessionObj);
+
+  const handleAccept = (event) => {
+    event.preventDefault();
+
+    //sessionID is new session's id
+    //useSessionData to get all sessions for logged user
+    //get current session from the above obj wth sessionID
+    //current sessions should have orig sesh id
+    //using orig sesh id delete session from the db
+    //hope it will delete rows in all tables
+    //get track_id of the current session
+    //set is_original for the track_id from above to true
+
+    axios
+      .delete(`http://localhost:5000/tracks/${originalSessionObj.track_id}`)
+      .then((res) => {
+        console.log("DELETE RES: ", res);
+        axios
+          .put(`http://localhost:5000/tracks/collab/${currentTrack.id}`)
+          .then((res) => console.log("UPDATED CONTRIB TRACK!", res));
+      });
+
+    console.log("ORIG TRACK: ", originalSessionObj);
+  };
+
   function drumsPlayback() {
     togglePlayback(
       isDrumSequencePlaying,
@@ -249,6 +271,9 @@ const Session = (props) => {
     <div>
       <DraggableElement>
         <form-play>
+          {currentSesssionObj.original_session ? (
+            <button onClick={handleAccept}>Accept</button>
+          ) : null}
           {sessionID == mySession.id ? (
             <button onClick={saveSession}>Save</button>
           ) : (

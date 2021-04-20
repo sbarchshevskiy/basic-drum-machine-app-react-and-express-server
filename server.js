@@ -44,7 +44,7 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 // db.connect();
 
-//get all track info
+//get all tracks info
 app.get("/tracks/all", (req, res) => {
   const queryString = `SELECT * FROM tracks;
   `;
@@ -93,6 +93,7 @@ app.post("/sessions/contribute", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//get all users
 app.get("/users", (req, res) => {
   const queryString = `SELECT * FROM users;
   `;
@@ -102,6 +103,7 @@ app.get("/users", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//get all sessions
 app.get("/sessions", (req, res) => {
   const queryString = `SELECT * FROM sessions;
   `;
@@ -111,6 +113,7 @@ app.get("/sessions", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//creators obj
 app.get("/api/creators", (req, res) => {
   const creators = [
     { id: 1, firstName: "Nick", lastName: "Maniutin" },
@@ -136,7 +139,7 @@ app.get("/tracks/:trackID", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
-//gett drum sequence info
+//get drum sequence info
 app.get("/sessions/:sessionID", (req, res) => {
   const queryString = `SELECT * 
   FROM drum_sequence, bass_sequence, synth_sequence
@@ -390,11 +393,35 @@ app.get("/tracks", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+// delete track from the db
 app.delete("/tracks/:id", function (req, res) {
-  // delete query
   const trackID = req.params.id;
 
   const queryString = `DELETE FROM tracks WHERE id=${trackID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("TRACK ID: ", req.params.id);
+});
+
+// change is_original to true
+app.put(`/tracks/collab/:currentTrackID`, function (req, res) {
+  const trackID = req.params.currentTrackID;
+
+  const queryString = `UPDATE tracks SET is_original = TRUE WHERE id=${trackID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("NEW TRACK ID: ", req.params);
+});
+
+// delete original track after collab accepted
+app.delete("/tracks/:origTrackID", function (req, res) {
+  const trackID = req.params.id;
+
+  const queryString = `DELETE FROM tracks WHERE id=${origTrackID}`;
   db.query(queryString)
     .then((result) => res.json(result.rows[0]))
     .catch((err) => console.log("ERRRRROR!", err));
