@@ -8,22 +8,22 @@ const drumSequenceList = [
     trackList: [
       {
         title: "Kick",
-        soundFile: "kick",
+        soundFile: "drums_kick",
         onNotes: [0, 4, 8, 12],
       },
       {
         title: "Snare",
-        soundFile: "snare",
+        soundFile: "drums_snare",
         onNotes: [],
       },
       {
         title: "HiHat Open",
-        soundFile: "hh_open",
+        soundFile: "drums_ho",
         onNotes: [],
       },
       {
         title: "HiHat Closed",
-        soundFile: "hh_closed",
+        soundFile: "drums_hc",
         onNotes: [],
       },
     ],
@@ -31,10 +31,10 @@ const drumSequenceList = [
 ];
 
 const drumSoundFiles = {
-  kick: "/sounds/drums/kick.wav",
-  snare: "/sounds/drums/snare.wav",
-  hh_open: "/sounds/drums/hh_open.wav",
-  hh_closed: "/sounds/drums/hh_closed.wav",
+  drums_kick: "/sounds/drums/kick.wav",
+  drums_snare: "/sounds/drums/snare.wav",
+  drums_ho: "/sounds/drums/hh_open.wav",
+  drums_hc: "/sounds/drums/hh_closed.wav",
 };
 
 export { drumSequenceList, drumSoundFiles };
