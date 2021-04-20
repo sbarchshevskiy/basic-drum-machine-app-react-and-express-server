@@ -16,7 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: linear-gradient(#ff0066, #738188); */
+  background: linear-gradient(#ff0066, #738188);
 }
 
 /* .motionblur {
