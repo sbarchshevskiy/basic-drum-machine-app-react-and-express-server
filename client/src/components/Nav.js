@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Login from "../Login";
 
 import "./Nav.css";
@@ -27,12 +27,15 @@ const Nav = ({
   return (
     <div>
       <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/tracks">Tracks</Link>
-        <Link to="/tracks/new">New Track</Link>
-        <Link to="#" onClick={user ? handleLogout : onLoginClick}>
+    
+        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>
+        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> Tracks </NavLink>
+        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> New Track </NavLink>
+        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>
+        <NavLink to="#" classname="main-nav" activeClassName="main-nav-active" onClick={user ? handleLogout : onLoginClick}>
           {user ? "Logout" : "Login"}
-        </Link>
+        </NavLink>
+
       </nav>
       {showLogin ? (
         <Login

@@ -86,7 +86,11 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-
+.main-nav-active {
+    color: darkblue;
+    font-size: 20px;
+    text-underline-mode: null;
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

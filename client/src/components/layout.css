@@ -11,13 +11,13 @@
 
 body {
   min-height: 100vh;
-  height: auto;
+  height: 100%;
   width: 100%;
   /* overflow: hidden; */
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(#ff0066, #738188);
+  background: linear-gradient(#c29bac, #c29bac);
 }
 
 /* .motionblur {

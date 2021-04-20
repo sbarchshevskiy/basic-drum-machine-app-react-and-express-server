@@ -3,7 +3,6 @@ import Bass from "./bass/Bass";
 import Drums from "./drums/Drums";
 import Synth from "./synth/Synth";
 import DraggableElement from "./DraggableElement";
-import Styling from "./Styling";
 
 const Instruments = ({
   startBassTime,
