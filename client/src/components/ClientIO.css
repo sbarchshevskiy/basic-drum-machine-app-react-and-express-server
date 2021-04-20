@@ -10,14 +10,20 @@ form,
   max-width: 1000px;
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0px 3px 24px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 3px 24px -5px rgba(0, 0, 0, 1);
+  opacity: 1;
+  background-color: #a02020!important;
+  border-radius: 25px;
+
 }
+
 
 form-play {
   max-width: 100px;
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
+  opacity: 1;
 }
 
 .name-field {
@@ -32,6 +38,7 @@ button {
 }
 
 .render-chat {
+  font-size: 30px;
   max-width: 350px;
   border-radius: 5px;
   padding: 20px;

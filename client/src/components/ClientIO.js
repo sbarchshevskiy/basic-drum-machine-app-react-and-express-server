@@ -47,16 +47,16 @@ export default function ClientIO() {
    return(
        <div className="card">
          <form onSubmit={onMessageSubmit}>
-           <h1>Here's what orca's been saying</h1>
+           <h4>Here's what orca's been saying</h4>
            {renderChat()}
            <div className="name-field">
 
-             {/*<TextField*/}
-             {/*  name="name"*/}
-             {/*  onChange={event => onTextChange(event)}*/}
-             {/*  value={state.name}*/}
-             {/*  label="Name"*/}
-             {/*/>*/}
+             <TextField
+               name="name"
+               onChange={event => onTextChange(event)}
+               value={state.name}
+               label="Name"
+             />
 
            </div>
            <div>
