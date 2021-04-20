@@ -6,12 +6,13 @@ import Track from "./Track";
 import "./TrackList.css";
 import e from "cors";
 
-const TrackList = () => {
+const ContribTrackList = ({ userData }) => {
   const { state } = useTrackListData();
   const { trackID, setTrackID } = useSequenceData();
+  console.log("CONTIRB USER: ", userData);
 
   const allTracks = state.trackListData
-    .filter((track) => track.is_original)
+    .filter((track) => !track.is_original && track.user_id === userData.id)
     .map((track, index) => (
       <div key={index} onClick={() => setTrackID(track.id)}>
         <Track
@@ -31,4 +32,4 @@ const TrackList = () => {
   );
 };
 
-export default TrackList;
+export default ContribTrackList;

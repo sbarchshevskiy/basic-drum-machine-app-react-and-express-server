@@ -10,6 +10,7 @@ import Session from "./components/Session";
 import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
 import TrackList from "./components/TrackList";
+import ContribTrackList from "./components/ContribTrackList";
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
@@ -43,6 +44,10 @@ function App() {
 
   const { trackInfo } = useTrackData();
   // console.log("STATE TRACK DATA: ", trackInfo);
+
+  const currentUser = useUserData().state.userData.find(
+    (userObj) => userObj.email === user.email
+  );
 
   const clearInputs = () => {
     setEmail("");
@@ -155,6 +160,9 @@ function App() {
               sessionInfo={sessionInfo}
               trackInfo={trackInfo}
             />
+          </Route>
+          <Route path="/collaborations">
+            <ContribTrackList userData={currentUser} />
           </Route>
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />
