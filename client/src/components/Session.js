@@ -153,6 +153,7 @@ const Session = (props) => {
               user_id: contributedTrack.user_id,
               track_id: res.data.id,
             },
+            sessionID,
           })
           .then((res) => {
             console.log("SAVED CONTRIB SESH!", res);
@@ -243,6 +244,7 @@ const Session = (props) => {
     stopSynthPlayback();
   }
 
+  //add column to sessions table
   return (
     <div>
       <DraggableElement>

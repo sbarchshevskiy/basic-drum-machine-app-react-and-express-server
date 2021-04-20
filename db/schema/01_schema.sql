@@ -27,7 +27,8 @@ CREATE TABLE tracks (
 CREATE TABLE sessions (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  track_id INTEGER REFERENCES tracks(id) ON DELETE CASCADE
+  track_id INTEGER REFERENCES tracks(id) ON DELETE CASCADE,
+  original_session INTEGER DEFAULT NULL
 );
 
 CREATE TABLE drum_sequence (

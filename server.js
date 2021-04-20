@@ -79,12 +79,13 @@ app.post("/tracks/contribute", (req, res) => {
 //insert contributed session into db
 app.post("/sessions/contribute", (req, res) => {
   const data = req.body.contributedSession;
+  const origSessionID = req.body.sessionID;
   console.log("CONTRIBUTED: ", data);
   // res.json({});
-  const queryParams = [data.user_id, data.track_id];
+  const queryParams = [data.user_id, data.track_id, origSessionID];
   const queryString = `INSERT INTO sessions 
-  (user_id, track_id)
-  VALUES ($1, $2) RETURNING *;`;
+  (user_id, track_id, original_session)
+  VALUES ($1, $2, $3) RETURNING *;`;
   db.query(queryString, queryParams)
     .then((result) => {
       res.json(result.rows[0]);
