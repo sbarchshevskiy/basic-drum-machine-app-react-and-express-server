@@ -40,6 +40,7 @@ const Session = (props) => {
     (session) => sessionID == session.id
   );
   console.log("CURRENT SESH: ", currentSesssionObj);
+
   const currentTrack = props.trackInfo.trackData.find(
     (track) => currentSesssionObj.track_id === track.id
   );
@@ -208,6 +209,14 @@ const Session = (props) => {
     console.log("ORIG TRACK: ", originalSessionObj);
   };
 
+  const handleReject = (trackID) => {
+    axios
+      .delete(`http://localhost:5000/tracks/${trackID}`, { trackID })
+      .then((res) => {
+        console.log("DELETE RES: ", res);
+      });
+  };
+
   function drumsPlayback() {
     togglePlayback(
       isDrumSequencePlaying,
@@ -269,6 +278,11 @@ const Session = (props) => {
         <form-play>
           {currentSesssionObj.original_session ? (
             <button onClick={handleAccept}>Accept</button>
+          ) : null}
+          {currentSesssionObj.original_session ? (
+            <button onClick={() => handleReject(currentTrack.id)}>
+              Reject
+            </button>
           ) : null}
           {sessionID == mySession.id ? (
             <button onClick={saveSession}>Save</button>

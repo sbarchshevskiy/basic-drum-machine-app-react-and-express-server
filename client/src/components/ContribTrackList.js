@@ -10,16 +10,6 @@ const ContribTrackList = ({ userData }) => {
   const { setTrackID } = useSequenceData();
   console.log("CONTIRB USER: ", userData);
 
-  const handleReject = (trackID) => {
-    axios
-      .delete(`http://localhost:5000/tracks/${trackID}`, { trackID })
-      .then((res) => {
-        console.log("DELETE RES: ", res);
-      });
-  };
-  console.log("STATE: ", state);
-  // const handleAccept = ()
-
   const allTracks = state.trackListData
     .filter((track) => !track.is_original && track.user_id === userData.id)
     .map((track, index) => (
@@ -34,8 +24,6 @@ const ContribTrackList = ({ userData }) => {
             isOriginal={track.is_original}
           />
         </div>
-        <button>accept</button>
-        <button onClick={() => handleReject(track.id)}>reject</button>
       </div>
     ));
   return (
