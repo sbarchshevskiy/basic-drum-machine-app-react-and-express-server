@@ -5,17 +5,17 @@
   font-family: "Nunito", sans-serif;
 }
 
-/* button {
+button {
   border: none;
   outline: none;
-  width: 100%;
+  width: 20%;
   padding: 15px 0;
   color: #fff;
   font-size: 16px;
   letter-spacing: 1px;
   background: #603bbb;
   cursor: pointer;
-} */
+}
 
 .login {
   width: 100%;
@@ -142,7 +142,7 @@ html {
 .App {
   text-align: center;
 }
-
+/* 
 .bass {
   margin-left: auto;
   margin-right: auto;
@@ -168,7 +168,7 @@ html {
   visibility: var(--app-visibility);
   background-color: var(--color-red);
   padding: 20px;
-}
+} */
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -176,7 +176,7 @@ html {
 }
 
 .App-header {
-  background-color: #2e2e2e;
+  /* background-color: #2e2e2e; */
   height: 150px;
   padding: 20px;
   color: white;

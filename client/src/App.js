@@ -5,6 +5,7 @@ import fire from "./fire";
 import useUserData from "./hooks/useUserData";
 import useSessionData from "./hooks/useSessionData";
 import useTrackData from "./hooks/useTrackData";
+import Styling from "./components/Styling";
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
@@ -128,12 +129,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">w e l c o m e t o o r c a</h1>
-        <button onClick={() => osc1.start()}>on</button>
-        <button onClick={() => osc1.stop()}>off</button>
-        <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
+        <h1 className="App-title">w e l c o m e - t o - o r c a</h1>
+        {/* <button onClick={() => osc1.start()}>on</button>
+        <button onClick={() => osc1.stop()}>off</button> */}
+        {/* <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} /> */}
       </header>
-      <Creators />
+      <Styling></Styling>
+
+      {/*<Creators />*/}
       <Router>
         <Nav
           user={user}

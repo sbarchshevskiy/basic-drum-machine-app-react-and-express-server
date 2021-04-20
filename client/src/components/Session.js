@@ -9,6 +9,7 @@ import { togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
+import './layout.css'
 
 const Session = (props) => {
   const [startBassTime, setStartBassTime] = useState(null);
