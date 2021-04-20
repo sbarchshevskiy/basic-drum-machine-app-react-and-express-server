@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {BrowserRouter as Router, NavLink} from "react-router-dom";
 import Login from "../Login";
-
+import Styling from "./Styling";
 import "./Nav.css";
 
 const Nav = ({
@@ -26,6 +26,8 @@ const Nav = ({
   console.log("SHOW LOGIN: ", showLogin);
   return (
     <div>
+      <Styling></Styling>
+
       <nav className="navbar">
     
         <NavLink exact to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>

@@ -89,7 +89,9 @@ const Instruments = ({
         </DraggableElement>
       </div>
     </div>
-  );
+
+
+);
 };
 
 export default Instruments;

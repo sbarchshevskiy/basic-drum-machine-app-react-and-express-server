@@ -4,9 +4,7 @@ import './layout.css'
 export default function Styling() {
 
   return(
-
     <div>
-
       <div className="motionblur">
         <span className="one"></span>
         <span className="two"></span>
@@ -45,11 +43,6 @@ export default function Styling() {
       </div> */}
 
     </div>
-
-
-
-
-
 
   )
 }
