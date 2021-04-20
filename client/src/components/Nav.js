@@ -28,11 +28,12 @@ const Nav = ({
     <div>
       <nav className="navbar">
     
-        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>
-        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> Tracks </NavLink>
-        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> New Track </NavLink>
-        <NavLink to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>
-        <NavLink to="#" classname="main-nav" activeClassName="main-nav-active" onClick={user ? handleLogout : onLoginClick}>
+        <NavLink exact to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>
+        <NavLink exact to="tracks" classname="main-nav" activeClassName="main-nav-active"> Tracks </NavLink>
+        <NavLink exact to="/tracks/new" classname="main-nav" activeClassName="main-nav-active"> New Track </NavLink>
+
+
+        <NavLink exact to="/#" classname="main-nav" activeClassName="main-nav-active" onClick={user ? handleLogout : onLoginClick}>
           {user ? "Logout" : "Login"}
         </NavLink>
 

@@ -51,12 +51,12 @@ export default function ClientIO() {
            {renderChat()}
            <div className="name-field">
 
-             <TextField
-               name="name"
-               onChange={event => onTextChange(event)}
-               value={state.name}
-               label="Name"
-             />
+             {/*<TextField*/}
+             {/*  name="name"*/}
+             {/*  onChange={event => onTextChange(event)}*/}
+             {/*  value={state.name}*/}
+             {/*  label="Name"*/}
+             {/*/>*/}
 
            </div>
            <div>
