@@ -389,6 +389,18 @@ app.get("/tracks", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+app.delete("/tracks/:id", function (req, res) {
+  // delete query
+  const trackID = req.params.id;
+
+  const queryString = `DELETE FROM tracks WHERE id=${trackID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("TRACK ID: ", req.params.id);
+});
+
 //create a new track
 app.post("/tracks/new", (req, res) => {
   const data = req.body.createNewTrack;
