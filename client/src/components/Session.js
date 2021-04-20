@@ -191,14 +191,7 @@ const Session = (props) => {
   const handleAccept = (event) => {
     event.preventDefault();
 
-    //sessionID is new session's id
-    //useSessionData to get all sessions for logged user
-    //get current session from the above obj wth sessionID
-    //current sessions should have orig sesh id
-    //using orig sesh id delete session from the db
-    //hope it will delete rows in all tables
-    //get track_id of the current session
-    //set is_original for the track_id from above to true
+    //add a request that updates original_session to null
 
     axios
       .delete(`http://localhost:5000/tracks/${originalSessionObj.track_id}`)
@@ -207,6 +200,9 @@ const Session = (props) => {
         axios
           .put(`http://localhost:5000/tracks/collab/${currentTrack.id}`)
           .then((res) => console.log("UPDATED CONTRIB TRACK!", res));
+        axios
+          .put(`http://localhost:5000/sessions/collab/${currentSesssionObj.id}`)
+          .then((res) => console.log("UPDATED CONTRIB SESSION!", res));
       });
 
     console.log("ORIG TRACK: ", originalSessionObj);

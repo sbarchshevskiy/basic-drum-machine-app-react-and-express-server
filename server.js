@@ -417,6 +417,18 @@ app.put(`/tracks/collab/:currentTrackID`, function (req, res) {
   console.log("NEW TRACK ID: ", req.params);
 });
 
+// change original_session to null
+app.put(`/sessions/collab/:currentSession`, function (req, res) {
+  const sessionID = req.params.currentSession;
+  console.log("UPD SESH ID: ", sessionID);
+  const queryString = `UPDATE sessions SET original_session = NULL WHERE id=${sessionID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("NEW SESSION ID: ", req.params);
+});
+
 // delete original track after collab accepted
 app.delete("/tracks/:origTrackID", function (req, res) {
   const trackID = req.params.id;
