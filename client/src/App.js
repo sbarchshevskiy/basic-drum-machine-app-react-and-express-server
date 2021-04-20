@@ -3,12 +3,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import fire from "./fire";
 import useUserData from "./hooks/useUserData";
+import useSessionData from "./hooks/useSessionData";
+import useTrackData from "./hooks/useTrackData";
+import useDelay from "./hooks/useDelay.ts";
+
 import Styling from "./components/Styling";
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
 import TrackList from "./components/TrackList";
+import ContribTrackList from "./components/ContribTrackList";
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
@@ -35,7 +40,17 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   const { state } = useUserData();
-  console.log("STATE USER DATA: ", state.userData);
+  // console.log("STATE USER DATA: ", state.userData);
+
+  const { sessionInfo } = useSessionData();
+  // console.log("STATE SESSION DATA: ", sessionInfo.sessionData);
+
+  const { trackInfo } = useTrackData();
+  // console.log("STATE TRACK DATA: ", trackInfo);
+
+  const currentUser = useUserData().state.userData.find(
+    (userObj) => userObj.email === user.email
+  );
 
   const clearInputs = () => {
     setEmail("");
@@ -147,7 +162,15 @@ function App() {
 
         <div>
           <Route path="/sessions/:sessionID">
-            <Session user={user} state={state} />
+            <Session
+              user={user}
+              state={state}
+              sessionInfo={sessionInfo}
+              trackInfo={trackInfo}
+            />
+          </Route>
+          <Route path="/collaborations">
+            <ContribTrackList userData={currentUser} />
           </Route>
           <Route path="/users" />
           <Route exact path="/tracks/new" component={NewTrack} />

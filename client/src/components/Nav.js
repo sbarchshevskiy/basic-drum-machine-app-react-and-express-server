@@ -26,12 +26,12 @@ const Nav = ({
   console.log("SHOW LOGIN: ", showLogin);
   return (
     <div>
-      <Styling></Styling>
+      {/* <Styling></Styling> */}
 
       <nav className="navbar">
     
         <NavLink exact to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>
-        <NavLink exact to="tracks" classname="main-nav" activeClassName="main-nav-active"> Tracks </NavLink>
+        <NavLink exact to="/tracks" classname="main-nav" activeClassName="main-nav-active"> Tracks </NavLink>
         <NavLink exact to="/tracks/new" classname="main-nav" activeClassName="main-nav-active"> New Track </NavLink>
 
 
