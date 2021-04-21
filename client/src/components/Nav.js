@@ -33,6 +33,8 @@ const Nav = ({
         <NavLink exact to="/" classname="main-nav" activeClassName="main-nav-active"> Home </NavLink>
         <NavLink exact to="/tracks" classname="main-nav" activeClassName="main-nav-active"> Tracks </NavLink>
         <NavLink exact to="/tracks/new" classname="main-nav" activeClassName="main-nav-active"> New Track </NavLink>
+        <NavLink exact to="/collaborations" classname="main-nav" activeClassName="main-nav-active"> Collaborations </NavLink>
+
 
 
         <NavLink exact to="/#" classname="main-nav" activeClassName="main-nav-active" onClick={user ? handleLogout : onLoginClick}>

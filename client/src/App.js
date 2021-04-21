@@ -136,10 +136,7 @@ function App() {
         <button onClick={() => osc1.stop()}>off</button> */}
         {/* <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} /> */}
       </header>
-      <style>
-        @import
-        url('https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&display=swap');
-      </style>
+      <Styling></Styling>
 
       {/*<Creators />*/}
       <Router>
