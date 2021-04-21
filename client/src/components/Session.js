@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import axios from "axios";
 import DraggableElement from "./DraggableElement";
 
 import Instruments from "./Instruments";
-import { togglePlayback } from "../helpers";
+import { notifyError, notifySuccess, togglePlayback } from "../helpers";
 import { getSequence as getBass } from "../hooks/useBassStore";
 import { getSequence as getDrums } from "../hooks/useDrumStore";
 import { getSequence as getSynth } from "../hooks/useSynthStore";
+
 import "./layout.css";
 
 const Session = (props) => {
+  toast.configure();
+
   const [startBassTime, setStartBassTime] = useState(null);
   const [pastBassLapsedTime, setBassPastLapse] = useState(0);
   const isBassSequencePlaying = startBassTime !== null;
@@ -25,6 +29,7 @@ const Session = (props) => {
   const isSynthSequencePlaying = startSynthTime !== null;
 
   const { sessionID } = useParams();
+
   // console.log("SESSION ID: ", sessionID);
 
   const myUser = props.state.userData.find(
@@ -98,8 +103,14 @@ const Session = (props) => {
       .catch((err) => console.log("ERROR!", err));
     axios
       .post(`http://localhost:5000/session/${sessionID}/synth`, { synthValues })
-      .then((res) => console.log("SAVED!", res))
-      .catch((err) => console.log("ERROR!", err));
+      .then((res) => {
+        console.log("SAVED!", res);
+        notifySuccess("TRACK SAVED!");
+      })
+      .catch((err) => {
+        console.log("ERROR!", err);
+        notifyError("Could not save track :(");
+      });
   };
 
   const contributeToSession = (event) => {
@@ -178,7 +189,10 @@ const Session = (props) => {
                   synthValues,
                 }
               )
-              .then((res) => console.log("CONTRIB SYNTH!", res))
+              .then((res) => {
+                console.log("CONTRIB SYNTH!", res);
+                notifySuccess("CONTRIBUTION SUCCESSFUL!");
+              })
               .catch((err) => console.log("ERROR!", err));
           });
       })
@@ -204,7 +218,10 @@ const Session = (props) => {
           .then((res) => console.log("UPDATED CONTRIB TRACK!", res));
         axios
           .put(`http://localhost:5000/sessions/collab/${currentSesssionObj.id}`)
-          .then((res) => console.log("UPDATED CONTRIB SESSION!", res));
+          .then((res) => {
+            console.log("UPDATED CONTRIB SESSION!", res);
+            notifySuccess("CONTRIBUTION ACCEPTED!");
+          });
       });
 
     console.log("ORIG TRACK: ", originalSessionObj);
@@ -215,6 +232,7 @@ const Session = (props) => {
       .delete(`http://localhost:5000/tracks/${trackID}`, { trackID })
       .then((res) => {
         console.log("DELETE RES: ", res);
+        notifySuccess("CONTRIBUTION REJECTED!");
       });
   };
 

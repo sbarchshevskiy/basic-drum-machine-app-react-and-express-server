@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 function togglePlayback(
   isInstrumentSequencePlaying,
   setInstrumentPastLapse,
@@ -12,4 +14,20 @@ function togglePlayback(
   }
 }
 
-export { togglePlayback };
+const notifyError = (message) =>
+  toast.dark(message, {
+    position: "top-left",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+
+const notifySuccess = (message) =>
+  toast.success(message, {
+    hideProgressBar: true,
+  });
+
+export { togglePlayback, notifySuccess, notifyError };

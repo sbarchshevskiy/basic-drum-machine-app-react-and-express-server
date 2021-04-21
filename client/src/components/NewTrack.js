@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { notifyError, notifySuccess } from "../helpers";
 
 import axios from "axios";
 
 import "./Nav.css";
 
 const NewTrack = () => {
+  toast.configure();
+
   const history = useHistory();
 
   const handleClick = (id) => {
@@ -58,7 +62,9 @@ const NewTrack = () => {
                 .catch((err) => console.log("ERROR!", err));
               axios
                 .post("http://localhost:5000/session/synth", { newSessionID })
-                .then((res) => console.log("SAVED!", res))
+                .then((res) => {
+                  console.log("SAVED!", res);
+                })
                 .catch((err) => console.log("ERROR!", err));
             })
             .catch((err) => console.log("ERROR!", err));
