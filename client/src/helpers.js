@@ -16,7 +16,7 @@ function togglePlayback(
 
 const notifyError = (message) =>
   toast.dark(message, {
-    position: "top-left",
+    position: "top-right",
     autoClose: 5000,
     hideProgressBar: true,
     closeOnClick: true,
