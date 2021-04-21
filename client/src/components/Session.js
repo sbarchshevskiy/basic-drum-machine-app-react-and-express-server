@@ -105,11 +105,11 @@ const Session = (props) => {
       .post(`http://localhost:5000/session/${sessionID}/synth`, { synthValues })
       .then((res) => {
         console.log("SAVED!", res);
-        notifySuccess("TRACK SAVED!");
+        // notifySuccess("TRACK SAVED!");
       })
       .catch((err) => {
         console.log("ERROR!", err);
-        notifyError("Could not save track :(");
+        // notifyError("Could not save track :(");
       });
   };
 
@@ -191,7 +191,7 @@ const Session = (props) => {
               )
               .then((res) => {
                 console.log("CONTRIB SYNTH!", res);
-                notifySuccess("CONTRIBUTION SUCCESSFUL!");
+                // notifySuccess("CONTRIBUTION SUCCESSFUL!");
               })
               .catch((err) => console.log("ERROR!", err));
           });
@@ -220,7 +220,7 @@ const Session = (props) => {
           .put(`http://localhost:5000/sessions/collab/${currentSesssionObj.id}`)
           .then((res) => {
             console.log("UPDATED CONTRIB SESSION!", res);
-            notifySuccess("CONTRIBUTION ACCEPTED!");
+            // notifySuccess("CONTRIBUTION ACCEPTED!");
           });
       });
 
@@ -232,7 +232,7 @@ const Session = (props) => {
       .delete(`http://localhost:5000/tracks/${trackID}`, { trackID })
       .then((res) => {
         console.log("DELETE RES: ", res);
-        notifySuccess("CONTRIBUTION REJECTED!");
+        // notifySuccess("CONTRIBUTION REJECTED!");
       });
   };
 
