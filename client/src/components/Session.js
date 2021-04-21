@@ -291,7 +291,7 @@ const Session = (props) => {
   }
 
   console.log("SESH AIDI: ", sessionID);
-  console.log("MA SESH AIDI: ", mySession.id);
+  // console.log("MA SESH AIDI: ", mySession.id);
 
   //add column to sessions table
   return (
