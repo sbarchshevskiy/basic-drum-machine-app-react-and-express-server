@@ -27,10 +27,10 @@ const Nav = ({
   return (
     <div>
       <nav className="navbar">
-        <div className="navbar-title">Orca</div>
         <Link to="/">Home</Link>
         <Link to="/tracks">Tracks</Link>
         <Link to="/tracks/new">New Track</Link>
+        <Link to="/collaborations">Collaborations</Link>
         <Link to="#" onClick={user ? handleLogout : onLoginClick}>
           {user ? "Logout" : "Login"}
         </Link>

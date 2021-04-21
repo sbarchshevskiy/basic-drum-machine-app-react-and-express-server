@@ -59,7 +59,7 @@ const Provider = ({ children }) => {
   const [sequence, dispatch] = useReducer(appReducer, {
     ...state.synthData[0][0],
   });
-  console.log("SEQUENCE Provider: ", state.synthData[0][0]);
+  // console.log("SEQUENCE Provider: ", state.synthData[0][0]);
 
   const toggleNote = ({ trackID, stepID }) => {
     let newOnNotes;

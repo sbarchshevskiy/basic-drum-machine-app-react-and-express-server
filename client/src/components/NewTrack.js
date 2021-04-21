@@ -9,7 +9,8 @@ const NewTrack = () => {
   const history = useHistory();
 
   const handleClick = (id) => {
-    history.push(`/sessions/${id}`);
+    history.push(`/tracks`);
+    window.location.reload();
   };
 
   const [newTrack, setNewTrack] = useState({

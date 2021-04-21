@@ -44,6 +44,56 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 // db.connect();
 
+//get all tracks info
+app.get("/tracks/all", (req, res) => {
+  const queryString = `SELECT * FROM tracks;
+  `;
+  db.query(queryString)
+    .then((result) => {
+      res.json(result.rows);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//insert contributed track into db
+app.post("/tracks/contribute", (req, res) => {
+  const data = req.body.contributedTrack;
+  // res.json({});
+  const queryParams = [
+    data.user_id,
+    data.title,
+    data.category,
+    data.description,
+    data.is_original,
+  ];
+  const queryString = `INSERT INTO tracks 
+  (user_id, title, category, description, is_original)
+  VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//insert contributed session into db
+app.post("/sessions/contribute", (req, res) => {
+  const data = req.body.contributedSession;
+  const origSessionID = req.body.sessionID;
+  console.log("CONTRIBUTED: ", data);
+  // res.json({});
+  const queryParams = [data.user_id, data.track_id, origSessionID];
+  const queryString = `INSERT INTO sessions 
+  (user_id, track_id, original_session)
+  VALUES ($1, $2, $3) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//get all users
 app.get("/users", (req, res) => {
   const queryString = `SELECT * FROM users;
   `;
@@ -53,6 +103,17 @@ app.get("/users", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//get all sessions
+app.get("/sessions", (req, res) => {
+  const queryString = `SELECT * FROM sessions;
+  `;
+
+  db.query(queryString)
+    .then((result) => res.json(result.rows))
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//creators obj
 app.get("/api/creators", (req, res) => {
   const creators = [
     { id: 1, firstName: "Nick", lastName: "Maniutin" },
@@ -78,6 +139,7 @@ app.get("/tracks/:trackID", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+//get drum sequence info
 app.get("/sessions/:sessionID", (req, res) => {
   const queryString = `SELECT * 
   FROM drum_sequence, bass_sequence, synth_sequence
@@ -92,6 +154,7 @@ app.get("/sessions/:sessionID", (req, res) => {
     })
     .catch((err) => console.log("ERRRRROR!", err));
 });
+
 //send drum values to the db
 app.post("/session/drums", (req, res) => {
   const data = req.body.newSessionID;
@@ -106,6 +169,85 @@ app.post("/session/drums", (req, res) => {
   ARRAY[]::integer[]) RETURNING *;`;
   db.query(queryString, queryParams)
     .then((result) => {
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//contribute drum values to the db
+app.post("/session/contribute/:contribSessionID/drums", (req, res) => {
+  const data = req.body.drumValues;
+  const sessionID = req.params.contribSessionID;
+  console.log("DRUM DATA: ", data);
+  // res.json({});
+  const queryParams = [
+    sessionID,
+    data.drums_kick,
+    data.drums_snare,
+    data.drums_ho,
+    data.drums_hc,
+  ];
+  const queryString = `INSERT INTO drum_sequence 
+  (session_id, drums_kick, drums_snare, drums_ho, drums_hc) 
+  VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      console.log("DRUM CONTRIB DONE!", result.rows[0]);
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//contribute bass values to the db
+app.post("/session/contribute/:contribSessionID/bass", (req, res) => {
+  const data = req.body.bassValues;
+  const sessionID = req.params.contribSessionID;
+  console.log("DRUM DATA: ", data);
+  // res.json({});
+  const queryParams = [
+    sessionID,
+    data.bass_c1,
+    data.bass_d1,
+    data.bass_e1,
+    data.bass_f1,
+    data.bass_g1,
+    data.bass_a1,
+    data.bass_b1,
+    data.bass_c2,
+  ];
+  const queryString = `INSERT INTO bass_sequence
+  (session_id, bass_c1, bass_d1, bass_e1, bass_f1, bass_g1, bass_a1, bass_b1, bass_c2)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      console.log("BASS CONTRIB DONE!", result.rows[0]);
+      res.json(result.rows[0]);
+    })
+    .catch((err) => console.log("ERRRRROR!", err));
+});
+
+//contribute synth values to the db
+app.post("/session/contribute/:contribSessionID/synth", (req, res) => {
+  const data = req.body.synthValues;
+  const sessionID = req.params.contribSessionID;
+  // res.json({});
+  const queryParams = [
+    sessionID,
+    data.synth_c3,
+    data.synth_d3,
+    data.synth_e3,
+    data.synth_f3,
+    data.synth_g3,
+    data.synth_a3,
+    data.synth_b3,
+    data.synth_c4,
+  ];
+  const queryString = `INSERT INTO synth_sequence
+  (session_id, synth_c3, synth_d3, synth_e3, synth_f3, synth_g3, synth_a3, synth_b3, synth_c4)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`;
+  db.query(queryString, queryParams)
+    .then((result) => {
+      console.log("SYNTH CONTRIB DONE!", result.rows[0]);
       res.json(result.rows[0]);
     })
     .catch((err) => console.log("ERRRRROR!", err));
@@ -251,10 +393,58 @@ app.get("/tracks", (req, res) => {
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
+// delete track from the db
+app.delete("/tracks/:id", function (req, res) {
+  const trackID = req.params.id;
+
+  const queryString = `DELETE FROM tracks WHERE id=${trackID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("TRACK ID: ", req.params.id);
+});
+
+// change is_original to true
+app.put(`/tracks/collab/:currentTrackID`, function (req, res) {
+  const trackID = req.params.currentTrackID;
+
+  const queryString = `UPDATE tracks SET is_original = TRUE WHERE id=${trackID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("NEW TRACK ID: ", req.params);
+});
+
+// change original_session to null
+app.put(`/sessions/collab/:currentSession`, function (req, res) {
+  const sessionID = req.params.currentSession;
+  console.log("UPD SESH ID: ", sessionID);
+  const queryString = `UPDATE sessions SET original_session = NULL WHERE id=${sessionID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("NEW SESSION ID: ", req.params);
+});
+
+// delete original track after collab accepted
+app.delete("/tracks/:origTrackID", function (req, res) {
+  const trackID = req.params.id;
+
+  const queryString = `DELETE FROM tracks WHERE id=${origTrackID}`;
+  db.query(queryString)
+    .then((result) => res.json(result.rows[0]))
+    .catch((err) => console.log("ERRRRROR!", err));
+
+  console.log("TRACK ID: ", req.params.id);
+});
+
 //create a new track
 app.post("/tracks/new", (req, res) => {
   const data = req.body.createNewTrack;
-  const queryParams = ["1", data.title, data.category, data.description];
+  const queryParams = ["3", data.title, data.category, data.description];
   const queryString = `INSERT INTO tracks (user_id, title, category, description)
   VALUES ($1, $2, $3, $4) RETURNING *;`;
   db.query(queryString, queryParams)
@@ -265,13 +455,16 @@ app.post("/tracks/new", (req, res) => {
 //create a new session
 app.post("/sessions/new", (req, res) => {
   const data = req.body.trackID;
-  const queryParams = ["1", data];
+  const queryParams = ["3", data];
   const queryString = `INSERT INTO sessions (user_id, track_id) VALUES ($1, $2) RETURNING *;
   `;
   db.query(queryString, queryParams)
     .then((result) => {
       res.json(result.rows[0]);
     })
+    // .then((result) => {
+    //   res.redirect(`/sessions/${data}`);
+    // })
     .catch((err) => console.log("ERRRRROR!", err));
 });
 
