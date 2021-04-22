@@ -20,15 +20,13 @@ CREATE TABLE tracks (
   category VARCHAR(255) NOT NULL,
   tags TEXT,
   description TEXT,
-  published BOOLEAN NOT NULL DEFAULT TRUE,
-  is_original BOOLEAN DEFAULT TRUE
+  published BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE sessions (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  track_id INTEGER REFERENCES tracks(id) ON DELETE CASCADE,
-  original_session INTEGER DEFAULT NULL
+  track_id INTEGER REFERENCES tracks(id) ON DELETE CASCADE
 );
 
 CREATE TABLE drum_sequence (

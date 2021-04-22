@@ -1,27 +1,23 @@
-import React, { useState, useEffect, Component, useRef } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState, useEffect, Component } from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import "./App.css";
-import fire from "./fire";
-import useUserData from "./hooks/useUserData";
-import useSessionData from "./hooks/useSessionData";
-import useTrackData from "./hooks/useTrackData";
-import useDelay from "./hooks/useDelay.ts";
-
-import Styling from "./components/Styling";
 
 import Session from "./components/Session";
 import Nav from "./components/Nav";
 import NewTrack from "./components/NewTrack";
 import TrackList from "./components/TrackList";
-import ContribTrackList from "./components/ContribTrackList";
 
 import logo from "./orca-logo.png";
 import Osc1 from "./components/Osc1";
-import Creators from "./components/creators";
-import ClientIO from "./components/ClientIO";
-import DraggableElement from "./components/DraggableElement";
+import Customers from "./components/creators";
+import Login from './Login'
+import Register from './Register'
 
-const actx = new AudioContext();
+import AuthService from "./services/auth.service";
+import AudioVisualizer from './AudioVisualizer';
+
+//const actx = new AudioContext();
+const actx = new (window.AudioContext || window.webkitAudioContext)();
 let out = actx.destination;
 
 let osc1 = actx.createOscillator();
@@ -30,95 +26,41 @@ let gain1 = actx.createGain();
 osc1.connect(gain1);
 gain1.connect(out);
 
-function App() {
-  const [user, setUser] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+const App = (props) => {
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showModal, setShowModal] = useState(false);
   const [hasAccount, setHasAccount] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-
-  const { state } = useUserData();
-  // console.log("STATE USER DATA: ", state.userData);
-
-  const { sessionInfo } = useSessionData();
-  // console.log("STATE SESSION DATA: ", sessionInfo.sessionData);
-
-  const { trackInfo } = useTrackData();
-  // console.log("STATE TRACK DATA: ", trackInfo);
-
-  const currentUser = useUserData().state.userData.find(
-    (userObj) => userObj.email === user.email
-  );
-
-  const clearInputs = () => {
-    setEmail("");
-    setPassword("");
-  };
-
-  const clearErrors = () => {
-    setEmailError("");
-    setPasswordError("");
-  };
-
-  const handleLogin = () => {
-    clearErrors();
-    fire
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-            setEmailError(err.mesage);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.mesage);
-            break;
-        }
-      });
-    setShowLogin(false);
-  };
-
-  const handleSignup = () => {
-    clearErrors();
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/email-already-in-use":
-          case "auth/invalid-email":
-          case "auth/user-not-found":
-            setEmailError(err.mesage);
-            break;
-          case "auth/weak-password":
-            setPasswordError(err.mesage);
-            break;
-        }
-      });
-  };
-
-  const handleLogout = () => {
-    fire.auth().signOut();
-  };
-
-  const authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        clearInputs();
-        setUser(user);
-      } else {
-        setUser("");
-      }
-    });
-  };
-
+  const [audioData, setAudioData] = useState( new Uint8Array());
+  
   useEffect(() => {
-    authListener();
+    const user = AuthService.getCurrentUser();
+
+    let analyser = actx.createAnalyser();
+    let dataArray = new Uint8Array(analyser.frequencyBinCount);
+    
+    gain1.connect(analyser);
+    analyser.getByteTimeDomainData(dataArray);
+    
+    console.log(dataArray);
+    
+    setAudioData(dataArray);
+
+    if (user) {
+      setCurrentUser(user);
+    }
   }, []);
+
+  const [state, setState] = useState({ 
+    mute: "off",
+    num_likers : 0
+  })
+  const logOut = () => {
+    AuthService.logout();
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  }
 
   const [osc1Freq, setOsc1Freq] = useState(osc1.frequency.value);
   const changeOsc1Freq = (event) => {
@@ -126,62 +68,88 @@ function App() {
     setOsc1Freq(value);
     osc1.frequency.value = value;
   };
+  
+  function voiceMute() {
+    if (state.mute =="off"){
+      gain1.gain.setValueAtTime(0, actx.currentTime);
+      setState({...state, mute: "on"});
+    }  else{
+      gain1.gain.setValueAtTime(1, actx.currentTime);
+      setState({...state, mute: "off"});
+    }
+  }
+
+  function like(trackid) {
+    setState({ ...state, num_likers: state.num_likers+1 });
+    let email = "test@test.com";
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Token 1234abcd');
+    fetch("http://localhost:5000/api/like", {
+      credentials: 'include',
+      method: "post",
+      mode: "no-cors",
+      headers: myHeaders,
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        email: email,
+        trackid: trackid
+      })
+    })
+    .then( (response) => { 
+      //do something awesome here
+    });
+  }
+
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">w e l c o m e - t o - o r c a</h1>
-        {/* <button onClick={() => osc1.start()}>on</button>
-        <button onClick={() => osc1.stop()}>off</button> */}
-        {/* <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} /> */}
+        <h1 className="App-title">w e l c o m e t o o r c a</h1>
       </header>
-      <Styling></Styling>
-
-      {/*<Creators />*/}
+      <div className="track-previw">
+        <AudioVisualizer audioData={audioData} />
+      </div>
+      <div className="trk">
+        <button onClick={() => osc1.start()}>on</button>
+        <button onClick={() => osc1.stop()}>off</button>
+        <button className="mute" onClick={voiceMute}>mute</button>
+        <button onClick={() => like(0)}>like({ state.num_likers })</button>
+        <button>comment</button>
+        
+        <Osc1 changeFreq={changeOsc1Freq} freq={osc1.frequency.value} />
+      </div>
+      <Customers />
       <Router>
-        <Nav
-          user={user}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-          handleSignup={handleSignup}
-          hasAccount={hasAccount}
-          setHasAccount={setHasAccount}
-          emailError={emailError}
-          passwordError={passwordError}
-          showLogin={showLogin}
-          setShowLogin={setShowLogin}
-        />
+        <Nav currentUser={currentUser} setShowModal={setShowModal} logOut={logOut} />
+
+        <div id="popupModal" className="overlay" style={{visibility: showModal ? 'visible' : 'hidden', opacity: showModal ? 1 : 0}}>
+          <div className="popup">
+            <a className="close" href="#" onClick={closeModal}>&times;</a>
+            {!hasAccount ? (
+                <Login hasAccount={hasAccount} setHasAccount={setHasAccount} />
+            ) : (
+                <Register hasAccount={hasAccount} setHasAccount={setHasAccount} />
+            )}
+          </div>
+        </div>
 
         <div>
-          <Route path="/sessions/:sessionID">
-            <Session
-              user={user}
-              state={state}
-              sessionInfo={sessionInfo}
-              trackInfo={trackInfo}
-            />
-          </Route>
-          <Route path="/collaborations">
-            <ContribTrackList userData={currentUser} />
-          </Route>
-          <Route path="/users" />
-          <Route exact path="/tracks/new" component={NewTrack} />
-          <Route exact path="/tracks" component={TrackList} />
-          <Route exact path="/" />
+          <Switch>
+            <Route exact path="/" />
+            {/*<Route exact path="/login" component={Login} />*/}
+            {/*<Route exact path="/register" component={Register} />*/}
+            <Route path="/sessions/:sessionID" component={Session} />
+            <Route path="/users" />
+            <Route exact path="/tracks/new" component={NewTrack} />
+            <Route exact path="/tracks" component={TrackList} />
+          </Switch>
         </div>
       </Router>
-      <div className="container">
-        <DraggableElement>
-          <ClientIO />
-        </DraggableElement>
-      </div>
     </div>
   );
 }
 
 export default App;
+

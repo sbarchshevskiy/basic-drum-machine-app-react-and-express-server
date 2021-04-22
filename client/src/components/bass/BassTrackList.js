@@ -1,4 +1,5 @@
 import React, { useContext, memo } from "react";
+
 import { Context } from "../../hooks/useBassStore";
 import { bassSoundFiles } from "../../constants/configBass";
 import Track from "./BassTrack";
@@ -9,8 +10,8 @@ const TrackList = ({ currentStepID }) => {
   } = useContext(Context);
   const content = trackList.map((track, trackID) => {
     const { title, onNotes, soundFile } = track;
-    const soundFilePath = bassSoundFiles[soundFile];
 
+    const soundFilePath = bassSoundFiles[soundFile];
     return (
       <Track
         key={title}

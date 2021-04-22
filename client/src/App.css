@@ -5,23 +5,24 @@
   font-family: "Nunito", sans-serif;
 }
 
-button {
+button, .button {
   border: none;
   outline: none;
-  width: 20%;
-  padding: 15px 0;
+  width: 100%;
+  padding: 15px;
   color: #fff;
   font-size: 16px;
   letter-spacing: 1px;
   background: #603bbb;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .login {
   width: 100%;
-  min-height: 100vh;
-  padding: 0 20px;
-  background: #e9e9e9;
+  /*min-height: 100vh;*/
+  /*padding: 0 20px;*/
+  /*background: #e9e9e9;*/
   display: flex;
 }
 
@@ -29,8 +30,8 @@ button {
   padding: 60px;
   margin: auto;
   width: 100%;
-  max-width: 520px;
-  min-height: 600px;
+  /*max-width: 520px;*/
+  /*min-height: 600px;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,7 +69,7 @@ button {
 }
 
 .login .loginContainer .btnContainer p {
-  margin: 14px 0 0 0;
+  margin: 10px 0 10px 0;
   text-align: right;
   color: #fff;
 }
@@ -121,6 +122,7 @@ button {
   background: #3a2b58;
 }
 
+
 body {
   margin: 0;
   padding: 0;
@@ -142,7 +144,7 @@ html {
 .App {
   text-align: center;
 }
-/* 
+
 .bass {
   margin-left: auto;
   margin-right: auto;
@@ -168,7 +170,7 @@ html {
   visibility: var(--app-visibility);
   background-color: var(--color-red);
   padding: 20px;
-} */
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -176,7 +178,7 @@ html {
 }
 
 .App-header {
-  /* background-color: #2e2e2e; */
+  background-color: #2e2e2e;
   height: 150px;
   padding: 20px;
   color: white;
@@ -203,6 +205,12 @@ html {
 
 .App-intro {
   font-size: large;
+}
+
+.navbar .navbar-menus {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @keyframes App-logo-spin {
@@ -266,4 +274,77 @@ html {
 
 .circle span:nth-child(4) {
   filter: blur(55px);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 30px auto;
+  /*background: #fff;*/
+  border-radius: 5px;
+  width: 50%;
+  position: relative;
+  transition: all .5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.alert.alert-danger {
+  color: #ff0066;
+}
+.trk {
+  background-color: #2e2e2e;
+  height: 150px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  margin-bottom: calc(var(--spacer) * 1);
+  margin-left: var(--spacer);
+  margin-right: var(--spacer);
 }

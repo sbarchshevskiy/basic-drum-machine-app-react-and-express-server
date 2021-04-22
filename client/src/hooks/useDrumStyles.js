@@ -11,15 +11,15 @@ const defaults = {
   __color_orange: "#eda42d",
   __base_font_size: 12,
   __number_of_steps: 16,
-  __number_of_drum_tracks: 4,
+  __number_of_tracks: 4,
   __grid_unit: 2,
   __play_head_width: 2,
   __form_element_height: 30,
   __input_bpm_width: 45,
   __step_height: 32,
   __track_title_width: 120,
-  __note_width: 24,
-  __note_height: 24,
+  __note_width: 32,
+  __note_height: 49,
   __note_border_size: 1,
   __note_margin_vert: 5,
   __note_margin_horz: 4,
@@ -48,8 +48,8 @@ const setStyles = (totalSteps) => {
   setProperty("--number-of-steps", defaults.__number_of_steps);
   setProperty("--play-head-width", defaults.__play_head_width + "px");
   setProperty(
-    "--drum-play-head-height",
-    noteHeightFull * defaults.__number_of_drum_tracks -
+    "--play-head-height",
+    noteHeightFull * defaults.__number_of_tracks -
       defaults.__note_margin_vert * 2 +
       "px"
   );

@@ -6,6 +6,7 @@ export default function Styling() {
   return(
 
     <div>
+      <h1 className="primary">ORCA</h1>
 
       <div className="motionblur">
         <span className="one"></span>
@@ -25,7 +26,7 @@ export default function Styling() {
         <span className="fifteen"></span>
 
       </div >
-      {/* <div className="buttons">
+      <div className="buttons">
         <input type="button" value="val1" onClick="'val1'" />
         <input type="button" value="val2" onClick="'val2'" />
         <input type="button" value="val3" onClick="'val3'" />
@@ -42,7 +43,7 @@ export default function Styling() {
         <input type="button" value="val14" onClick="'val14'" />
         <input type="button" value="val15" onClick="'val15'" />
         <input type="button" value="val16" onClick="'val16'" />
-      </div> */}
+      </div>
 
     </div>
 
