@@ -43,3 +43,9 @@ npm run db:reset
 
 # Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
+
+## Screenshots
+
+!["Screenshot of Collaboration Session page"](https://github.com/sbarchshevskiy/Orca/blob/master/docs/Collaboration.png?raw=true)
+!["Screenshot of Session page"](https://github.com/sbarchshevskiy/Orca/blob/master/docs/Session.png?raw=true)
+!["Screenshot of Tracks page with Chat dragged into view"](https://github.com/sbarchshevskiy/Orca/blob/master/docs/Tracks%20List%20&%20Chat.png?raw=true)
