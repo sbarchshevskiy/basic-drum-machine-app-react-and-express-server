@@ -6,12 +6,15 @@
 
 ### Orca was created as the final project for Lighthouse Labs Web Development Bootcamp.
 
-### Contributors:
+## Contributors:
 
-Nick Maniutin
-Sergey B.
-Babison Vilvarajah
-Shout out to Joe Seifi (https://github.com/joeshub/react-808) whose React-808 was the basis of the instruments.
+### Nick Maniutin
+
+### Sergey B.
+
+### Babison Vilvarajah
+
+### Shout out to Joe Seifi (https://github.com/joeshub/react-808) whose React-808 was the basis of the instruments.
 
 ## Dependencies
 
