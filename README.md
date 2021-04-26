@@ -2,9 +2,16 @@
 
 ## An easy-to-use music production app with a focus on collaboration.
 
-### This app allows users to create short loops using built-in drum machine, synthesizer and bass synthesizer. Then, other users can contribute to the tracks and the original user can either accept or reject the changes. Once the changes have been accepted, the new track will appear in the list of tracks.
+### This app allows users to create short loops using built-in drum machine, synthesizer and bass synthesizer. Then, other users can contribute to the tracks and the original user can either accept or reject the changes. Once the changes have been accepted, the new track will appear in the list of tracks. Orca allows users to understand and experiment music via adjustable play-loops. The instruments are easy to use and provided by the app. Main focus while creating this app, was to encourage participation by all users, via an inbuilt chat and an option of contribution to a specific track, which can always be adjusted by the original author. The project has taken place in a remote full-time bootcamp, at Lighthouse Labs, through April 9th to April 21st 2021.
 
 ### Orca was created as the final project for Lighthouse Labs Web Development Bootcamp.
+
+### Contributors:
+
+Nick Maniutin
+Sergey B.
+Babison Vilvarajah
+Shout out to Joe Seifi (https://github.com/joeshub/react-808) whose React-808 was the basis of the instruments.
 
 ## Dependencies
 
